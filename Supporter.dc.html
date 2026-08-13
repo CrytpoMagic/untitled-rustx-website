@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <title>Buy Supporter — Untitled RustX Store | $10/mo</title>
+  <meta name="description" content="Supporter tier on Untitled RustX: a Discord supporter role and a wipe shout-out for $10/month. Cosmetic-only, no pay-to-win.">
+  <meta name="keywords" content="rust server supporter tier, untitled rustx store, rust server donate">
+  <link rel="canonical" href="https://untitledrx.com/Supporter.dc.html">
+  <meta property="og:type" content="product">
+  <meta property="og:title" content="Supporter — Untitled RustX Store">
+  <meta property="og:description" content="Supporter tier on Untitled RustX: a Discord supporter role and a wipe shout-out for $10/month. Cosmetic-only, no pay-to-win.">
+  <meta property="og:url" content="https://untitledrx.com/Supporter.dc.html">
+  <meta name="robots" content="index, follow">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Minicopter",
+    "description": "A one-time spawn of the in-game Minicopter on Untitled RustX, delivered directly to the purchaser. Same vehicle available in normal gameplay — no stat changes, cosmetic and convenience only.",
+    "brand": { "@type": "Brand", "name": "Untitled RustX" },
+    "offers": {
+      "@type": "Offer",
+      "price": "5.00",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://untitledrx.com/Supporter.dc.html"
+    }
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+  <script src="image-slot.js"></script>
+  <style>
+    @keyframes signFlicker { 0%,7%,9%,11%,89%,100% { opacity: 1; } 8% { opacity: 0.4; } 10% { opacity: 0.85; } 45% { opacity: 1; } 46% { opacity: 0.3; } 47% { opacity: 1; } 90% { opacity: 0.5; } 91% { opacity: 1; } }
+    @keyframes storeGlow { 0%,100% { box-shadow: 0 0 16px rgba(255,255,255,0.5), 0 2px 8px rgba(0,0,0,0.3); } 50% { box-shadow: 0 0 28px rgba(255,255,255,0.9), 0 2px 8px rgba(0,0,0,0.3); } }
+    @keyframes drift1 { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(40px,-30px) scale(1.08); } }
+    @keyframes drift2 { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(-50px,40px) scale(1.12); } }
+    @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    @keyframes marqueeSingle { 0% { transform: translateX(100vw); } 100% { transform: translateX(-100%); } }
+    @keyframes blink { 0%,49% { opacity: 1; } 50%,100% { opacity: 0; } }
+    body { margin: 0; background: #0a0b0d; text-wrap: pretty; }
+    a { color: #ff7a3d; text-underline-offset: 3px; transition: color 0.2s ease; }
+    a:hover { color: #ffa06a; }
+    ::selection { background: #ff6a1a; color: #0a0b0d; }
+    .nav-link { position: relative; transition: color 0.2s ease; padding: 6px 2px; text-decoration: none; }
+    .nav-link::after { content: ''; position: absolute; left: 0; bottom: 0px; width: 0; height: 2px; background: #ff6a1a; transition: width 0.25s cubic-bezier(0.4,0,0.2,1); }
+    .nav-link:hover::after { width: 100%; }
+    .site-nav-inner { position: relative; background-image: repeating-linear-gradient(135deg, rgba(255,255,255,0.012) 0px, rgba(255,255,255,0.012) 1px, transparent 1px, transparent 5px), repeating-linear-gradient(45deg, rgba(255,255,255,0.01) 0px, rgba(255,255,255,0.01) 1px, transparent 1px, transparent 5px); }
+    .nav-emblem { transition: filter 0.2s ease, transform 0.2s ease; }
+    .nav-emblem:hover { filter: brightness(1.12); transform: translate(-50%, -22px) scale(1.03); }
+    .btn-connect { transition: transform 0.18s cubic-bezier(0.4,0,0.2,1), box-shadow 0.18s ease, filter 0.18s ease; }
+    .btn-connect:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(255,106,26,0.4); filter: brightness(1.08); }
+    .btn-connect:active { transform: translateY(0) scale(0.97); }
+    .nav-hamburger { display: none; }
+    .nav-tab { display: inline-flex; align-items: center; justify-content: center; height: 38px; padding: 0 16px; background: #15161a; border: 1px solid rgba(255,255,255,0.12); border-bottom-width: 2px; color: #c9c3ba; font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; font-size: 12.5px; text-decoration: none; clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px); box-shadow: inset 0 1px 0 rgba(255,255,255,0.05), 0 1px 3px rgba(0,0,0,0.4); transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease; }
+    .nav-tab:hover { border-color: rgba(255,106,26,0.55); background: #1c1d21; color: #ffb27a; transform: translateY(-1px); }
+    .nav-tab.active { border-color: rgba(255,106,26,0.5); border-bottom-color: #ff6a1a; background: linear-gradient(180deg, rgba(255,106,26,0.18), rgba(255,106,26,0.04)); color: #ff8a52; box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 0 10px rgba(255,106,26,0.15); }
+    .nav-tab-mobile { display: flex; width: 100%; justify-content: flex-start; height: auto; padding: 13px 16px; }
+    @media (max-width: 860px) {
+      .nav-links-desktop { display: none !important; }
+      .nav-hamburger { display: flex !important; }
+    }
+    .btn-primary { transition: transform 0.18s cubic-bezier(0.4,0,0.2,1), box-shadow 0.18s ease, background 0.18s ease; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,106,26,0.35); }
+    .btn-primary:active { transform: translateY(0) scale(0.97); }
+    .btn-outline { transition: transform 0.18s cubic-bezier(0.4,0,0.2,1), border-color 0.18s ease, background 0.18s ease; }
+    .btn-outline:hover { transform: translateY(-2px); border-color: #ff8a52; background: rgba(255,122,61,0.08); }
+    .btn-outline:active { transform: translateY(0) scale(0.97); }
+    .reveal { opacity: 0; transform: translateY(48px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .reveal.is-visible { opacity: 1; transform: translateY(0); }
+    @keyframes hudPulse { 0%,100% { opacity: 1; } 50% { opacity: 0.55; } }
+    .hud-panel { clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px); }
+    .nav-catalog-wrap { position: relative; }
+    .nav-catalog-dropdown { position: absolute; top: calc(100% + 10px); left: 0; opacity: 0; visibility: hidden; transform: translateY(-6px); transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s; pointer-events: none; z-index: 30; }
+    .nav-catalog-wrap.is-open .nav-catalog-dropdown { opacity: 1; visibility: visible; transform: translateY(0); pointer-events: auto; }
+    .nav-catalog-dropdown a:hover { color: #ff8a52 !important; background: rgba(255,106,26,0.1); }
+    .nav-links-desktop > .nav-catalog-wrap:last-child .nav-catalog-dropdown { left: auto !important; right: 0 !important; }
+    .nav-connect-wrap { position: relative; }
+    .nav-connect-dropdown { position: absolute; top: calc(100% + 12px); left: 50%; transform: translateX(-50%) translateY(-6px); opacity: 0; visibility: hidden; transform: translateY(-6px); transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease; pointer-events: none; z-index: 30; }
+    .nav-connect-wrap.is-open .nav-connect-dropdown { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); pointer-events: auto; }
+  </style>
+</helmet>
+
+<div style="position: fixed; inset: 0; z-index: 0; overflow: hidden; background: #0a0b0d;">
+  <div style="position: absolute; inset: -10%; background-image: linear-gradient(rgba(255,122,61,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,122,61,0.06) 1px, transparent 1px); background-size: 48px 48px; transform: translateY({{ parallaxSlow }}px);"></div>
+  <div style="position: absolute; width: 560px; height: 560px; left: -160px; top: 10%; border-radius: 50%; background: radial-gradient(circle, rgba(255,90,30,0.20), transparent 70%); filter: blur(10px); animation: drift1 14s ease-in-out infinite; transform: translateY({{ parallaxMed }}px);"></div>
+  <div style="position: absolute; width: 620px; height: 620px; right: -200px; top: 55%; border-radius: 50%; background: radial-gradient(circle, rgba(200,40,20,0.18), transparent 70%); filter: blur(10px); animation: drift2 18s ease-in-out infinite; transform: translateY({{ parallaxFast }}px);"></div>
+  <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,11,13,0) 0%, rgba(10,11,13,0.4) 60%, #0a0b0d 100%);"></div>
+</div>
+
+<div style="position: relative; z-index: 1; font-family: 'Inter', system-ui, sans-serif; color: #e9e7e3; min-height: 100vh;">
+
+  <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; background: #0e0f11; border-bottom: 1px solid rgba(255,122,61,0.25); padding: 8px 0;">
+    <div style="flex: 1; overflow: hidden;">
+      <div style="width: max-content; animation: marqueeSingle 16s linear infinite;">
+        <span style="font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; font-size: 12px; color: #ff8a52; white-space: nowrap;">{{ sponsorTickerText }}</span>
+      </div>
+    </div>
+  </div><nav class="site-nav" style="position: sticky; top: 0; z-index: 20;">
+    <div class="site-nav-inner" style="background: linear-gradient(180deg, rgba(21,22,25,0.98), rgba(9,10,12,0.96)); border-bottom: 1px solid rgba(255,106,26,0.35); box-shadow: 0 8px 26px rgba(0,0,0,0.5);">
+      <div style="max-width: 1280px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px); height: 64px; display: flex; align-items: center; justify-content: center; gap: 40px; position: relative;">
+        <div class="nav-links-desktop" style="display: flex; align-items: center; gap: 10px;">
+          <div class="{{ homeWrapClass }}" onMouseEnter="{{ openHomeDrop }}" onMouseLeave="{{ closeDrop }}">
+            <a href="./index.html" class="nav-tab" style="animation: signFlicker 3s linear infinite; animation-delay: 0s; text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 14px rgba(255,138,82,0.9), 0 0 26px rgba(255,106,26,0.7);">Home</a>
+            <div class="nav-catalog-dropdown" style="background: #15161a; border: 1px solid rgba(255,106,26,0.35); box-shadow: 0 12px 30px rgba(0,0,0,0.5); min-width: 200px; padding: 8px;">
+              <a href="./Quickstart.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">Quickstart</a>
+              <a href="./Server.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">Server Specs</a>
+              <a href="./Events.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">Events</a>
+            </div>
+          </div>
+          <div class="{{ rulesWrapClass }}" onMouseEnter="{{ openRulesDrop }}" onMouseLeave="{{ closeDrop }}">
+            <a href="./Rules.dc.html" class="nav-tab" style="animation: signFlicker 3.4s linear infinite; animation-delay: 0.6s; text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 14px rgba(255,138,82,0.9), 0 0 26px rgba(255,106,26,0.7);">Rules</a>
+            <div class="nav-catalog-dropdown" style="background: #15161a; border: 1px solid rgba(255,106,26,0.35); box-shadow: 0 12px 30px rgba(0,0,0,0.5); min-width: 200px; padding: 8px;">
+              <a href="./Reporting.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">Reporting a Violation</a>
+              <a href="./Enforcement.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">Enforcement</a>
+              <a href="./FAQ.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">FAQ</a>
+            </div>
+          </div>
+          <div class="{{ navConnectWrapClass }}" onMouseEnter="{{ openNavConnect }}" onMouseLeave="{{ closeNavConnect }}">
+            <button type="button" onClick="{{ connectNow }}" class="btn-connect" style="font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; font-size: 12.5px; color: #0a0b0d; background: linear-gradient(135deg, #ff8a4c, #ff6a1a); border: 1px solid rgba(255,180,130,0.5); height: 38px; padding: 0 18px; display: inline-flex; align-items: center; cursor: pointer; clip-path: polygon(7px 0, 100% 0, 100% calc(100% - 7px), calc(100% - 7px) 100%, 0 100%, 0 7px); box-shadow: 0 2px 8px rgba(255,106,26,0.3);">Connect Now</button>
+            <div class="nav-connect-dropdown hud-panel" style="width: 340px; background: linear-gradient(180deg, rgba(255,106,26,0.08), rgba(10,11,13,0.97)); border: 1px solid rgba(255,122,61,0.35); padding: 18px 20px; box-shadow: 0 16px 40px rgba(0,0,0,0.5);">
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 14px;">
+                <span style="width: 7px; height: 7px; border-radius: 50%; background: {{ statusDotColor }}; box-shadow: 0 0 8px {{ statusDotColor }}; display: inline-block; animation: hudPulse 1.6s ease-in-out infinite;"></span>
+                <span style="font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; font-size: 11px; color: #ff8a52;">{{ serverStatusText }}</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
+                <span style="font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 13px; color: #fff;">157.85.93.170:28015</span>
+              </div>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px;">
+                <div>
+                  <span style="display: block; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: #6b655e; margin-bottom: 4px;">Players</span>
+                  <span style="font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 17px; color: #fff;">{{ playersLabel }}</span>
+                </div>
+                <div>
+                  <span style="display: block; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: #6b655e; margin-bottom: 4px;">Next wipe</span>
+                  <span style="font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 17px; color: #ff6a1a;">{{ countdown }}</span>
+                </div>
+              </div>
+              <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                <button type="button" onClick="{{ connectNow }}" class="btn-outline" style="font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; font-size: 11.5px; color: #fff; background: transparent; border: 1px solid rgba(255,255,255,0.3); padding: 9px 14px; cursor: pointer;">Launch via Steam</button>
+                <button type="button" onClick="{{ copyIp }}" class="btn-outline" style="font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; font-size: 11.5px; color: #fff; background: transparent; border: 1px solid rgba(255,255,255,0.3); padding: 9px 14px; cursor: pointer;">{{ copyLabel }}</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="width: 120px; height: 64px; flex-shrink: 0; position: relative;">
+          <img src="assets/logo-new.png" alt="Untitled RustX" style="width: 100%; height: 100%; object-fit: contain; display: block;" />
+        </div>
+        <div class="nav-links-desktop" style="display: flex; align-items: center; gap: 10px;">
+          <a href="./Rules.dc.html#faq" class="nav-tab">FAQs</a>
+          <a href="https://discord.gg/M4rqjGpjyW" target="_blank" rel="noopener" class="nav-tab" style="animation: signFlicker 2.6s linear infinite; animation-delay: 0.3s; text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 14px rgba(255,138,82,0.9), 0 0 26px rgba(255,106,26,0.7);">Discord</a>
+          <div class="{{ storeWrapClass }}" onMouseEnter="{{ openStoreDrop }}" onMouseLeave="{{ closeDrop }}">
+            <a href="./Store.dc.html" class="nav-tab" style="animation: signFlicker 2.9s linear infinite; animation-delay: 1.3s; text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 14px rgba(255,138,82,0.9), 0 0 26px rgba(255,106,26,0.7);">Store</a>
+            <div class="nav-catalog-dropdown" style="background: #15161a; border: 1px solid rgba(255,106,26,0.35); box-shadow: 0 12px 30px rgba(0,0,0,0.5); min-width: 200px; padding: 8px;">
+              <a href="./MembershipTiers.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">Membership Tiers</a>
+              <a href="./Medical.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">Medical</a>
+              <a href="./Teas.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">Teas</a>
+              <a href="./WeaponKits.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">Weapon Kits</a>
+              <a href="./ResourceKits.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">Resource Kits</a>
+              <a href="./Unmute.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">Unmute</a>
+              <a href="./SuperSerum.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">Super Serum</a>
+              <a href="./Minicopter.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">Minis</a>
+              <a href="./WebsiteShoutout.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">Website Shoutout</a>
+            </div>
+          </div>
+        </div>
+        <button type="button" class="nav-hamburger" onClick="{{ toggleMobileMenu }}" aria-label="Menu" style="position: absolute; right: clamp(16px, 4vw, 40px); background: none; border: 1px solid rgba(255,255,255,0.25); padding: 8px 10px; cursor: pointer; flex-direction: column; gap: 4px; align-items: center; justify-content: center;">
+          <span style="width: 18px; height: 2px; background: #e9e7e3;"></span>
+          <span style="width: 18px; height: 2px; background: #e9e7e3;"></span>
+          <span style="width: 18px; height: 2px; background: #e9e7e3;"></span>
+        </button>
+      </div>    </div>
+    <sc-if value="{{ mobileMenuOpen }}" hint-placeholder-val="{{ false }}">
+      <div style="background: #0e0f11; border-bottom: 1px solid rgba(255,106,26,0.3); padding: 14px clamp(16px, 4vw, 40px) 18px; display: flex; flex-direction: column; gap: 8px;">
+        <a href="./index.html" class="nav-tab nav-tab-mobile">Home</a>
+        <a href="./Rules.dc.html" class="nav-tab nav-tab-mobile">Rules</a>
+        <a href="./Store.dc.html" class="nav-tab nav-tab-mobile active">Store</a>
+        <a href="./Rules.dc.html#faq" class="nav-tab nav-tab-mobile">FAQs</a>
+        <a href="https://discord.gg/M4rqjGpjyW" target="_blank" rel="noopener" class="nav-tab nav-tab-mobile">Discord</a>
+        <button type="button" onClick="{{ connectNow }}" class="btn-connect" style="margin-top: 6px; font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; font-size: 13px; color: #0a0b0d; background: linear-gradient(135deg, #ff8a4c, #ff6a1a); border: 1px solid rgba(255,180,130,0.5); padding: 13px; cursor: pointer; clip-path: polygon(7px 0, 100% 0, 100% calc(100% - 7px), calc(100% - 7px) 100%, 0 100%, 0 7px);">Connect Now</button>
+      </div>
+    </sc-if>
+  </nav>
+
+  <div style="max-width: 1000px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 64px);">
+
+    <p style="padding: 118px 0 0; font-size: 13px; color: #8f887f; margin: 0;"><a href="./Store.dc.html">Store</a> / Supporter</p>
+
+    <section class="reveal" style="padding: 20px 0 56px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;">
+      <div style="background: #0e0f11; border: 1px solid rgba(255,106,26,0.3); aspect-ratio: 4 / 3; display: flex; align-items: center; justify-content: center;">
+        <svg width="140" height="140" viewBox="0 0 24 24" fill="none" stroke="#8f887f" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.2H22l-6 4.6 2.3 7.2L12 16.4l-6.3 4.6 2.3-7.2-6-4.6h7.6z"></path></svg>
+      </div>
+      <div>
+        <h1 style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase; font-size: clamp(30px, 4vw, 42px); margin: 0 0 12px; color: #fff;">Supporter</h1>
+        <p style="font-size: 15.5px; line-height: 26px; margin: 0 0 20px; color: #b0a99f;">Tier I support. A Discord supporter role and a shout-out in our next wipe announcement — a simple way to back the server every month.</p>
+        <p style="font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 36px; margin: 0 0 20px; color: #fff;">$10<span style="font-size: 13px; font-family: 'Inter', sans-serif; font-weight: 400; color: #8f887f;"> / month</span></p>
+        <button type="button" class="btn-primary" style="font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; font-size: 14px; color: #0a0b0d; background: #ff6a1a; border: none; padding: 14px 26px; cursor: pointer; clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);">Buy Now</button>
+        <p style="font-size: 12px; margin: 14px 0 0; color: #6b655e;">Fulfillment: role and shout-out applied automatically via Discord within minutes of purchase. Renews monthly, cancel anytime.</p>
+      </div>
+    </section>
+
+    <section class="reveal" style="padding: 10px 0 56px;">
+      <h2 style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 20px; margin: 0 0 16px; color: #fff;">What you're getting</h2>
+      <ul style="margin: 0; padding-left: 20px; color: #b0a99f; font-size: 14.5px; line-height: 26px;">
+        <li>Discord Supporter role</li>
+        <li>Shout-out in the next wipe announcement</li>
+        <li>Renews monthly, cancel anytime</li>
+        <li>No gameplay advantage — cosmetic only</li>
+      </ul>
+    </section>
+
+    <section class="reveal" style="padding: 10px 0 64px; text-align: center;">
+      <p style="font-size: 14.5px; color: #b0a99f; margin: 0 0 16px;">Questions about fulfillment or limits? See the <a href="./Rules.dc.html#faq">FAQ</a> or ask in <a href="https://discord.gg/M4rqjGpjyW" target="_blank" rel="noopener">Discord</a>.</p>
+      <a href="./Store.dc.html" class="btn-outline" style="display: inline-block; font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; font-size: 13px; color: #fff; border: 1px solid rgba(255,255,255,0.3); padding: 12px 22px; text-decoration: none;">Back to the store</a>
+    </section>
+
+    <footer style="padding: 24px 0; font-size: 13px; border-top: 1px solid rgba(255,255,255,0.08); color: #6b655e;">
+      <div style="display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 12px;">
+        <a href="./index.html">Home</a>
+        <a href="./Server.dc.html">Server Info</a>
+        <a href="./Rules.dc.html">Rules</a>
+        <a href="./Store.dc.html">Store</a>
+        <a href="./WipeSchedule.dc.html">Wipe Schedule</a>
+        <a href="./Rules.dc.html#faq">FAQ</a>
+        <a href="https://discord.gg/M4rqjGpjyW" target="_blank" rel="noopener">Discord</a>
+      </div>
+      Untitled RustX · 157.85.93.170:28015 · Wipes every Thursday, 1PM CDT · Site by joeboetheasian
+    </footer>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { copyLabel: 'Copy IP', navConnectOpen: false, countdown: '—', onlinePlayers: null, maxPlayers: null, live: false,  scrollY: 0, mobileMenuOpen: false, activeDropdown: null };
+  componentDidMount() {
+    this.tick();
+    this._t = setInterval(() => this.tick(), 1000);
+    this.fetchStatus();
+    this._statusT = setInterval(() => this.fetchStatus(), 60000);
+    window.scrollTo(0, 0);
+    this._onScroll = () => this.setState({ scrollY: window.scrollY || 0 });
+    window.addEventListener('scroll', this._onScroll, { passive: true });
+    this._observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => { entry.target.classList.toggle('is-visible', entry.isIntersecting); });
+    }, { threshold: 0.12 });
+    setTimeout(() => {
+      document.querySelectorAll('.reveal').forEach((el) => this._observer.observe(el));
+    }, 0);
+  }
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this._onScroll);
+    this._observer?.disconnect();
+  }
+  connectNow() {
+    window.location.href = 'steam://run/252490//+connect%20157.85.93.170:28015';
+  }
+  copyIp() {
+    navigator.clipboard?.writeText('157.85.93.170:28015').then(() => {
+      this.setState({ copyLabel: 'Copied!' });
+      setTimeout(() => this.setState({ copyLabel: 'Copy IP' }), 1800);
+    });
+  }
+  async fetchStatus() {
+    try {
+      const res = await fetch('https://api.battlemetrics.com/servers/40070748', {
+        headers: { Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6ImQ5Mjk3ZTAzZDAzYWU1ZmEiLCJpYXQiOjE3ODUzNTMyMjgsIm5iZiI6MTc4NTM1MzIyOCwiaXNzIjoiaHR0cHM6Ly93d3cuYmF0dGxlbWV0cmljcy5jb20iLCJzdWIiOiJ1cm46dXNlcjoxMjI2ODI1In0.r8PAaSXNGfPwJMSV_4h_ry6Ltwg9Ec8HTRFRBsuFhDs' }
+      });
+      if (!res.ok) throw new Error('http ' + res.status);
+      const json = await res.json();
+      const attrs = json?.data?.attributes;
+      if (attrs) {
+        this.setState({ onlinePlayers: attrs.players, maxPlayers: attrs.maxPlayers, live: attrs.status === 'online' });
+      }
+    } catch (e) {
+      this.setState({ onlinePlayers: null, live: false });
+    }
+  }
+  nextWipe(now) {
+    const target = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 18, 0, 0));
+    const diffDays = (4 - now.getUTCDay() + 7) % 7;
+    target.setUTCDate(target.getUTCDate() + diffDays);
+    if (target <= now) target.setUTCDate(target.getUTCDate() + 7);
+    return target;
+  }
+  fmt(ms) {
+    if (ms < 0) ms = 0;
+    const s = Math.floor(ms / 1000);
+    const d = Math.floor(s / 86400);
+    const h = Math.floor((s % 86400) / 3600);
+    const m = Math.floor((s % 3600) / 60);
+    return d + 'd ' + h + 'h ' + m + 'm';
+  }
+  tick() {
+    const now = new Date();
+    this.setState({ countdown: this.fmt(this.nextWipe(now) - now) });
+  }
+  async fetchSponsors() {
+    try {
+      const res = await fetch('/api/sponsors');
+      if (!res.ok) throw new Error('http ' + res.status);
+      const data = await res.json();
+      this.setState({ sponsors: Array.isArray(data?.sponsors) ? data.sponsors : [] });
+    } catch (e) {
+      this.setState({ sponsors: [] });
+    }
+  }
+  renderVals() {
+    if (!this._sponsorsFetched) { this._sponsorsFetched = true; this.fetchSponsors(); this._sponsorsT = setInterval(() => this.fetchSponsors(), 120000); }
+    return {
+      sponsorTickerText: (this.state.sponsors && this.state.sponsors.length) ? 'Shout Out To Our Donors: ' + this.state.sponsors.join(' \u00b7 ') : 'Be the first name on the wall \u2014 sponsor the wipe in the Store.',
+      copyLabel: this.state.copyLabel,
+      copyIp: () => this.copyIp(),
+      homeWrapClass: this.state.activeDropdown === 'home' ? 'nav-catalog-wrap is-open' : 'nav-catalog-wrap',
+      rulesWrapClass: this.state.activeDropdown === 'rules' ? 'nav-catalog-wrap is-open' : 'nav-catalog-wrap',
+      storeWrapClass: this.state.activeDropdown === 'store' ? 'nav-catalog-wrap is-open' : 'nav-catalog-wrap',
+      openHomeDrop: () => { clearTimeout(this._dropTimer); this.setState({ activeDropdown: 'home' }); },
+      openRulesDrop: () => { clearTimeout(this._dropTimer); this.setState({ activeDropdown: 'rules' }); },
+      openStoreDrop: () => { clearTimeout(this._dropTimer); this.setState({ activeDropdown: 'store' }); },
+      closeDrop: () => { this._dropTimer = setTimeout(() => this.setState({ activeDropdown: null }), 900); },
+      navConnectWrapClass: this.state.navConnectOpen ? 'nav-connect-wrap is-open' : 'nav-connect-wrap',
+      openNavConnect: () => { clearTimeout(this._navConnectTimer); this.setState({ navConnectOpen: true }); },
+      closeNavConnect: () => { this._navConnectTimer = setTimeout(() => this.setState({ navConnectOpen: false }), 300); },
+      countdown: this.state.countdown,
+      playersLabel: this.state.onlinePlayers != null ? `${this.state.onlinePlayers} / ${this.state.maxPlayers}` : '— / —',
+      serverStatusText: this.state.onlinePlayers != null ? (this.state.live ? 'Server online · NA · Vanilla+' : 'Server offline') : 'NA · Vanilla+',
+      statusDotColor: this.state.onlinePlayers != null ? (this.state.live ? '#3ddc78' : '#ff4d4d') : '#8f887f',
+      connectNow: () => this.connectNow(),
+      mobileMenuOpen: this.state.mobileMenuOpen,
+      toggleMobileMenu: () => this.setState({ mobileMenuOpen: !this.state.mobileMenuOpen }),
+      parallaxSlow: this.state.scrollY * 0.08,
+      parallaxMed: this.state.scrollY * -0.12,
+      parallaxFast: this.state.scrollY * 0.18,
+    };
+  }
+}
+
+</script>
+</body>
+</html>

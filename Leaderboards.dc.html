@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+  <title>Leaderboards — Untitled RustX | PvP, Raiding, Farming &amp; PvE Rankings</title>
+  <meta name="description" content="Untitled RustX leaderboards — top players and clans this wipe across PvP, raiding, farming, and PvE. Real Rust server stats, updated every wipe.">
+  <link rel="canonical" href="https://untitledrx.com/Leaderboards.dc.html">
+  <meta name="robots" content="index, follow">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Untitled RustX Leaderboards">
+  <meta property="og:description" content="Who runs the island? Top players and clans this wipe on Untitled RustX.">
+  <meta property="og:url" content="https://untitledrx.com/Leaderboards.dc.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+  <script src="image-slot.js"></script>
+  <style>
+    @keyframes signFlicker { 0%,7%,9%,11%,89%,100% { opacity: 1; } 8% { opacity: 0.4; } 10% { opacity: 0.85; } 45% { opacity: 1; } 46% { opacity: 0.3; } 47% { opacity: 1; } 90% { opacity: 0.5; } 91% { opacity: 1; } }
+    @keyframes storeGlow { 0%,100% { box-shadow: 0 0 16px rgba(255,255,255,0.5), 0 2px 8px rgba(0,0,0,0.3); } 50% { box-shadow: 0 0 28px rgba(255,255,255,0.9), 0 2px 8px rgba(0,0,0,0.3); } }
+    @keyframes marqueeSingle { 0% { transform: translateX(100vw); } 100% { transform: translateX(-100%); } }
+    @keyframes scanMove { 0% { background-position: 0 0; } 100% { background-position: 0 60px; } }
+    @keyframes blobDrift { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(12px,-10px) scale(1.1); } }
+    body { margin: 0; background: #08090a; text-wrap: pretty; }
+    a { color: #ff7a3d; text-underline-offset: 3px; transition: color 0.2s ease; }
+    a:hover { color: #ffa06a; }
+    ::selection { background: #ff6a1a; color: #0a0b0d; }
+    .site-nav-inner { position: relative; background-image: repeating-linear-gradient(135deg, rgba(255,255,255,0.012) 0px, rgba(255,255,255,0.012) 1px, transparent 1px, transparent 5px), repeating-linear-gradient(45deg, rgba(255,255,255,0.01) 0px, rgba(255,255,255,0.01) 1px, transparent 1px, transparent 5px); }
+    .btn-connect { transition: transform 0.18s cubic-bezier(0.4,0,0.2,1), box-shadow 0.18s ease, filter 0.18s ease; }
+    .btn-connect:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(255,106,26,0.4); filter: brightness(1.08); }
+    .nav-hamburger { display: none; }
+    .nav-tab { display: inline-flex; align-items: center; justify-content: center; height: 38px; padding: 0 16px; background: #15161a; border: 1px solid rgba(255,255,255,0.12); border-bottom-width: 2px; color: #c9c3ba; font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; font-size: 12.5px; text-decoration: none; clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px); transition: all 0.18s ease; }
+    .nav-tab:hover { border-color: rgba(255,106,26,0.55); background: #1c1d21; color: #ffb27a; }
+    .nav-tab.active { border-color: rgba(255,106,26,0.5); border-bottom-color: #ff6a1a; background: linear-gradient(180deg, rgba(255,106,26,0.18), rgba(255,106,26,0.04)); color: #ff8a52; }
+    .nav-tab-mobile { display: flex; width: 100%; justify-content: flex-start; height: auto; padding: 13px 16px; }
+    @media (max-width: 860px) { .nav-links-desktop { display: none !important; } .nav-hamburger { display: flex !important; } }
+    .nav-catalog-wrap { position: relative; }
+    .nav-catalog-dropdown { position: absolute; top: calc(100% + 10px); left: 0; opacity: 0; visibility: hidden; transform: translateY(-6px); transition: all 0.18s ease; pointer-events: none; z-index: 30; }
+    .nav-catalog-wrap.is-open .nav-catalog-dropdown { opacity: 1; visibility: visible; transform: translateY(0); pointer-events: auto; }
+    .nav-catalog-dropdown a:hover { color: #ff8a52 !important; background: rgba(255,106,26,0.1); }
+    .nav-links-desktop > .nav-catalog-wrap:last-child .nav-catalog-dropdown { left: auto !important; right: 0 !important; }
+
+    .lb-shell { display: grid; grid-template-columns: 268px 1fr; gap: 18px; align-items: start; }
+    @media (max-width: 900px) { .lb-shell { grid-template-columns: 1fr; } }
+
+    .seg2 { display: flex; }
+    .seg2-btn { flex: 1; font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; font-size: 12.5px; padding: 11px 0; cursor: pointer; border: 1px solid rgba(255,255,255,0.14); background: #131417; color: #8f887f; transition: all 0.16s ease; }
+    .seg2-btn.active { background: linear-gradient(135deg, #ff8a4c, #ff6a1a); color: #0a0b0d; border-color: rgba(255,180,130,0.5); }
+    .lb-input { width: 100%; background: #0f1012; border: 1px solid rgba(255,255,255,0.14); color: #e9e7e3; font-family: 'Inter', sans-serif; font-size: 13px; padding: 10px 12px; box-sizing: border-box; }
+    .lb-input:focus { outline: none; border-color: rgba(255,106,26,0.55); }
+    .lb-major-btn { display: flex; align-items: center; gap: 10px; width: 100%; text-align: left; font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; font-size: 13px; padding: 13px 14px; cursor: pointer; border: 1px solid rgba(255,255,255,0.12); background: #101113; color: #cfc9c2; transition: all 0.16s ease; clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px); }
+    .lb-major-btn:hover { border-color: rgba(255,106,26,0.4); color: #ffb27a; }
+    .lb-major-btn.active { background: linear-gradient(135deg, rgba(255,106,26,0.22), rgba(255,106,26,0.06)); border-color: #ff6a1a; color: #ff8a52; box-shadow: inset 0 0 0 1px rgba(255,106,26,0.25); }
+    .lb-cat-head { display: flex; align-items: center; gap: 10px; width: 100%; text-align: left; font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; font-size: 13px; padding: 13px 14px; cursor: pointer; border: 1px solid rgba(255,255,255,0.12); background: #101113; color: #cfc9c2; transition: all 0.16s ease; }
+    .lb-cat-head:hover { border-color: rgba(255,106,26,0.35); }
+    .lb-cat-head.active { border-color: #ff6a1a; background: linear-gradient(135deg, rgba(255,106,26,0.2), rgba(255,106,26,0.05)); color: #ff8a52; }
+    .lb-cat-icon { flex-shrink: 0; }
+    .lb-cat-chev { margin-left: auto; transition: transform 0.2s ease; font-size: 11px; color: #6b655e; }
+    .lb-cat-chev.open { transform: rotate(90deg); }
+    .lb-submenu { border-left: 2px solid rgba(255,106,26,0.3); margin-left: 14px; overflow: hidden; transition: max-height 0.25s ease; }
+    .lb-submetric { display: block; width: 100%; text-align: left; background: none; border: none; padding: 9px 14px; font-family: 'Inter', sans-serif; font-size: 12.5px; color: #8f887f; cursor: pointer; transition: all 0.14s ease; border-left: 2px solid transparent; }
+    .lb-submetric:hover { color: #cfc9c2; background: rgba(255,255,255,0.03); }
+    .lb-submetric.active { color: #ff8a52; border-left-color: #ff6a1a; background: rgba(255,106,26,0.08); font-weight: 600; }
+
+    .lb-row { transition: background 0.14s ease; cursor: pointer; }
+    .lb-row:hover { background: rgba(255,106,26,0.06); }
+    .lb-row.rank1 { background: linear-gradient(90deg, rgba(255,215,0,0.1), transparent 60%); box-shadow: inset 3px 0 0 #ffd700; }
+    .lb-row.rank2 { background: linear-gradient(90deg, rgba(201,195,186,0.06), transparent 60%); box-shadow: inset 3px 0 0 #c9c3ba; }
+    .lb-row.rank3 { background: linear-gradient(90deg, rgba(255,138,82,0.07), transparent 60%); box-shadow: inset 3px 0 0 #ff8a52; }
+    .avatar-circle { width: 28px; height: 28px; border-radius: 3px; background: linear-gradient(135deg, #2a2b30, #16171a); border: 1px solid rgba(255,255,255,0.12); display: flex; align-items: center; justify-content: center; font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 11px; color: #8f887f; flex-shrink: 0; }
+    .lb-desktop-col { }
+    @media (max-width: 720px) { .lb-desktop-col { display: none !important; } }
+    .page-btn { font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 12.5px; padding: 7px 12px; background: #131417; border: 1px solid rgba(255,255,255,0.14); color: #b0a99f; cursor: pointer; }
+    .page-btn:disabled { opacity: 0.35; cursor: default; }
+    .page-btn.active { background: #ff6a1a; color: #0a0b0d; border-color: #ff6a1a; }
+    .heat-chip { font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; font-size: 11.5px; padding: 7px 14px; background: #131417; border: 1px solid rgba(255,255,255,0.14); color: #8f887f; cursor: pointer; transition: all 0.15s ease; }
+    .heat-chip.active { background: rgba(255,106,26,0.16); border-color: #ff6a1a; color: #ff8a52; }
+    @keyframes hudPulse { 0%,100% { opacity: 1; } 50% { opacity: 0.55; } }
+    .hud-panel { clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px); }
+    .nav-connect-wrap { position: relative; }
+    .nav-connect-dropdown { position: absolute; top: calc(100% + 12px); left: 50%; transform: translateX(-50%) translateY(-6px); opacity: 0; visibility: hidden; transform: translateY(-6px); transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease; pointer-events: none; z-index: 30; }
+    .nav-connect-wrap.is-open .nav-connect-dropdown { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); pointer-events: auto; }
+  </style>
+</helmet>
+
+<div style="position: fixed; inset: 0; z-index: 0; overflow: hidden; background: #08090a;">
+  <div style="position: absolute; inset: 0; background-image: repeating-linear-gradient(0deg, rgba(255,106,26,0.018) 0px, rgba(255,106,26,0.018) 1px, transparent 1px, transparent 60px); animation: scanMove 7s linear infinite;"></div>
+  <div style="position: absolute; inset: 0; background: radial-gradient(ellipse at 20% 0%, rgba(255,90,30,0.08), transparent 55%);"></div>
+</div>
+
+<div style="position: relative; z-index: 1; font-family: 'Inter', system-ui, sans-serif; color: #e9e7e3; min-height: 100vh;">
+
+  <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; background: #0e0f11; border-bottom: 1px solid rgba(255,122,61,0.25); padding: 8px 0;">
+    <div style="flex: 1; overflow: hidden;">
+      <div style="width: max-content; animation: marqueeSingle 16s linear infinite;">
+        <span style="font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; font-size: 12px; color: #ff8a52; white-space: nowrap;">{{ sponsorTickerText }}</span>
+      </div>
+    </div>
+  </div><nav class="site-nav" style="position: sticky; top: 0; z-index: 20;">
+    <div class="site-nav-inner" style="background: linear-gradient(180deg, rgba(21,22,25,0.98), rgba(9,10,12,0.96)); border-bottom: 1px solid rgba(255,106,26,0.35); box-shadow: 0 8px 26px rgba(0,0,0,0.5);">
+      <div style="max-width: 1280px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px); height: 84px; display: flex; align-items: center; justify-content: center; gap: 40px; position: relative; left: 15px;">
+        <div class="nav-links-desktop" style="display: flex; align-items: center; gap: 10px;">
+          <div class="{{ homeWrapClass }}" onMouseEnter="{{ openHomeDrop }}" onMouseLeave="{{ closeDrop }}">
+            <a href="./index.html" class="nav-tab" style="animation: signFlicker 3s linear infinite; animation-delay: 0s; text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 14px rgba(255,138,82,0.9), 0 0 26px rgba(255,106,26,0.7);">Home</a>
+            <div class="nav-catalog-dropdown" style="background: #15161a; border: 1px solid rgba(255,106,26,0.35); box-shadow: 0 12px 30px rgba(0,0,0,0.5); min-width: 200px; padding: 8px;">
+              <a href="./Quickstart.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">Quickstart</a>
+              <a href="./Server.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">Server Specs</a>
+              <a href="./Events.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">Events</a>
+            </div>
+          </div>
+          <div class="{{ rulesWrapClass }}" onMouseEnter="{{ openRulesDrop }}" onMouseLeave="{{ closeDrop }}">
+            <a href="./Rules.dc.html" class="nav-tab" style="animation: signFlicker 3.4s linear infinite; animation-delay: 0.6s; text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 14px rgba(255,138,82,0.9), 0 0 26px rgba(255,106,26,0.7);">Rules</a>
+            <div class="nav-catalog-dropdown" style="background: #15161a; border: 1px solid rgba(255,106,26,0.35); box-shadow: 0 12px 30px rgba(0,0,0,0.5); min-width: 200px; padding: 8px;">
+              <a href="./Reporting.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">Reporting a Violation</a>
+              <a href="./Enforcement.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">Enforcement</a>
+              <a href="./FAQ.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">FAQ</a>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center;">
+            <div class="{{ navConnectWrapClass }}" onMouseEnter="{{ openNavConnect }}" onMouseLeave="{{ closeNavConnect }}">
+            <button type="button" onClick="{{ connectNow }}" class="btn-connect" style="font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; font-size: 12.5px; color: #0a0b0d; background: linear-gradient(135deg, #ff8a4c, #ff6a1a); border: 1px solid rgba(255,180,130,0.5); height: 38px; padding: 0 18px; display: inline-flex; align-items: center; cursor: pointer; clip-path: polygon(7px 0, 100% 0, 100% calc(100% - 7px), calc(100% - 7px) 100%, 0 100%, 0 7px); box-shadow: 0 2px 8px rgba(255,106,26,0.3);">Connect Now</button>
+            <div class="nav-connect-dropdown hud-panel" style="width: 340px; background: linear-gradient(180deg, rgba(255,106,26,0.08), rgba(10,11,13,0.97)); border: 1px solid rgba(255,122,61,0.35); padding: 18px 20px; box-shadow: 0 16px 40px rgba(0,0,0,0.5);">
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 14px;">
+                <span style="width: 7px; height: 7px; border-radius: 50%; background: {{ statusDotColor }}; box-shadow: 0 0 8px {{ statusDotColor }}; display: inline-block; animation: hudPulse 1.6s ease-in-out infinite;"></span>
+                <span style="font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; font-size: 11px; color: #ff8a52;">{{ serverStatusText }}</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
+                <span style="font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 13px; color: #fff;">157.85.93.170:28015</span>
+              </div>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px;">
+                <div>
+                  <span style="display: block; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: #6b655e; margin-bottom: 4px;">Players</span>
+                  <span style="font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 17px; color: #fff;">{{ playersLabel }}</span>
+                </div>
+                <div>
+                  <span style="display: block; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: #6b655e; margin-bottom: 4px;">Next wipe</span>
+                  <span style="font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 17px; color: #ff6a1a;">{{ countdown }}</span>
+                </div>
+              </div>
+              <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                <button type="button" onClick="{{ connectNow }}" class="btn-outline" style="font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; font-size: 11.5px; color: #fff; background: transparent; border: 1px solid rgba(255,255,255,0.3); padding: 9px 14px; cursor: pointer;">Launch via Steam</button>
+                <button type="button" onClick="{{ copyIp }}" class="btn-outline" style="font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; font-size: 11.5px; color: #fff; background: transparent; border: 1px solid rgba(255,255,255,0.3); padding: 9px 14px; cursor: pointer;">{{ copyLabel }}</button>
+              </div>
+            </div>
+          </div>
+          </div>
+
+        </div>
+        <div style="width: 160px; height: 100px; flex-shrink: 0; position: relative; background: transparent; overflow: visible;">
+          <img src="assets/logo-new.png" alt="Untitled RustX" style="width: 100%; height: 100%; object-fit: contain; display: block; background: transparent;" />
+        </div>
+        <div class="nav-links-desktop" style="display: flex; align-items: center; gap: 10px;">
+          <a href="./Leaderboards.dc.html" class="nav-tab active">Leaderboards</a>
+          <a href="./FAQ.dc.html" class="nav-tab" style="animation: signFlicker 3.1s linear infinite; animation-delay: 1.6s; text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 14px rgba(255,138,82,0.9), 0 0 26px rgba(255,106,26,0.7);">FAQs</a>
+          <a href="https://discord.gg/M4rqjGpjyW" target="_blank" rel="noopener" class="nav-tab" style="animation: signFlicker 2.6s linear infinite; animation-delay: 0.3s; text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 14px rgba(255,138,82,0.9), 0 0 26px rgba(255,106,26,0.7);">Discord</a>
+          <div class="{{ storeWrapClass }}" onMouseEnter="{{ openStoreDrop }}" onMouseLeave="{{ closeDrop }}">
+            <a href="./Store.dc.html" class="nav-tab" style="animation: signFlicker 2.9s linear infinite; animation-delay: 1.3s; text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 14px rgba(255,138,82,0.9), 0 0 26px rgba(255,106,26,0.7);">Store</a>
+            <div class="nav-catalog-dropdown" style="background: #15161a; border: 1px solid rgba(255,106,26,0.35); box-shadow: 0 12px 30px rgba(0,0,0,0.5); min-width: 200px; padding: 8px;">
+              <a href="./MembershipTiers.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">Membership Tiers</a>
+              <a href="./Medical.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">Medical</a>
+              <a href="./Teas.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">Teas</a>
+              <a href="./WeaponKits.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">Weapon Kits</a>
+              <a href="./ResourceKits.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">Resource Kits</a>
+              <a href="./Unmute.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">Unmute</a>
+              <a href="./SuperSerum.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">Super Serum</a>
+              <a href="./Minicopter.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">Minis</a>
+              <a href="./WebsiteShoutout.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">Website Shoutout</a>
+            </div>
+          </div>
+        </div>
+        <button type="button" class="nav-hamburger" onClick="{{ toggleMobileMenu }}" aria-label="Menu" style="position: absolute; right: clamp(16px, 4vw, 40px); background: none; border: 1px solid rgba(255,255,255,0.25); padding: 8px 10px; cursor: pointer; flex-direction: column; gap: 4px; align-items: center; justify-content: center;">
+          <span style="width: 18px; height: 2px; background: #e9e7e3;"></span>
+          <span style="width: 18px; height: 2px; background: #e9e7e3;"></span>
+          <span style="width: 18px; height: 2px; background: #e9e7e3;"></span>
+        </button>
+      </div>
+    </div>
+    <sc-if value="{{ mobileMenuOpen }}" hint-placeholder-val="{{ false }}">
+      <div style="background: #0e0f11; border-bottom: 1px solid rgba(255,106,26,0.3); padding: 14px clamp(16px, 4vw, 40px) 18px; display: flex; flex-direction: column; gap: 8px;">
+        <a href="./index.html" class="nav-tab nav-tab-mobile">Home</a>
+        <a href="./Rules.dc.html" class="nav-tab nav-tab-mobile">Rules</a>
+        <a href="./Store.dc.html" class="nav-tab nav-tab-mobile">Store</a>
+        <a href="./Leaderboards.dc.html" class="nav-tab nav-tab-mobile active">Leaderboards</a>
+        <a href="./FAQ.dc.html" class="nav-tab nav-tab-mobile">FAQs</a>
+        <a href="https://discord.gg/M4rqjGpjyW" target="_blank" rel="noopener" class="nav-tab nav-tab-mobile">Discord</a>
+        <button type="button" onClick="{{ connectNow }}" class="btn-connect" style="margin-top: 6px; font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; font-size: 13px; color: #0a0b0d; background: linear-gradient(135deg, #ff8a4c, #ff6a1a); border: 1px solid rgba(255,180,130,0.5); padding: 13px; cursor: pointer; clip-path: polygon(7px 0, 100% 0, 100% calc(100% - 7px), calc(100% - 7px) 100%, 0 100%, 0 7px);">Connect Now</button>
+      </div>
+    </sc-if>
+  </nav>
+
+  <div style="max-width: 1360px; margin: 0 auto; padding: 0 clamp(18px, 4vw, 48px);">
+
+    <p style="padding: 22px 0 0; font-size: 12.5px; color: #8f887f; margin: 0;"><a href="./index.html">Home</a> / Leaderboards</p>
+
+    <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 20px; flex-wrap: wrap; padding: 14px 0 18px;">
+      <div>
+        <h1 style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase; font-size: clamp(26px, 4vw, 38px); margin: 0; color: #fff; letter-spacing: 0.01em;">Untitled RustX <span style="color: #ff6a1a;">Leaderboards</span></h1>
+        <p style="font-size: 13px; margin: 4px 0 0; color: #8f887f;">Who runs the island? Vanilla loot, 2x wood/stone/cloth.</p>
+      </div>
+      <span style="font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 11.5px; letter-spacing: 0.06em; text-transform: uppercase; color: #ff8a52; border: 1px solid rgba(255,106,26,0.4); background: rgba(255,106,26,0.08); padding: 6px 12px;">{{ wipeLabel }}</span>
+    </div>
+
+    <div class="lb-shell" style="padding-bottom: 60px;">
+      <!-- SIDEBAR -->
+      <aside style="background: #0d0e10; border: 1px solid rgba(255,255,255,0.09); border-top: 3px solid #ff6a1a; padding: 16px; display: flex; flex-direction: column; gap: 14px;">
+        <div class="seg2">
+          <button type="button" onClick="{{ setModePlayers }}" class="seg2-btn {{ playersActive }}" style="border-right: none;">Players</button>
+          <button type="button" onClick="{{ setModeClans }}" class="seg2-btn {{ clansActive }}">Clans</button>
+        </div>
+
+        <div>
+          <span style="display: block; font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; font-size: 10.5px; color: #6b655e; margin-bottom: 6px;">Search Survivors</span>
+          <input class="lb-input" value="{{ search }}" onChange="{{ onSearchChange }}" placeholder="{{ searchPlaceholder }}">
+        </div>
+
+        <div>
+          <span style="display: block; font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; font-size: 10.5px; color: #6b655e; margin-bottom: 6px;">Wipe</span>
+          <div class="seg2">
+            <button type="button" onClick="{{ setWipeCurrent }}" class="seg2-btn {{ currentActive }}" style="border-right: none;">Current</button>
+            <button type="button" onClick="{{ setWipePrevious }}" class="seg2-btn {{ previousActive }}">Previous</button>
+          </div>
+        </div>
+
+        <button type="button" onClick="{{ selectOverview }}" class="lb-major-btn {{ overviewActive }}">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"></path><path d="M18.7 8 13 13.7l-3-3L4 17"></path></svg>
+          Overview
+        </button>
+        <button type="button" onClick="{{ selectHeatmaps }}" class="lb-major-btn {{ heatmapActive }}">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"></path></svg>
+          Heatmaps
+        </button>
+
+        <div>
+          <span style="display: block; font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; font-size: 10.5px; color: #6b655e; margin: 4px 0 8px;">Competitive Stats</span>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <sc-for list="{{ categories }}" as="cat" hint-placeholder-count="4">
+              <div>
+                <button type="button" onClick="{{ cat.toggle }}" class="lb-cat-head {{ cat.headClass }}">
+                  <span class="lb-cat-icon" dangerouslySetInnerHTML="{{ cat.iconHtml }}"></span>
+                  {{ cat.label }}
+                  <span class="lb-cat-chev {{ cat.chevClass }}">▶</span>
+                </button>
+                <sc-if value="{{ cat.expanded }}" hint-placeholder-val="{{ false }}">
+                  <div class="lb-submenu">
+                    <sc-for list="{{ cat.metrics }}" as="met" hint-placeholder-count="5">
+                      <button type="button" onClick="{{ met.select }}" class="lb-submetric {{ met.activeClass }}">{{ met.label }}</button>
+                    </sc-for>
+                  </div>
+                </sc-if>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </aside>
+
+      <!-- MAIN -->
+      <main>
+        <sc-if value="{{ profileOpen }}" hint-placeholder-val="{{ false }}">
+          <div style="background: linear-gradient(160deg, #14151a, #0e0f11); border: 1px solid rgba(255,122,61,0.35); border-top: 3px solid #ff6a1a; padding: 26px; position: relative; margin-bottom: 18px;">
+            <button type="button" onClick="{{ closeProfile }}" style="position: absolute; top: 14px; right: 14px; background: none; border: 1px solid rgba(255,255,255,0.2); color: #b0a99f; width: 28px; height: 28px; cursor: pointer; font-size: 14px;">✕</button>
+            <sc-if value="{{ isPlayerProfile }}" hint-placeholder-val="{{ true }}">
+              <div style="display: flex; align-items: center; gap: 18px; margin-bottom: 20px;">
+                <div class="avatar-circle" style="width: 58px; height: 58px; font-size: 18px; border-radius: 8px;">{{ profile.initial }}</div>
+                <div>
+                  <h2 style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 22px; margin: 0 0 3px; color: #fff;">{{ profile.name }}</h2>
+                  <span style="font-size: 12.5px; color: #8f887f;">{{ profile.clanLabel }} · {{ profile.playtimeLabel }}</span>
+                </div>
+              </div>
+              <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 18px;">
+                <sc-for list="{{ profile.rankBadges }}" as="badge" hint-placeholder-count="4">
+                  <div style="background: #0e0f11; border: 1px solid rgba(255,255,255,0.08); padding: 12px; text-align: center;">
+                    <span style="display: block; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; font-size: 10px; color: #6b655e; margin-bottom: 5px;">{{ badge.label }}</span>
+                    <span style="font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 18px; color: #ff8a52;">{{ badge.rank }}</span>
+                  </div>
+                </sc-for>
+              </div>
+              <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: rgba(255,255,255,0.08);">
+                <sc-for list="{{ profile.stats }}" as="stat" hint-placeholder-count="8">
+                  <div style="background: #0e0f11; padding: 12px 14px;">
+                    <span style="display: block; font-size: 10.5px; color: #8f887f; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 3px;">{{ stat.label }}</span>
+                    <span style="font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 16px; color: #fff;">{{ stat.value }}</span>
+                  </div>
+                </sc-for>
+              </div>
+            </sc-if>
+            <sc-if value="{{ isClanProfile }}" hint-placeholder-val="{{ false }}">
+              <div style="display: flex; align-items: center; gap: 18px; margin-bottom: 20px;">
+                <div class="avatar-circle" style="width: 58px; height: 58px; font-size: 14px; border-radius: 8px;">{{ profile.tag }}</div>
+                <div>
+                  <h2 style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 22px; margin: 0 0 3px; color: #fff;">{{ profile.name }}</h2>
+                  <span style="font-size: 12.5px; color: #8f887f;">Rank #{{ profile.rank }} · {{ profile.memberCount }} members</span>
+                </div>
+              </div>
+              <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: rgba(255,255,255,0.08); margin-bottom: 20px;">
+                <sc-for list="{{ profile.stats }}" as="stat" hint-placeholder-count="5">
+                  <div style="background: #0e0f11; padding: 12px 14px;">
+                    <span style="display: block; font-size: 10.5px; color: #8f887f; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 3px;">{{ stat.label }}</span>
+                    <span style="font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 16px; color: #fff;">{{ stat.value }}</span>
+                  </div>
+                </sc-for>
+              </div>
+              <span style="display: block; font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; font-size: 11px; color: #ff8a52; margin-bottom: 10px;">Members</span>
+              <div style="display: flex; flex-direction: column; gap: 1px; background: rgba(255,255,255,0.08);">
+                <sc-for list="{{ profile.members }}" as="mem" hint-placeholder-count="4">
+                  <div style="background: #0e0f11; padding: 11px 14px; display: flex; align-items: center; justify-content: space-between; cursor: pointer;" onClick="{{ mem.open }}">
+                    <span style="font-weight: 600; color: #e9e7e3;">{{ mem.name }}</span>
+                    <span style="font-size: 12px; color: #8f887f;">{{ mem.kills }} kills · {{ mem.kd }} K/D</span>
+                  </div>
+                </sc-for>
+              </div>
+            </sc-if>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ isHeatmapView }}" hint-placeholder-val="{{ false }}">
+          <div style="background: #0d0e10; border: 1px solid rgba(255,255,255,0.09); border-top: 3px solid #ff6a1a;">
+            <div style="padding: 16px 20px; border-bottom: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+              <div>
+                <span style="display: block; font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; font-size: 11px; color: #ff8a52; margin-bottom: 2px;">Activity Heatmap</span>
+                <h2 style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 20px; margin: 0; color: #fff;">{{ heatmapCategoryLabel }}</h2>
+              </div>
+              <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+                <sc-for list="{{ heatmapCatTabs }}" as="t" hint-placeholder-count="4">
+                  <button type="button" onClick="{{ t.select }}" class="heat-chip {{ t.activeClass }}">{{ t.label }}</button>
+                </sc-for>
+              </div>
+            </div>
+            <div style="padding: 16px 20px; display: flex; gap: 6px; flex-wrap: wrap; border-bottom: 1px solid rgba(255,255,255,0.06);">
+              <sc-for list="{{ heatmapFilters }}" as="f" hint-placeholder-count="4">
+                <button type="button" onClick="{{ f.select }}" class="heat-chip {{ f.activeClass }}">{{ f.label }}</button>
+              </sc-for>
+            </div>
+            <div style="position: relative; margin: 20px; height: 420px; background: #0a0b0c; border: 1px solid rgba(255,255,255,0.08); overflow: hidden;">
+              <div style="position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px); background-size: 40px 40px;"></div>
+              <sc-for list="{{ heatmapBlobs }}" as="b" hint-placeholder-count="6">
+                <div style="position: absolute; left: {{ b.left }}; top: {{ b.top }}; width: {{ b.size }}; height: {{ b.size }}; border-radius: 50%; background: radial-gradient(circle, {{ b.color }}, transparent 70%); filter: blur(6px); animation: blobDrift {{ b.dur }} ease-in-out infinite;"></div>
+              </sc-for>
+              <sc-if value="{{ heatmapLoading }}" hint-placeholder-val="{{ false }}">
+                <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: #8f887f; font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; font-size: 13px;">Loading heatmap…</div>
+              </sc-if>
+              <sc-if value="{{ heatmapErrorMsg }}" hint-placeholder-val="{{ false }}">
+                <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: #ff6b60; font-size: 13px; text-align: center; padding: 20px;">Couldn't load heatmap data: {{ heatmapErrorMsg }}</div>
+              </sc-if>
+              <sc-if value="{{ heatmapEmpty }}" hint-placeholder-val="{{ false }}">
+                <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: #6b655e; font-size: 13px;">No heatmap data recorded yet this wipe.</div>
+              </sc-if>
+              <div style="position: absolute; bottom: 14px; left: 14px; font-family: ui-monospace, monospace; font-size: 11px; color: #6b655e; background: rgba(0,0,0,0.5); padding: 6px 10px; border: 1px solid rgba(255,255,255,0.08);">Aggregated activity zones — not live positions</div>
+            </div>
+            <p style="padding: 0 20px 20px; font-size: 12px; color: #6b655e; margin: 0;">Live aggregated event density from the Rust plugin feed. Never shows live or exact base coordinates.</p>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ !isHeatmapView }}" hint-placeholder-val="{{ true }}">
+          <div style="background: #0d0e10; border: 1px solid rgba(255,255,255,0.09); border-top: 3px solid #ff6a1a;">
+            <div style="padding: 16px 20px; border-bottom: 1px solid rgba(255,255,255,0.08); display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+              <div>
+                <span style="display: block; font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; font-size: 11px; color: #8f887f;">{{ headerCategoryLabel }} Leaderboard</span>
+                <h2 style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 22px; margin: 2px 0 0; color: #ff8a52; text-shadow: 0 0 14px rgba(255,106,26,0.3);">{{ headerMetricLabel }}</h2>
+              </div>
+              <span style="font-size: 12px; color: #6b655e;">Showing {{ rangeLabel }} of {{ totalCount }}</span>
+            </div>
+            <div style="overflow-x: auto;">
+              <div style="display: grid; grid-template-columns: {{ tableTemplate }}; gap: 14px; padding: 12px 20px; border-bottom: 1px solid rgba(255,255,255,0.08); background: rgba(255,106,26,0.05); min-width: 600px;">
+                <sc-for list="{{ columns }}" as="col" hint-placeholder-count="6">
+                  <span style="font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; font-size: 11px; color: {{ col.color }};" class="{{ col.colClass }}">{{ col.label }}</span>
+                </sc-for>
+              </div>
+              <sc-for list="{{ rows }}" as="row" hint-placeholder-count="10">
+                <div class="{{ row.rowClass }}" style="display: grid; grid-template-columns: {{ tableTemplate }}; gap: 14px; padding: 11px 20px; border-bottom: 1px solid rgba(255,255,255,0.05); align-items: center; min-width: 600px;" onClick="{{ row.open }}">
+                  <span style="font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 14px; color: {{ row.rankColor }};">{{ row.rankDisplay }}</span>
+                  <span style="display: flex; align-items: center; gap: 9px; font-weight: 700; color: #fff; overflow: hidden;">
+                    <span class="avatar-circle">{{ row.initial }}</span>
+                    <span style="overflow: hidden; text-overflow: ellipsis; font-size: 13.5px;">{{ row.name }}</span>
+                  </span>
+                  <sc-for list="{{ row.cells }}" as="cell" hint-placeholder-count="5">
+                    <span style="text-align: right; font-family: 'Rajdhani', sans-serif; font-weight: {{ cell.weight }}; font-size: 13.5px; color: {{ cell.color }};" class="{{ cell.colClass }}">{{ cell.value }}</span>
+                  </sc-for>
+                </div>
+              </sc-for>
+              <sc-if value="{{ playersLoading }}" hint-placeholder-val="{{ true }}">
+                <div style="padding: 50px 20px; text-align: center; color: #8f887f; font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; font-size: 13px;">Loading leaderboard…</div>
+              </sc-if>
+              <sc-if value="{{ playersErrorMsg }}" hint-placeholder-val="{{ false }}">
+                <div style="padding: 50px 20px; text-align: center; color: #ff6b60; font-size: 13.5px;">Couldn't load the leaderboard: {{ playersErrorMsg }}</div>
+              </sc-if>
+              <sc-if value="{{ noResults }}" hint-placeholder-val="{{ false }}">
+                <div style="padding: 40px 20px; text-align: center; color: #6b655e; font-size: 13.5px;">
+                  <sc-if value="{{ hasSearch }}" hint-placeholder-val="{{ false }}"><span>No matches for "{{ search }}".</span></sc-if>
+                  <sc-if value="{{ !hasSearch }}" hint-placeholder-val="{{ true }}"><span>No stats recorded yet this wipe — the leaderboard fills in once the Rust plugin reports data.</span></sc-if>
+                </div>
+              </sc-if>
+            </div>
+            <div style="padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; gap: 12px; border-top: 1px solid rgba(255,255,255,0.06);">
+              <span style="font-size: 12px; color: #6b655e;">Page {{ page }} of {{ pageCount }}</span>
+              <div style="display: flex; gap: 6px;">
+                <button type="button" onClick="{{ prevPage }}" class="page-btn" disabled="{{ isFirstPage }}">‹ Prev</button>
+                <button type="button" onClick="{{ nextPage }}" class="page-btn" disabled="{{ isLastPage }}">Next ›</button>
+              </div>
+            </div>
+          </div>
+          <p style="font-size: 12px; margin: 14px 0 0; color: #6b655e;">Sample data shown for layout — ready to sync with real per-wipe stats once the Rust plugin feed is connected (see RUST_PLUGIN_SPEC.md).</p>
+        </sc-if>
+      </main>
+    </div>
+
+    <div style="text-align: center; padding: 0 0 60px;">
+      <a href="./index.html" class="nav-tab" style="text-decoration: none;">← Return to Home</a>
+    </div>
+
+    <footer style="padding: 24px 0; font-size: 13px; border-top: 1px solid rgba(255,255,255,0.08); color: #6b655e;">Untitled RustX · 157.85.93.170:28015 · Wipes every Thursday, 1PM CDT · Site by joeboetheasian</footer>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { copyLabel: 'Copy IP', navConnectOpen: false, countdown: '—', onlinePlayers: null, maxPlayers: null, live: false, 
+    mobileMenuOpen: false, activeDropdown: null,
+    mode: 'players', wipe: 'current', search: '',
+    view: 'overview', category: null, metric: null, expandedCat: null,
+    heatmapCat: 'pvp', heatmapFilter: 'all',
+    profileType: null, profileId: null,
+    page: 1,
+    playersLoading: true, playersError: null, playersRaw: [], wipeIdLabel: null,
+    heatmapLoading: false, heatmapError: null, heatmapCells: [],
+  };
+  componentDidMount() {
+    this.tick();
+    this._t = setInterval(() => this.tick(), 1000);
+    this.fetchStatus();
+    this._statusT = setInterval(() => this.fetchStatus(), 60000);
+    window.scrollTo(0, 0); this.fetchPlayers('current'); }
+  connectNow() { window.location.href = 'steam://run/252490//+connect%20157.85.93.170:28015'; }
+
+  copyIp() {
+    navigator.clipboard?.writeText('157.85.93.170:28015').then(() => {
+      this.setState({ copyLabel: 'Copied!' });
+      setTimeout(() => this.setState({ copyLabel: 'Copy IP' }), 1800);
+    });
+  }
+  async fetchPlayers(wipe) {
+    this.setState({ playersLoading: true, playersError: null });
+    try {
+      const res = await fetch(`/api/leaderboards?wipe=${encodeURIComponent(wipe)}`);
+      if (!res.ok) throw new Error('Request failed (' + res.status + ')');
+      const data = await res.json();
+      this.setState({ playersRaw: Array.isArray(data.players) ? data.players : [], wipeIdLabel: data.wipeId || null, playersLoading: false });
+    } catch (err) {
+      this.setState({ playersError: err.message || 'Failed to load leaderboard', playersLoading: false, playersRaw: [] });
+    }
+  }
+  async fetchHeatmap() {
+    this.setState({ heatmapLoading: true, heatmapError: null });
+    const subtype = this.currentHeatmapSubtype();
+    try {
+      const res = await fetch(`/api/leaderboards/heatmap?wipe=${encodeURIComponent(this.state.wipe)}&category=${this.state.heatmapCat}&subtype=${subtype}`);
+      if (!res.ok) throw new Error('Request failed (' + res.status + ')');
+      const data = await res.json();
+      this.setState({ heatmapCells: Array.isArray(data.cells) ? data.cells : [], heatmapLoading: false });
+    } catch (err) {
+      this.setState({ heatmapError: err.message || 'Failed to load heatmap', heatmapLoading: false, heatmapCells: [] });
+    }
+  }
+  currentHeatmapSubtype() {
+    const map = {
+      pvp: { all: 'kills', kills: 'kills', deaths: 'deaths' },
+      raiding: { all: 'rockets', rockets: 'rockets', c4: 'c4', satchels: 'satchels' },
+      farming: { all: 'wood', wood: 'wood', stone: 'stone', cloth: 'cloth', metal: 'metal', sulfur: 'sulfur' },
+      pve: { all: 'scientists', scientists: 'scientists', animals: 'animals', bradley: 'bradley', heli: 'heli' },
+    };
+    const key = (this.state.heatmapFilter || 'all').toLowerCase().replace(/[^a-z]/g, '');
+    const catMap = map[this.state.heatmapCat] || map.pvp;
+    return catMap[key] || Object.values(catMap)[0];
+  }
+
+  // Normalizes the real API player shape (see RUST_PLUGIN_SPEC.md) to the internal field names the UI renders.
+  normalize(p) {
+    const n = (v) => (typeof v === 'number' ? v : 0);
+    return {
+      id: p.steamId, name: p.name || 'Unknown', clan: p.clanTag || null,
+      kills: n(p.kills), deaths: n(p.deaths), headshots: n(p.headshots), longestKill: n(p.longestKillMeters),
+      structuresDestroyed: n(p.structuresDestroyed), doorsDestroyed: n(p.doorsDestroyed),
+      rockets: n(p.rocketsUsed), c4: n(p.c4Used), satchels: n(p.satchelsUsed), explosiveAmmo: n(p.explosiveAmmoUsed),
+      wood: n(p.wood), stone: n(p.stone), cloth: n(p.cloth), metalOre: n(p.metalOre), sulfurOre: n(p.sulfurOre), hqmOre: n(p.hqmOre),
+      scientistsKilled: n(p.scientistsKilled), animalsKilled: n(p.animalsKilled), bradleyKills: n(p.bradleyKills), heliKills: n(p.heliKills), otherNpcKills: n(p.otherNpcKills),
+      playtimeHours: +(n(p.playtimeSeconds) / 3600).toFixed(1),
+    };
+  }
+  augment(p) {
+    const kd = p.kills / Math.max(p.deaths, 1);
+    const totalResources = p.wood + p.stone + p.cloth + p.metalOre + p.sulfurOre + p.hqmOre;
+    const raidScore = p.rockets * 25 + p.c4 * 20 + p.satchels * 8 + Math.round(p.explosiveAmmo * 0.5) + p.structuresDestroyed * 3 + p.doorsDestroyed * 2;
+    const overallScore = Math.round(p.kills * 4 + raidScore * 0.6 + totalResources / 500 + p.playtimeHours * 3);
+    const npcKills = p.scientistsKilled + p.animalsKilled + p.bradleyKills + p.heliKills + p.otherNpcKills;
+    return { ...p, kd, totalResources, raidScore, overallScore, npcKills };
+  }
+  get players() { return this.state.playersRaw.map((p) => this.augment(this.normalize(p))); }
+  get clans() {
+    const byTag = new Map();
+    this.players.filter((p) => p.clan).forEach((p) => {
+      if (!byTag.has(p.clan)) byTag.set(p.clan, []);
+      byTag.get(p.clan).push(p);
+    });
+    return [...byTag.entries()].map(([tag, members]) => {
+      const sum = (key) => members.reduce((a, m) => a + m[key], 0);
+      const kills = sum('kills'), deaths = sum('deaths'), raidScore = sum('raidScore'), resources = sum('totalResources'), overallScore = sum('overallScore'), rockets = sum('rockets'), c4 = sum('c4'), wood = sum('wood'), stone = sum('stone');
+      const n = Math.max(members.length, 1);
+      return { tag, name: tag, members, memberCount: n, kills, deaths, kd: kills / Math.max(deaths, 1), raidScore, resources, overallScore, rockets, c4, wood, stone, scorePerMember: Math.round(overallScore / n), perMemberKills: +(kills / n).toFixed(1), resourcesPerMember: Math.round(resources / n) };
+    });
+  }
+
+  colLabel(key) {
+    return ({ kills: 'Kills', deaths: 'Deaths', kd: 'K/D', headshots: 'Headshots', longestKill: 'Longest Kill', raidScore: 'Raid Score', rockets: 'Rockets', c4: 'C4', satchels: 'Satchels', explosiveAmmo: 'Expl. Ammo', structuresDestroyed: 'Structures', doorsDestroyed: 'Doors', totalResources: 'Total', wood: 'Wood', stone: 'Stone', cloth: 'Cloth', metalOre: 'Metal', sulfurOre: 'Sulfur', hqmOre: 'HQM', npcKills: 'NPC Kills', scientistsKilled: 'Scientists', animalsKilled: 'Animals', bradleyKills: 'Bradley', heliKills: 'Heli', playtimeHours: 'Playtime', memberCount: 'Members', perMemberKills: 'Per Member', resources: 'Total', resourcesPerMember: 'Per Member', scorePerMember: 'Per Member', overallScore: 'Score' })[key] || key;
+  }
+  fmtVal(key, v) {
+    if (key === 'kd') return v.toFixed(2);
+    if (key === 'longestKill') return v + 'm';
+    if (key === 'playtimeHours') return v + 'h';
+    if (typeof v === 'number' && v >= 1000) return v.toLocaleString();
+    return v;
+  }
+
+  get playerMetricDefs() {
+    return {
+      pvp: [
+        { key: 'kills', label: 'Player Kills', cols: ['kills', 'deaths', 'kd', 'headshots'] },
+        { key: 'kd', label: 'K/D Ratio', cols: ['kd', 'kills', 'deaths'] },
+        { key: 'headshots', label: 'Headshots', cols: ['headshots', 'kills', 'kd'] },
+        { key: 'longestKill', label: 'Longest Kill', cols: ['longestKill', 'kills'] },
+        { key: 'deaths', label: 'Deaths', cols: ['deaths', 'kills', 'kd'] },
+      ],
+      raiding: [
+        { key: 'raidScore', label: 'Raid Score', cols: ['raidScore', 'structuresDestroyed', 'rockets', 'c4'] },
+        { key: 'rockets', label: 'Rockets Used', cols: ['rockets', 'raidScore'] },
+        { key: 'c4', label: 'C4 Used', cols: ['c4', 'raidScore'] },
+        { key: 'satchels', label: 'Satchels Used', cols: ['satchels', 'raidScore'] },
+        { key: 'explosiveAmmo', label: 'Explosive Ammo', cols: ['explosiveAmmo', 'raidScore'] },
+        { key: 'structuresDestroyed', label: 'Structures Destroyed', cols: ['structuresDestroyed', 'doorsDestroyed'] },
+        { key: 'doorsDestroyed', label: 'Doors Destroyed', cols: ['doorsDestroyed', 'structuresDestroyed'] },
+      ],
+      farming: [
+        { key: 'totalResources', label: 'Total Gathered', cols: ['totalResources', 'wood', 'stone', 'metalOre'] },
+        { key: 'wood', label: 'Wood', cols: ['wood', 'totalResources'] },
+        { key: 'stone', label: 'Stone', cols: ['stone', 'totalResources'] },
+        { key: 'cloth', label: 'Cloth', cols: ['cloth', 'totalResources'] },
+        { key: 'metalOre', label: 'Metal Ore', cols: ['metalOre', 'totalResources'] },
+        { key: 'sulfurOre', label: 'Sulfur Ore', cols: ['sulfurOre', 'totalResources'] },
+        { key: 'hqmOre', label: 'HQM Ore', cols: ['hqmOre', 'totalResources'] },
+      ],
+      pve: [
+        { key: 'npcKills', label: 'NPC Kills', cols: ['npcKills', 'scientistsKilled', 'animalsKilled'] },
+        { key: 'scientistsKilled', label: 'Scientists', cols: ['scientistsKilled', 'npcKills'] },
+        { key: 'animalsKilled', label: 'Animals', cols: ['animalsKilled', 'npcKills'] },
+        { key: 'bradleyKills', label: 'Bradley', cols: ['bradleyKills', 'npcKills'] },
+        { key: 'heliKills', label: 'Patrol Heli', cols: ['heliKills', 'npcKills'] },
+      ],
+    };
+  }
+  get clanMetricDefs() {
+    return {
+      pvp: [
+        { key: 'kills', label: 'Total Kills', cols: ['kills', 'deaths', 'kd'] },
+        { key: 'kd', label: 'Clan K/D', cols: ['kd', 'kills'] },
+        { key: 'perMemberKills', label: 'Kills Per Member', cols: ['perMemberKills', 'kills', 'memberCount'] },
+      ],
+      raiding: [
+        { key: 'raidScore', label: 'Raid Score', cols: ['raidScore', 'rockets', 'c4'] },
+        { key: 'rockets', label: 'Rockets', cols: ['rockets', 'raidScore'] },
+        { key: 'c4', label: 'C4', cols: ['c4', 'raidScore'] },
+        { key: 'scorePerMember', label: 'Score Per Member', cols: ['scorePerMember', 'memberCount'] },
+      ],
+      farming: [
+        { key: 'resources', label: 'Total Gathered', cols: ['resources', 'wood', 'stone'] },
+        { key: 'resourcesPerMember', label: 'Gathered Per Member', cols: ['resourcesPerMember', 'memberCount'] },
+        { key: 'wood', label: 'Wood', cols: ['wood', 'resources'] },
+        { key: 'stone', label: 'Stone', cols: ['stone', 'resources'] },
+      ],
+    };
+  }
+  get categoryDefs() {
+    const icons = {
+      pvp: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="4"></circle><line x1="12" y1="1" x2="12" y2="5"></line><line x1="12" y1="19" x2="12" y2="23"></line></svg>',
+      raiding: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.5 5.5L20 8l-4 4 1 6-5-3-5 3 1-6-4-4 5.5-.5z"></path></svg>',
+      farming: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 17.5 3 6V3h3l11.5 11.5"></path><path d="M13 19l6-6"></path><path d="M16 16l4 4"></path><path d="M19 21l2-2"></path></svg>',
+      pve: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>',
+    };
+    const defs = this.state.mode === 'players' ? this.playerMetricDefs : this.clanMetricDefs;
+    const labels = { pvp: 'PvP', raiding: 'Raiding', farming: 'Farming', pve: 'PvE' };
+    return Object.keys(defs).map((key) => ({ key, label: labels[key], icon: icons[key], metrics: defs[key] }));
+  }
+  toggleCat(key) {
+    const opening = this.state.expandedCat !== key;
+    if (opening) {
+      const metrics = this.categoryDefs.find((c) => c.key === key).metrics;
+      this.setState({ expandedCat: key, view: 'category', category: key, metric: metrics[0].key, page: 1 });
+    } else {
+      this.setState({ expandedCat: null });
+    }
+  }
+  selectMetric(catKey, metricKey) { this.setState({ view: 'category', category: catKey, metric: metricKey, expandedCat: catKey, page: 1 }); }
+  selectOverview() { this.setState({ view: 'overview', expandedCat: null, page: 1 }); }
+  selectHeatmaps() { this.setState({ view: 'heatmap', expandedCat: null }); this.fetchHeatmap(); }
+  openPlayer(id) { this.setState({ profileType: 'player', profileId: id }); }
+  openClan(tag) { this.setState({ profileType: 'clan', profileId: tag }); }
+
+  async fetchStatus() {
+    try {
+      const res = await fetch('https://api.battlemetrics.com/servers/40070748', {
+        headers: { Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6ImQ5Mjk3ZTAzZDAzYWU1ZmEiLCJpYXQiOjE3ODUzNTMyMjgsIm5iZiI6MTc4NTM1MzIyOCwiaXNzIjoiaHR0cHM6Ly93d3cuYmF0dGxlbWV0cmljcy5jb20iLCJzdWIiOiJ1cm46dXNlcjoxMjI2ODI1In0.r8PAaSXNGfPwJMSV_4h_ry6Ltwg9Ec8HTRFRBsuFhDs' }
+      });
+      if (!res.ok) throw new Error('http ' + res.status);
+      const json = await res.json();
+      const attrs = json?.data?.attributes;
+      if (attrs) {
+        this.setState({ onlinePlayers: attrs.players, maxPlayers: attrs.maxPlayers, live: attrs.status === 'online' });
+      }
+    } catch (e) {
+      this.setState({ onlinePlayers: null, live: false });
+    }
+  }
+  nextWipe(now) {
+    const target = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 18, 0, 0));
+    const diffDays = (4 - now.getUTCDay() + 7) % 7;
+    target.setUTCDate(target.getUTCDate() + diffDays);
+    if (target <= now) target.setUTCDate(target.getUTCDate() + 7);
+    return target;
+  }
+  fmt(ms) {
+    if (ms < 0) ms = 0;
+    const s = Math.floor(ms / 1000);
+    const d = Math.floor(s / 86400);
+    const h = Math.floor((s % 86400) / 3600);
+    const m = Math.floor((s % 3600) / 60);
+    return d + 'd ' + h + 'h ' + m + 'm';
+  }
+  tick() {
+    const now = new Date();
+    this.setState({ countdown: this.fmt(this.nextWipe(now) - now) });
+  }
+  async fetchSponsors() {
+    try {
+      const res = await fetch('/api/sponsors');
+      if (!res.ok) throw new Error('http ' + res.status);
+      const data = await res.json();
+      this.setState({ sponsors: Array.isArray(data?.sponsors) ? data.sponsors : [] });
+    } catch (e) {
+      this.setState({ sponsors: [] });
+    }
+  }
+  renderVals() {
+    if (!this._sponsorsFetched) { this._sponsorsFetched = true; this.fetchSponsors(); this._sponsorsT = setInterval(() => this.fetchSponsors(), 120000); }
+    const sponsorTickerText = (this.state.sponsors && this.state.sponsors.length) ? 'Shout Out To Our Donors: ' + this.state.sponsors.join(' \u00b7 ') : 'Be the first name on the wall \u2014 sponsor the wipe in the Store.';
+    const isClan = this.state.mode === 'clans';
+    const initials = (name) => name.split(/\s/).map((w) => w[0]).join('').slice(0, 2).toUpperCase();
+    const catDefs = this.categoryDefs;
+
+    // Resolve active metric definition
+    let activeCols, activeLabel, sortKey, categoryLabel;
+    if (this.state.view === 'overview' || !this.state.category) {
+      activeCols = isClan ? ['overallScore', 'kills', 'kd', 'scorePerMember'] : ['overallScore', 'kills', 'kd', 'raidScore', 'totalResources'];
+      activeLabel = 'Overall Score'; sortKey = 'overallScore'; categoryLabel = 'Overview';
+    } else {
+      const defs = isClan ? this.clanMetricDefs : this.playerMetricDefs;
+      const catMetrics = defs[this.state.category] || defs.pvp;
+      const found = catMetrics.find((m) => m.key === this.state.metric) || catMetrics[0];
+      activeCols = found.cols; activeLabel = found.label; sortKey = found.key;
+      categoryLabel = { pvp: 'PvP', raiding: 'Raiding', farming: 'Farming', pve: 'PvE' }[this.state.category];
+    }
+
+    const source = isClan ? this.clans : this.players;
+    const q = this.state.search.trim().toLowerCase();
+    const filtered = q ? source.filter((r) => (isClan ? r.name + r.tag : r.name).toLowerCase().includes(q)) : source;
+    const sorted = [...filtered].sort((a, b) => b[sortKey] - a[sortKey]);
+
+    const pageSize = 10;
+    const pageCount = Math.max(1, Math.ceil(sorted.length / pageSize));
+    const page = Math.min(this.state.page, pageCount);
+    const pageRows = sorted.slice((page - 1) * pageSize, page * pageSize);
+
+    const rankColors = ['#ffd700', '#c9c3ba', '#ff8a52'];
+    const rows = pageRows.map((r, i) => {
+      const rank = (page - 1) * pageSize + i + 1;
+      return {
+        rowClass: 'lb-row' + (rank <= 3 ? ` rank${rank}` : ''),
+        rankDisplay: String(rank),
+        rankColor: rank <= 3 ? rankColors[rank - 1] : '#8f887f',
+        initial: isClan ? r.tag.slice(0, 2) : initials(r.name),
+        name: isClan ? `[${r.tag}] ${r.name}` : (r.clan ? `[${r.clan}] ${r.name}` : r.name),
+        open: () => (isClan ? this.openClan(r.tag) : this.openPlayer(r.id)),
+        cells: [
+          ...activeCols.map((k, idx) => ({ value: this.fmtVal(k, r[k]), weight: idx === 0 ? 700 : 600, color: idx === 0 ? '#ff8a52' : '#cfc9c2', colClass: idx === 0 ? '' : 'lb-desktop-col' })),
+          ...(isClan ? [] : [{ value: r.playtimeHours + 'h', weight: 600, color: '#8f887f', colClass: 'lb-desktop-col' }]),
+        ],
+      };
+    });
+    const columns = [
+      { label: 'Rank', color: '#ff8a52', colClass: '' },
+      { label: isClan ? 'Clan' : 'Player', color: '#ff8a52', colClass: '' },
+      ...activeCols.map((k, idx) => ({ label: this.colLabel(k), color: '#ff8a52', colClass: idx === 0 ? '' : 'lb-desktop-col' })),
+      ...(isClan ? [] : [{ label: 'Playtime', color: '#ff8a52', colClass: 'lb-desktop-col' }]),
+    ];
+    const tableTemplate = `56px 1fr ${activeCols.map(() => '110px').join(' ')}${isClan ? '' : ' 100px'}`;
+
+    // Sidebar category list
+    const categories = catDefs.map((cat) => ({
+      key: cat.key, label: cat.label, iconHtml: { __html: cat.icon },
+      headClass: this.state.category === cat.key && this.state.view === 'category' ? 'active' : '',
+      chevClass: this.state.expandedCat === cat.key ? 'open' : '',
+      expanded: this.state.expandedCat === cat.key,
+      toggle: () => this.toggleCat(cat.key),
+      metrics: cat.metrics.map((m) => ({ label: m.label, activeClass: this.state.category === cat.key && this.state.metric === m.key ? 'active' : '', select: () => this.selectMetric(cat.key, m.key) })),
+    }));
+
+    // Profile panel
+    let profile = null, isPlayerProfile = false, isClanProfile = false;
+    if (this.state.profileType === 'player') {
+      const p = this.players.find((x) => x.id === this.state.profileId);
+      if (p) {
+        isPlayerProfile = true;
+        const rankIn = (list, key) => [...list].sort((a, b) => b[key] - a[key]).findIndex((x) => x.id === p.id) + 1;
+        profile = {
+          initial: initials(p.name), name: p.name, clanLabel: p.clan ? `[${p.clan}]` : 'No clan', playtimeLabel: `${p.playtimeHours}h played`,
+          rankBadges: [
+            { label: 'Overall', rank: '#' + rankIn(this.players, 'overallScore') },
+            { label: 'PvP', rank: '#' + rankIn(this.players, 'kills') },
+            { label: 'Raiding', rank: '#' + rankIn(this.players, 'raidScore') },
+            { label: 'Farming', rank: '#' + rankIn(this.players, 'totalResources') },
+          ],
+          stats: [
+            { label: 'Kills', value: p.kills }, { label: 'Deaths', value: p.deaths }, { label: 'K/D', value: p.kd.toFixed(2) }, { label: 'Headshots', value: p.headshots },
+            { label: 'Raid Score', value: p.raidScore.toLocaleString() }, { label: 'Resources', value: p.totalResources.toLocaleString() }, { label: 'Scientists', value: p.scientistsKilled }, { label: 'Playtime', value: p.playtimeHours + 'h' },
+          ],
+        };
+      }
+    } else if (this.state.profileType === 'clan') {
+      const c = this.clans.find((x) => x.tag === this.state.profileId);
+      if (c) {
+        isClanProfile = true;
+        const rankIn = [...this.clans].sort((a, b) => b.overallScore - a.overallScore).findIndex((x) => x.tag === c.tag) + 1;
+        profile = {
+          tag: c.tag, name: c.name, rank: rankIn, memberCount: c.memberCount,
+          stats: [{ label: 'Score', value: c.overallScore.toLocaleString() }, { label: 'Kills', value: c.kills }, { label: 'K/D', value: c.kd.toFixed(2) }, { label: 'Raid Score', value: c.raidScore.toLocaleString() }, { label: 'Per Member', value: c.scorePerMember.toLocaleString() }],
+          members: c.members.map((m) => ({ name: m.name, kills: m.kills, kd: m.kd.toFixed(2), open: () => this.openPlayer(m.id) })),
+        };
+      }
+    }
+
+    // Heatmap — real aggregated grid cells from the API, scaled to the panel. No placeholder data.
+    const heatCatLabels = { pvp: 'PvP', raiding: 'Raiding', farming: 'Farming', pve: 'PvE' };
+    const heatFilterOptions = { pvp: ['All Combat', 'Kills', 'Deaths'], raiding: ['All Raiding', 'Rockets', 'C4', 'Satchels'], farming: ['All', 'Wood', 'Stone', 'Cloth', 'Metal', 'Sulfur'], pve: ['All', 'Scientists', 'Animals', 'Bradley', 'Patrol Heli'] }[this.state.heatmapCat];
+    const blobPalette = { pvp: 'rgba(255,60,40,0.55)', raiding: 'rgba(255,106,26,0.55)', farming: 'rgba(120,200,120,0.4)', pve: 'rgba(160,110,255,0.45)' }[this.state.heatmapCat];
+    const cells = this.state.heatmapCells;
+    let heatmapBlobs = [];
+    if (cells.length) {
+      const xs = cells.map((c) => c.cellX), ys = cells.map((c) => c.cellY), counts = cells.map((c) => c.count);
+      const minX = Math.min(...xs), maxX = Math.max(...xs), minY = Math.min(...ys), maxY = Math.max(...ys), maxCount = Math.max(...counts);
+      const spanX = Math.max(maxX - minX, 1), spanY = Math.max(maxY - minY, 1);
+      heatmapBlobs = cells.map((c) => ({
+        left: `${((c.cellX - minX) / spanX) * 88 + 4}%`,
+        top: `${((c.cellY - minY) / spanY) * 88 + 4}%`,
+        size: `${30 + (c.count / maxCount) * 100}px`,
+        dur: `${5 + (c.count % 3)}s`,
+        color: blobPalette,
+      }));
+    }
+
+    return {
+      sponsorTickerText,
+      connectNow: () => this.connectNow(),
+      mobileMenuOpen: this.state.mobileMenuOpen,
+      toggleMobileMenu: () => this.setState({ mobileMenuOpen: !this.state.mobileMenuOpen }),
+      homeWrapClass: this.state.activeDropdown === 'home' ? 'nav-catalog-wrap is-open' : 'nav-catalog-wrap',
+      rulesWrapClass: this.state.activeDropdown === 'rules' ? 'nav-catalog-wrap is-open' : 'nav-catalog-wrap',
+      storeWrapClass: this.state.activeDropdown === 'store' ? 'nav-catalog-wrap is-open' : 'nav-catalog-wrap',
+      openHomeDrop: () => { clearTimeout(this._dropTimer); this.setState({ activeDropdown: 'home' }); },
+      openRulesDrop: () => { clearTimeout(this._dropTimer); this.setState({ activeDropdown: 'rules' }); },
+      openStoreDrop: () => { clearTimeout(this._dropTimer); this.setState({ activeDropdown: 'store' }); },
+      closeDrop: () => { this._dropTimer = setTimeout(() => this.setState({ activeDropdown: null }), 900); },
+      wipeLabel: this.state.wipe === 'current' ? 'Current Wipe · Live' : 'Previous Wipe',
+      setModePlayers: () => this.setState({ mode: 'players', view: 'overview', category: null, metric: null, expandedCat: null, page: 1, profileType: null }),
+      setModeClans: () => this.setState({ mode: 'clans', view: 'overview', category: null, metric: null, expandedCat: null, page: 1, profileType: null }),
+      playersActive: this.state.mode === 'players' ? 'active' : '',
+      clansActive: this.state.mode === 'clans' ? 'active' : '',
+      setWipeCurrent: () => { this.setState({ wipe: 'current', page: 1 }); this.fetchPlayers('current'); if (this.state.view === 'heatmap') this.fetchHeatmap(); },
+      setWipePrevious: () => { this.setState({ wipe: 'previous', page: 1 }); this.fetchPlayers('previous'); if (this.state.view === 'heatmap') this.fetchHeatmap(); },
+      currentActive: this.state.wipe === 'current' ? 'active' : '',
+      previousActive: this.state.wipe === 'previous' ? 'active' : '',
+      search: this.state.search,
+      searchPlaceholder: isClan ? 'Search clan…' : 'Search player…',
+      onSearchChange: (e) => this.setState({ search: e.target.value, page: 1 }),
+      selectOverview: () => this.selectOverview(),
+      selectHeatmaps: () => this.selectHeatmaps(),
+      overviewActive: this.state.view === 'overview' ? 'active' : '',
+      heatmapActive: this.state.view === 'heatmap' ? 'active' : '',
+      categories,
+      isHeatmapView: this.state.view === 'heatmap',
+      headerCategoryLabel: categoryLabel,
+      headerMetricLabel: activeLabel,
+      rangeLabel: sorted.length === 0 ? '0' : `${(page - 1) * pageSize + 1}-${Math.min(page * pageSize, sorted.length)}`,
+      totalCount: sorted.length,
+      columns, tableTemplate, rows,
+      noResults: rows.length === 0 && !this.state.playersLoading && !this.state.playersError,
+      hasSearch: !!q,
+      page, pageCount,
+      isFirstPage: page <= 1,
+      isLastPage: page >= pageCount,
+      prevPage: () => this.setState({ page: Math.max(1, page - 1) }),
+      nextPage: () => this.setState({ page: Math.min(pageCount, page + 1) }),
+      profileOpen: !!profile,
+      isPlayerProfile, isClanProfile, profile,
+      closeProfile: () => this.setState({ profileType: null, profileId: null }),
+      heatmapCategoryLabel: heatCatLabels[this.state.heatmapCat],
+      heatmapCatTabs: Object.keys(heatCatLabels).map((k) => ({ label: heatCatLabels[k], activeClass: this.state.heatmapCat === k ? 'active' : '', select: () => { this.setState({ heatmapCat: k, heatmapFilter: 'all' }); this.fetchHeatmap(); } })),
+      heatmapFilters: heatFilterOptions.map((label, i) => ({ label, activeClass: this.state.heatmapFilter === label || (i === 0 && this.state.heatmapFilter === 'all') ? 'active' : '', select: () => { this.setState({ heatmapFilter: label }); this.fetchHeatmap(); } })),
+      heatmapBlobs,
+      heatmapLoading: this.state.heatmapLoading,
+      heatmapErrorMsg: this.state.heatmapError,
+      heatmapEmpty: !this.state.heatmapLoading && !this.state.heatmapError && this.state.heatmapCells.length === 0,
+      playersLoading: this.state.playersLoading,
+      playersErrorMsg: this.state.playersError,
+    };
+  }
+}
+
+</script>
+</body>
+</html>

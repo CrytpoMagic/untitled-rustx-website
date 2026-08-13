@@ -1,0 +1,34 @@
+[build]
+  publish = "."
+  functions = "netlify/functions"
+
+[[redirects]]
+  from = "/api/leaderboards/ingest"
+  to = "/.netlify/functions/leaderboards-ingest"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/leaderboards"
+  to = "/.netlify/functions/leaderboards-read"
+  status = 200
+  force = true
+
+
+[[redirects]]
+  from = "/api/leaderboards/heatmap-ingest"
+  to = "/.netlify/functions/leaderboards-heatmap-ingest"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/leaderboards/heatmap"
+  to = "/.netlify/functions/leaderboards-heatmap-read"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/sponsors"
+  to = "/.netlify/functions/sponsors-read"
+  status = 200
+  force = true
