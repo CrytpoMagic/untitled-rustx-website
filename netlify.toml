@@ -9,6 +9,60 @@
   force = true
 
 [[redirects]]
+  from = "/Home.dc.html"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/GENERATED_SECRET.txt"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/*.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/oxide/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/uploads/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/screenshots/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/scraps/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/.image-slots.state.json"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/github.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
   from = "/api/leaderboards/ingest"
   to = "/.netlify/functions/leaderboards-ingest"
   status = 200

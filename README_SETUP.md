@@ -12,7 +12,7 @@ Open Supabase -> SQL Editor and run:
 - `SUPABASE_SERVICE_ROLE_KEY`
 - `LEADERBOARD_INGEST_SECRET`
 
-Use the generated shared secret from `GENERATED_SECRET.txt`.
+Use the LEADERBOARD_INGEST_SECRET value you set in Netlify environment variables.
 
 Do NOT expose the Supabase server-side secret or ingest secret in frontend JavaScript.
 
@@ -42,7 +42,7 @@ On first load edit:
 
 Set:
 - Ingest URL: `https://untitledrx.com/api/leaderboards/ingest`
-- Bearer Secret: use the value from `GENERATED_SECRET.txt`
+- Bearer Secret: use your LEADERBOARD_INGEST_SECRET value
 - Push Interval Seconds: `600`
 
 Reload:
