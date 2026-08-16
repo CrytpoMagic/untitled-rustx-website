@@ -21,7 +21,43 @@
   force = true
 
 [[redirects]]
-  from = "/*.md"
+  from = "/CLAUDE_HANDOFF.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/README_SETUP.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/RUST_PLUGIN_SPEC.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/SEO_AUDIT.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/SEO_VERIFICATION.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/SEO_CHANGELOG.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/GOOGLE_SEARCH_CONSOLE_SETUP.md"
   to = "/404.html"
   status = 404
   force = true
