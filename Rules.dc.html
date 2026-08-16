@@ -113,7 +113,15 @@
   /* mobile-global-fix */
     @media (max-width: 760px) {
       [style*="grid-template-columns: 1.5fr 1fr"], [style*="grid-template-columns: 1fr 1.5fr"],
-      [style*="grid-template-columns: 2fr 1fr"], [style*="grid-template-columns: 1fr 2fr"] { grid-template-columns: 1fr !important; }
+      [style*="grid-template-columns: 2fr 1fr"], [style*="grid-template-columns: 1fr 2fr"],
+      [style*="grid-template-columns: 1.4fr 1fr"], [style*="grid-template-columns: 1.3fr 1fr 1fr"] { grid-template-columns: 1fr !important; }
+      [style*="grid-template-columns: repeat(4"], [style*="grid-template-columns: repeat(3"] { grid-template-columns: 1fr 1fr !important; }
+      body, html { overflow-x: hidden; max-width: 100vw; }
+      * { max-width: 100%; }
+    }
+    @media (max-width: 480px) {
+      [style*="grid-template-columns: repeat(4"], [style*="grid-template-columns: repeat(3"],
+      [style*="grid-template-columns: repeat(2"] { grid-template-columns: 1fr !important; }
     }
   </style>
 </helmet>
