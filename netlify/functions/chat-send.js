@@ -1,6 +1,36 @@
 const { getSupabase, json } = require("./_supabase");
 
-const BLOCKED_WORDS = ["nigger","nigga","faggot","fag","retard","spic","chink","kike","tranny","cunt"];
+const BLOCKED_WORDS = [
+  "nigger","nigga","niger","nigr","negro",
+  "faggot","fag","fags","faggy",
+  "retard","retarded","tard",
+  "spic","spick","wetback",
+  "chink","gook","jap",
+  "kike","kyke",
+  "tranny","shemale",
+  "cunt",
+  "queer",
+  "monkey","coon","porch monkey",
+  "beaner","towelhead","raghead","sandnigger",
+  "cracker honky","dyke",
+  "rapist","rape",
+  "kill yourself","kys"
+];
+
+function normalize(text) {
+  let s = text.toLowerCase();
+  s = s.replace(/[@]/g, "a").replace(/[4]/g, "a");
+  s = s.replace(/[3]/g, "e");
+  s = s.replace(/[1!|]/g, "i");
+  s = s.replace(/[0]/g, "o");
+  s = s.replace(/[$5]/g, "s");
+  s = s.replace(/[7+]/g, "t");
+  s = s.replace(/[^a-z0-9\s]/g, "");
+  s = s.replace(/(.)\1{2,}/g, "$1$1");
+  s = s.replace(/\s+/g, " ");
+  const collapsed = s.replace(/\s/g, "");
+  return { spaced: s, collapsed };
+}
 const MAX_LEN = 140;
 const COOLDOWN_MS = 60000;
 
@@ -16,8 +46,10 @@ function violatesRules(text) {
   if (/https?:\/\//i.test(text) || /\bwww\./i.test(text)) return "links are not allowed";
   if (/@/.test(text)) return "@ mentions are not allowed";
   if (/discord\.gg/i.test(text)) return "invite links are not allowed";
+  const { spaced, collapsed } = normalize(text);
   for (const w of BLOCKED_WORDS) {
-    if (lower.includes(w)) return "message blocked by chat filter";
+    const wNorm = w.replace(/\s/g, "");
+    if (spaced.includes(w) || collapsed.includes(wNorm)) return "message blocked by chat filter";
   }
   if (!text) return "message is empty";
   return null;

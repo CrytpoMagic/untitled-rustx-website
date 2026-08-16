@@ -6,7 +6,7 @@ exports.handler = async function (event) {
     const supabase = getSupabase();
     const { data, error } = await supabase
       .from("chat_messages")
-      .select("sender, origin, message, created_at")
+      .select("id, sender, origin, message, created_at")
       .order("created_at", { ascending: false })
       .limit(50);
     if (error) throw error;

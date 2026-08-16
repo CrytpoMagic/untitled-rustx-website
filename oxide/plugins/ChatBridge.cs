@@ -14,7 +14,7 @@ namespace Oxide.Plugins
     public class ChatBridge : RustPlugin
     {
         private Configuration _config;
-        private long _lastPolledId = 0;
+        private string _lastPolledAt = "";
 
         protected override void LoadDefaultConfig() => _config = new Configuration();
 
@@ -37,15 +37,17 @@ namespace Oxide.Plugins
 
         void Init()
         {
+            _lastPolledAt = DateTime.UtcNow.ToString("o");
             timer.Every(_config.PollIntervalSeconds, PollWebsiteChat);
         }
 
         // In-game chat -> website
-        void OnPlayerChat(BasePlayer player, string message, Chat.ChatChannel channel)
+        object OnPlayerChat(BasePlayer player, string message, ConVar.Chat.ChatChannel channel)
         {
-            if (player == null || string.IsNullOrEmpty(message)) return;
-            if (channel != Chat.ChatChannel.Global) return;
+            if (player == null || string.IsNullOrEmpty(message)) return null;
+            if (channel != ConVar.Chat.ChatChannel.Global) return null;
             PushToWebsite(player.displayName, message);
+            return null;
         }
 
         void PushToWebsite(string sender, string message)
@@ -53,7 +55,7 @@ namespace Oxide.Plugins
             var payload = new Dictionary<string, object> { { "sender", sender }, { "message", message } };
             var json = JsonConvert.SerializeObject(payload);
             var headers = new Dictionary<string, string> { { "Authorization", "Bearer " + _config.BearerSecret }, { "Content-Type", "application/json" } };
-            webrequest.Enqueue(_config.IngestUrl, json, (code, response) => { }, this, RequestMethod.POST, headers, 10f);
+            webrequest.Enqueue(_config.IngestUrl, json, (code, response) => { }, this, Oxide.Core.Libraries.RequestMethod.POST, headers, 10f);
         }
 
         // Website -> in-game chat
@@ -61,26 +63,37 @@ namespace Oxide.Plugins
         {
             webrequest.Enqueue(_config.ReadUrl, null, (code, response) =>
             {
+                Puts($"[ChatBridge] Poll response code={code} bodyLen={response?.Length ?? 0}");
                 if (code != 200 || string.IsNullOrEmpty(response)) return;
                 try
                 {
                     var data = JsonConvert.DeserializeObject<ReadResponse>(response);
-                    if (data?.messages == null) return;
+                    if (data?.messages == null) { Puts("[ChatBridge] No messages field in response"); return; }
+                    Puts($"[ChatBridge] {data.messages.Count} messages received, lastPolledAt={_lastPolledAt}");
+                    if (data.messages.Count > 0)
+                    {
+                        var last = data.messages[data.messages.Count - 1];
+                        Puts($"[ChatBridge] Sample last msg: created_at={last.created_at} origin='{last.origin}' sender='{last.sender}' message='{last.message}'");
+                    }
+                    string maxAt = _lastPolledAt;
                     foreach (var m in data.messages)
                     {
                         if (m.origin != "website") continue;
-                        var id = m.created_at?.GetHashCode() ?? 0;
-                        if (id == _lastPolledId) continue;
-                        _lastPolledId = id;
+                        if (string.IsNullOrEmpty(m.created_at)) continue;
+                        if (string.Compare(m.created_at, _lastPolledAt, StringComparison.Ordinal) <= 0) continue;
+                        if (string.Compare(m.created_at, maxAt, StringComparison.Ordinal) > 0) maxAt = m.created_at;
+                        Puts($"[ChatBridge] Broadcasting created_at={m.created_at} message={m.message}");
                         Server.Broadcast($"<color=#ff8a52>Website Viewer</color>: {m.message}");
                     }
+                    _lastPolledAt = maxAt;
                 }
-                catch { }
-            }, this, RequestMethod.GET, null, 10f);
+                catch (Exception ex) { Puts($"[ChatBridge] Parse error: {ex.Message}"); }
+            }, this, Oxide.Core.Libraries.RequestMethod.GET, null, 10f);
         }
 
         private class ChatMsg
         {
+            public long id;
             public string sender;
             public string origin;
             public string message;

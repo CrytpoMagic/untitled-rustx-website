@@ -47,6 +47,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <script src="image-slot.js"></script>
+  <script>window.__urxHideAudioBtn = true;</script>
+  <script src="ambient-audio.js"></script>
   <script async src="https://www.tiktok.com/embed.js"></script>
   <style>
     @keyframes storeGlow { 0%,100% { box-shadow: 0 0 16px rgba(255,255,255,0.5), 0 2px 8px rgba(0,0,0,0.3); } 50% { box-shadow: 0 0 28px rgba(255,255,255,0.9), 0 2px 8px rgba(0,0,0,0.3); } }
@@ -77,6 +79,15 @@
     @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
     @keyframes marqueeSingle { 0% { transform: translateX(100vw); } 100% { transform: translateX(-100%); } }
     @keyframes blink { 0%,49% { opacity: 1; } 50%,100% { opacity: 0; } }
+    @keyframes introEmberRise { 0% { transform: translateY(0) translateX(0); opacity: 0; } 10% { opacity: 0.9; } 100% { transform: translateY(-360px) translateX(24px); opacity: 0; } }
+    @keyframes introLogoIn { 0% { opacity: 0; transform: scale(0.85); filter: blur(6px); } 100% { opacity: 1; transform: scale(1); filter: blur(0); } }
+    @keyframes introSweep { 0% { background-position: -150% center; } 100% { background-position: 150% center; } }
+    @keyframes introPulseGlow { 0%,100% { opacity: 0.5; } 50% { opacity: 1; } }
+    @keyframes introFlashPop { 0% { opacity: 0; } 15% { opacity: 1; } 100% { opacity: 0; } }
+    @keyframes introTextUp { 0% { opacity: 0; transform: translateY(18px); } 100% { opacity: 1; transform: translateY(0); } }
+    @media (prefers-reduced-motion: reduce) {
+      .intro-anim { animation: none !important; transition: opacity 0.3s ease !important; }
+    }
     body { margin: 0; background: #0a0b0d; text-wrap: pretty; }
     a { color: #ff7a3d; text-underline-offset: 3px; transition: color 0.2s ease; }
     a:hover { color: #ffa06a; }
@@ -97,6 +108,9 @@
     .nav-catalog-wrap.is-open .nav-catalog-dropdown { opacity: 1; visibility: visible; transform: translateY(0); pointer-events: auto; }
     .nav-catalog-dropdown a:hover { color: #ff8a52 !important; background: rgba(255,106,26,0.1); }
     .nav-links-desktop > .nav-catalog-wrap:last-child .nav-catalog-dropdown { left: auto !important; right: 0 !important; }
+    @media (max-width: 760px) {
+      .nav-catalog-dropdown, .nav-connect-dropdown { max-width: 90vw !important; }
+    }
     .nav-hamburger { display: none; }
     .nav-tab { display: inline-flex; align-items: center; justify-content: center; height: 38px; padding: 0 16px; background: #15161a; border: 1px solid rgba(255,255,255,0.12); border-bottom-width: 2px; color: #c9c3ba; font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; font-size: 12.5px; text-decoration: none; clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px); box-shadow: inset 0 1px 0 rgba(255,255,255,0.05), 0 1px 3px rgba(0,0,0,0.4); transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease; }
     .nav-tab:hover { border-color: rgba(255,106,26,0.55); background: #1c1d21; color: #ffb27a; transform: translateY(-1px); }
@@ -127,7 +141,9 @@
     @media (max-width: 760px) {
       [style*="grid-template-columns: 1.5fr 1fr"], [style*="grid-template-columns: 1fr 1.5fr"],
       [style*="grid-template-columns: 2fr 1fr"], [style*="grid-template-columns: 1fr 2fr"],
-      [style*="grid-template-columns: 1.4fr 1fr"], [style*="grid-template-columns: 1.3fr 1fr 1fr"] { grid-template-columns: 1fr !important; }
+      [style*="grid-template-columns: 1.4fr 1fr"], [style*="grid-template-columns: 1.3fr 1fr 1fr"],
+      [style*="grid-template-columns: 1.1fr 1fr"], [style*="grid-template-columns: 1fr 1.1fr"],
+      [style*="grid-template-columns: 1fr 1.2fr"], [style*="grid-template-columns: 1.2fr 1fr"] { grid-template-columns: 1fr !important; }
       [style*="grid-template-columns: repeat(4"], [style*="grid-template-columns: repeat(3"] { grid-template-columns: 1fr 1fr !important; }
       body, html { overflow-x: hidden; max-width: 100vw; }
       * { max-width: 100%; }
@@ -140,7 +156,49 @@
       .specs-grid { grid-template-columns: repeat(2, 1fr) !important; }
     }
   </style>
+<script src="page-transition.js"></script>
 </helmet>
+
+<sc-if value="{{ introVisible }}" hint-placeholder-val="{{ false }}">
+  <div style="position: fixed; inset: 0; z-index: 500; background: #050506; display: flex; align-items: center; justify-content: center; overflow: hidden; transition: opacity 0.3s ease; opacity: {{ introOverlayOpacity }};">
+    <div style="position: absolute; inset: 0; background-image: linear-gradient(rgba(255,122,61,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,122,61,0.05) 1px, transparent 1px); background-size: 56px 56px;"></div>
+    <div style="position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 40%, rgba(255,90,20,0.16), transparent 62%);"></div>
+    <div class="intro-anim" style="position: absolute; inset: 0; background: linear-gradient(100deg, transparent 42%, rgba(255,150,90,0.10) 50%, transparent 58%); background-size: 260% 100%; animation: introSweep 5s ease-in-out infinite;"></div>
+    <div style="position: absolute; inset: 0; background: radial-gradient(circle at 50% 50%, transparent 40%, rgba(0,0,0,0.75) 100%);"></div>
+    <div style="position: absolute; inset: 0; pointer-events: none;">
+      <span class="intro-anim" style="position: absolute; left: 6%; bottom: -10px; width: 3px; height: 3px; border-radius: 50%; background: #ff8a52; box-shadow: 0 0 6px #ff6a1a; animation: introEmberRise 6s ease-in infinite; animation-delay: 0.2s;"></span>
+      <span class="intro-anim" style="position: absolute; left: 16%; bottom: -10px; width: 2px; height: 2px; border-radius: 50%; background: #ff8a52; box-shadow: 0 0 6px #ff6a1a; animation: introEmberRise 8s ease-in infinite; animation-delay: 1.4s;"></span>
+      <span class="intro-anim" style="position: absolute; left: 28%; bottom: -10px; width: 2px; height: 2px; border-radius: 50%; background: #ff8a52; box-shadow: 0 0 6px #ff6a1a; animation: introEmberRise 7.2s ease-in infinite; animation-delay: 2.4s;"></span>
+      <span class="intro-anim" style="position: absolute; left: 62%; bottom: -10px; width: 3px; height: 3px; border-radius: 50%; background: #ff8a52; box-shadow: 0 0 6px #ff6a1a; animation: introEmberRise 7s ease-in infinite; animation-delay: 0.6s;"></span>
+      <span class="intro-anim" style="position: absolute; left: 72%; bottom: -10px; width: 2px; height: 2px; border-radius: 50%; background: #ff8a52; box-shadow: 0 0 6px #ff6a1a; animation: introEmberRise 9s ease-in infinite; animation-delay: 3.5s;"></span>
+      <span class="intro-anim" style="position: absolute; left: 84%; bottom: -10px; width: 3px; height: 3px; border-radius: 50%; background: #ff8a52; box-shadow: 0 0 6px #ff6a1a; animation: introEmberRise 6.5s ease-in infinite; animation-delay: 1s;"></span>
+      <span class="intro-anim" style="position: absolute; left: 45%; bottom: -10px; width: 2px; height: 2px; border-radius: 50%; background: #ff8a52; box-shadow: 0 0 6px #ff6a1a; animation: introEmberRise 7.5s ease-in infinite; animation-delay: 3s;"></span>
+      <span class="intro-anim" style="position: absolute; left: 92%; bottom: -10px; width: 2px; height: 2px; border-radius: 50%; background: #ff8a52; box-shadow: 0 0 6px #ff6a1a; animation: introEmberRise 8.5s ease-in infinite; animation-delay: 0.9s;"></span>
+    </div>
+    <div style="position: absolute; top: 28px; left: 28px; width: 42px; height: 42px; border-top: 2px solid rgba(255,122,61,0.5); border-left: 2px solid rgba(255,122,61,0.5);"></div>
+    <div style="position: absolute; top: 28px; right: 28px; width: 42px; height: 42px; border-top: 2px solid rgba(255,122,61,0.5); border-right: 2px solid rgba(255,122,61,0.5);"></div>
+    <div style="position: absolute; bottom: 28px; left: 28px; width: 42px; height: 42px; border-bottom: 2px solid rgba(255,122,61,0.5); border-left: 2px solid rgba(255,122,61,0.5);"></div>
+    <div style="position: absolute; bottom: 28px; right: 28px; width: 42px; height: 42px; border-bottom: 2px solid rgba(255,122,61,0.5); border-right: 2px solid rgba(255,122,61,0.5);"></div>
+    <div style="position: relative; display: flex; flex-direction: column; align-items: center; gap: 26px; transform: {{ introContentTransform }}; filter: {{ introContentBlur }}; transition: transform 0.45s cubic-bezier(0.7,0,0.84,0), filter 0.35s ease; opacity: {{ introContentOpacity }};">
+      <div class="intro-anim" style="width: 240px; height: 148px; position: relative; animation: introLogoIn 1.1s cubic-bezier(0.16,1,0.3,1) both;">
+        <div style="position: absolute; inset: -30px; background: radial-gradient(circle, rgba(255,106,26,0.35), transparent 70%); animation: introPulseGlow 2.6s ease-in-out infinite;"></div>
+        <img src="assets/logo-new.png" alt="Untitled RustX" style="width: 100%; height: 100%; object-fit: contain; position: relative; z-index: 1;" />
+      </div>
+      <div style="text-align: center;">
+        <p class="intro-anim" style="margin: 0 0 10px; font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.4em; text-transform: uppercase; font-size: 13px; color: #b0a99f; animation: introTextUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.5s both;">Welcome to</p>
+        <p class="intro-anim" style="margin: 0; font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; font-size: clamp(38px, 6vw, 58px); color: #fff; text-shadow: 0 0 40px rgba(255,106,26,0.5), 0 0 90px rgba(255,106,26,0.25); animation: introTextUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.65s both;">Untitled <span style="color: #ff6a1a;">RustX</span></p>
+        <div class="intro-anim" style="width: 60px; height: 1px; background: linear-gradient(90deg, transparent, #ff6a1a, transparent); margin: 18px auto 0; animation: introTextUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.85s both;"></div>
+      </div>
+      <button type="button" onClick="{{ enterSite }}" class="intro-anim" style="margin-top: 6px; font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; font-size: 16px; color: #0a0b0d; background: linear-gradient(135deg, #ff8a4c, #ff6a1a); border: 1px solid rgba(255,180,130,0.6); padding: 16px 52px; cursor: pointer; clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px); box-shadow: 0 0 40px rgba(255,106,26,0.4); animation: introTextUp 0.7s cubic-bezier(0.16,1,0.3,1) 1s both, introPulseGlow 2.2s ease-in-out 1.7s infinite; transition: transform 0.15s ease, filter 0.15s ease;">Enter</button>
+      <button type="button" onClick="{{ toggleIntroSound }}" style="background: transparent; border: none; cursor: pointer; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; font-size: 11px; color: #6b655e; margin-top: 2px;">{{ introSoundIcon }}</button>
+    </div>
+    <sc-if value="{{ introFlashVisible }}" hint-placeholder-val="{{ false }}">
+      <div style="position: absolute; inset: 0; background: radial-gradient(circle, rgba(255,130,60,0.95), rgba(255,60,20,0.45) 55%, transparent 100%); animation: introFlashPop 0.3s ease-out forwards; pointer-events: none;"></div>
+      <div style="position: absolute; inset: 0; border: 40px solid rgba(255,120,50,0.6); animation: introFlashPop 0.3s ease-out forwards; pointer-events: none;"></div>
+      <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; font-size: clamp(20px, 3.5vw, 30px); color: #fff; text-shadow: 0 0 24px rgba(255,106,26,0.9); white-space: nowrap; animation: introFlashPop 0.3s ease-out forwards;">Survive. Raid. Dominate.</div>
+    </sc-if>
+  </div>
+</sc-if>
 
 <div style="position: fixed; inset: 0; z-index: 0; overflow: hidden; background: #0a0b0d;">
   <div style="position: absolute; inset: -10%; background-image: linear-gradient(rgba(255,122,61,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,122,61,0.06) 1px, transparent 1px); background-size: 48px 48px; transform: translateY({{ parallaxSlow }}px);"></div>
@@ -168,7 +226,7 @@
     </div>
         </div><nav class="site-nav" style="position: sticky; top: 0; z-index: 20;">
     <div class="site-nav-inner" style="background: linear-gradient(180deg, rgba(21,22,25,0.98), rgba(9,10,12,0.96)); border-bottom: 1px solid rgba(255,106,26,0.35); box-shadow: 0 8px 26px rgba(0,0,0,0.5);">
-      <div style="max-width: 1280px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px); height: 84px; display: flex; align-items: center; justify-content: center; gap: 40px; position: relative; left: 15px;">
+      <div style="max-width: 1280px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px); height: 84px; display: flex; align-items: center; justify-content: center; gap: 40px; position: relative;">
         <div class="nav-links-desktop" style="display: flex; align-items: center; gap: 10px;">
           <div class="{{ homeWrapClass }}" onMouseEnter="{{ openHomeDrop }}" onMouseLeave="{{ closeDrop }}">
             <a href="./index.html" class="nav-tab active" style="animation: signFlicker 3s linear infinite; animation-delay: 0s; text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 14px rgba(255,138,82,0.9), 0 0 26px rgba(255,106,26,0.7);">Home</a>
@@ -186,6 +244,7 @@
               <a href="./FAQ.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">FAQ</a>
             </div>
           </div>
+          <a href="./index.html#live-chat" class="nav-tab" style="animation: signFlicker 3.6s linear infinite; animation-delay: 0.9s; text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 14px rgba(255,138,82,0.9), 0 0 26px rgba(255,106,26,0.7);">Live Chat</a>
           <div class="{{ navConnectWrapClass }}" onMouseEnter="{{ openNavConnect }}" onMouseLeave="{{ closeNavConnect }}">
             <button type="button" class="btn-connect" style="font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; font-size: 12.5px; color: #0a0b0d; background: linear-gradient(135deg, #ff8a4c, #ff6a1a); border: 1px solid rgba(255,180,130,0.5); height: 38px; padding: 0 18px; display: inline-flex; align-items: center; cursor: pointer; clip-path: polygon(7px 0, 100% 0, 100% calc(100% - 7px), calc(100% - 7px) 100%, 0 100%, 0 7px); box-shadow: 0 2px 8px rgba(255,106,26,0.3);">Connect Now</button>
             <div class="nav-connect-dropdown hud-panel" style="width: 340px; background: linear-gradient(180deg, rgba(255,106,26,0.08), rgba(10,11,13,0.97)); border: 1px solid rgba(255,122,61,0.35); padding: 18px 20px; box-shadow: 0 16px 40px rgba(0,0,0,0.5);">
@@ -217,7 +276,6 @@
           <img src="assets/logo-new.png" alt="Untitled RustX" style="width: 100%; height: 100%; object-fit: contain; display: block; background: transparent;" />
         </div>
         <div class="nav-links-desktop" style="display: flex; align-items: center; gap: 10px;">
-          <a href="./index.html#live-chat" class="nav-tab" style="animation: signFlicker 3.6s linear infinite; animation-delay: 0.9s; text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 14px rgba(255,138,82,0.9), 0 0 26px rgba(255,106,26,0.7);">Live Chat</a>
           <a href="./Leaderboards.dc.html" class="nav-tab" style="animation: signFlicker 3.6s linear infinite; animation-delay: 0.9s; text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 14px rgba(255,138,82,0.9), 0 0 26px rgba(255,106,26,0.7);">Leaderboards</a>
           <a href="./FAQ.dc.html" class="nav-tab" style="animation: signFlicker 3.1s linear infinite; animation-delay: 1.6s; text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 14px rgba(255,138,82,0.9), 0 0 26px rgba(255,106,26,0.7);">FAQs</a>
           <a href="https://discord.gg/M4rqjGpjyW" target="_blank" rel="noopener" class="nav-tab" style="animation: signFlicker 2.6s linear infinite; animation-delay: 0.3s; text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 14px rgba(255,138,82,0.9), 0 0 26px rgba(255,106,26,0.7);">Discord</a>
@@ -916,9 +974,23 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  state = { activeDropdown: null, spotlightMuted: true, copyLabel: 'Copy IP', countdown: '—', scrollY: 0, onlinePlayers: null, maxPlayers: null, live: false, draftStars: 0, draftText: '', reviews: [], submitLabel: 'Submit rating', chatMessages: [], chatDraft: '', chatSendLabel: 'Send', chatCooldownUntil: 0, navConnectOpen: false, connectPanelOpen: true, openFaq: null, mobileMenuOpen: false, connectPanelOpen: false };
+  state = { activeDropdown: null, spotlightMuted: true, copyLabel: 'Copy IP', countdown: '—', scrollY: 0, onlinePlayers: null, maxPlayers: null, live: false, draftStars: 0, draftText: '', reviews: [], submitLabel: 'Submit rating', chatMessages: [], chatDraft: '', chatSendLabel: 'Send', chatCooldownUntil: 0, navConnectOpen: false, connectPanelOpen: true, openFaq: null, mobileMenuOpen: false, connectPanelOpen: false, introDone: true, introPhase: 'idle', introSoundOn: true };
 
   componentDidMount() {
+    try {
+      const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      this._introReduced = !!reduced;
+      const seen = false;
+      if (!seen) {
+        this.setState({ introDone: false, introPhase: 'waiting' });
+        document.body.style.overflow = 'hidden';
+        setTimeout(() => this.setState({ introPhase: 'ready' }), 60);
+        setTimeout(() => { if (this._spotlightVideo) { this._spotlightVideo.pause(); } }, 100);
+      }
+      setTimeout(() => {
+        if (window.urxAudio) this.forceUpdate();
+      }, 0);
+    } catch (e) {}
     this.tick();
     this._t = setInterval(() => this.tick(), 1000);
     if (!window.location.hash) {
@@ -946,9 +1018,20 @@ class Component extends DCLogic {
     if (savedCooldown > Date.now()) this.setState({ chatCooldownUntil: savedCooldown });
     this.fetchChat();
     this._chatT = setInterval(() => this.fetchChat(), 4000);
-    this._chatTickT = setInterval(() => this.forceUpdate(), 1000);
+    this._onDocClick = (e) => {
+      const el = e.target.closest('button, a.nav-tab, .btn-connect');
+      if (!el) return;
+      this.playClickSound();
+      if (el.tagName === 'A' && el.href && !el.target && !e.defaultPrevented) {
+        e.preventDefault();
+        const href = el.href;
+        setTimeout(() => { window.location.href = href; }, 90);
+      }
+    };
+    document.addEventListener('click', this._onDocClick, true);    this._chatTickT = setInterval(() => this.forceUpdate(), 1000);
     this._spotlightVideo = document.getElementById('spotlightVideo');
     if (this._spotlightVideo) {
+      this._spotlightVideo.muted = true;
       this._spotlightVideo.addEventListener('ended', () => {
         this._spotlightVideo.currentTime = 0;
         this._spotlightVideo.play().catch(() => {});
@@ -957,6 +1040,7 @@ class Component extends DCLogic {
   }
   toggleSpotlightMute() {
     if (!this._spotlightVideo) return;
+    this._spotlightVideo.volume = 1;
     this._spotlightVideo.muted = !this._spotlightVideo.muted;
     this.setState({ spotlightMuted: this._spotlightVideo.muted });
   }
@@ -1062,7 +1146,79 @@ class Component extends DCLogic {
       this.setState({ onlinePlayers: null, live: false });
     }
   }
+  playClickSound() {
+    if (!(window.urxAudio ? window.urxAudio.isOn() : false)) return;
+    try {
+      const ctx = this._clickCtx || (this._clickCtx = new (window.AudioContext || window.webkitAudioContext)());
+      const now = ctx.currentTime;
+      const osc = ctx.createOscillator(); const g = ctx.createGain();
+      osc.type = 'square'; osc.frequency.setValueAtTime(700, now);
+      osc.frequency.exponentialRampToValueAtTime(180, now + 0.06);
+      g.gain.setValueAtTime(0.08, now);
+      g.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+      osc.connect(g); g.connect(ctx.destination);
+      osc.start(now); osc.stop(now + 0.08);
+    } catch (e) {}
+  }
+
+  toggleIntroSound() {
+    if (window.urxAudio) window.urxAudio.toggle();
+    this.forceUpdate();
+  }
+
+  enterSite() {
+    if (window.urxAudio) window.urxAudio.ensureStarted();
+    if (window.urxAudio ? window.urxAudio.isOn() : false) {
+      try {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        const now = ctx.currentTime;
+        const bass = ctx.createOscillator(); const bassGain = ctx.createGain();
+        bass.type = 'sine'; bass.frequency.setValueAtTime(180, now);
+        bass.frequency.exponentialRampToValueAtTime(38, now + 0.4);
+        bassGain.gain.setValueAtTime(0.0001, now);
+        bassGain.gain.exponentialRampToValueAtTime(0.5, now + 0.05);
+        bassGain.gain.exponentialRampToValueAtTime(0.001, now + 0.9);
+        bass.connect(bassGain); bassGain.connect(ctx.destination);
+        bass.start(now); bass.stop(now + 0.9);
+        const riser = ctx.createOscillator(); const riserGain = ctx.createGain();
+        riser.type = 'sawtooth'; riser.frequency.setValueAtTime(220, now);
+        riser.frequency.exponentialRampToValueAtTime(1600, now + 0.5);
+        riserGain.gain.setValueAtTime(0.0001, now);
+        riserGain.gain.exponentialRampToValueAtTime(0.14, now + 0.35);
+        riserGain.gain.exponentialRampToValueAtTime(0.001, now + 0.55);
+        riser.connect(riserGain); riserGain.connect(ctx.destination);
+        riser.start(now); riser.stop(now + 0.55);
+        [1, 1.5, 2].forEach((mult, i) => {
+          const stab = ctx.createOscillator(); const stabGain = ctx.createGain();
+          stab.type = 'square'; stab.frequency.setValueAtTime(110 * mult, now + 0.45);
+          stabGain.gain.setValueAtTime(0.0001, now + 0.45);
+          stabGain.gain.exponentialRampToValueAtTime(0.12 / (i + 1), now + 0.47);
+          stabGain.gain.exponentialRampToValueAtTime(0.001, now + 0.75);
+          stab.connect(stabGain); stabGain.connect(ctx.destination);
+          stab.start(now + 0.45); stab.stop(now + 0.75);
+        });
+      } catch (e) {}
+    }
+    if (this._introReduced) {
+      this.setState({ introPhase: 'flash' });
+      setTimeout(() => this.finishIntro(), 300);
+      return;
+    }
+    this.setState({ introPhase: 'press' });
+    setTimeout(() => this.setState({ introPhase: 'zoom' }), 250);
+    setTimeout(() => this.setState({ introPhase: 'flash' }), 700);
+    setTimeout(() => this.finishIntro(), 1000);
+  }
+
+  finishIntro() {
+    try { sessionStorage.setItem('urx_intro_seen', '1'); } catch (e) {}
+    this.setState({ introDone: true, introPhase: 'idle' });
+    document.body.style.overflow = '';
+    if (this._spotlightVideo) { this._spotlightVideo.muted = true; this._spotlightVideo.play().catch(() => {}); }
+  }
+
   componentWillUnmount() {
+    document.removeEventListener('click', this._onDocClick, true);
     clearInterval(this._t);
     clearInterval(this._statusT);
     clearInterval(this._chatT);
@@ -1173,6 +1329,19 @@ class Component extends DCLogic {
       addToCalendar: () => this.addToCalendar(),
       countdown: this.state.countdown,
       playersLabel: this.state.onlinePlayers != null ? `${this.state.onlinePlayers} / ${this.state.maxPlayers}` : '— / —',
+      introDone: this.state.introDone,
+      introPhase: this.state.introPhase,
+      introVisible: !this.state.introDone,
+      introOverlayOpacity: this.state.introPhase === 'flash' ? 0 : 1,
+      introContentTransform: this.state.introPhase === 'zoom' || this.state.introPhase === 'flash' ? 'scale(6)' : (this.state.introPhase === 'press' ? 'scale(0.96)' : 'scale(1)'),
+      introContentBlur: this.state.introPhase === 'zoom' || this.state.introPhase === 'flash' ? 'blur(14px)' : 'blur(0px)',
+      introContentOpacity: this.state.introPhase === 'flash' ? 0 : 1,
+      introFlashVisible: this.state.introPhase === 'flash',
+      noop: () => {},
+      introSoundOn: window.urxAudio ? window.urxAudio.isOn() : false,
+      introSoundIcon: (window.urxAudio ? window.urxAudio.isOn() : false) ? '\uD83D\uDD0A SOUND ON' : '\uD83D\uDD07 SOUND OFF',
+      toggleIntroSound: () => this.toggleIntroSound(),
+      enterSite: () => this.enterSite(),
       serverStatusText: this.state.onlinePlayers != null ? (this.state.live ? 'Server online · NA · Vanilla+' : 'Server offline') : 'NA · Vanilla+',
       statusDotColor: this.state.onlinePlayers != null ? (this.state.live ? '#3ddc78' : '#ff4d4d') : '#8f887f',
       parallaxSlow: this.state.scrollY * 0.08,

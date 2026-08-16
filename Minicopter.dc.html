@@ -90,16 +90,21 @@
     @media (max-width: 760px) {
       [style*="grid-template-columns: 1.5fr 1fr"], [style*="grid-template-columns: 1fr 1.5fr"],
       [style*="grid-template-columns: 2fr 1fr"], [style*="grid-template-columns: 1fr 2fr"],
-      [style*="grid-template-columns: 1.4fr 1fr"], [style*="grid-template-columns: 1.3fr 1fr 1fr"] { grid-template-columns: 1fr !important; }
+      [style*="grid-template-columns: 1.4fr 1fr"], [style*="grid-template-columns: 1.3fr 1fr 1fr"],
+      [style*="grid-template-columns: 1.1fr 1fr"], [style*="grid-template-columns: 1fr 1.1fr"],
+      [style*="grid-template-columns: 1fr 1.2fr"], [style*="grid-template-columns: 1.2fr 1fr"] { grid-template-columns: 1fr !important; }
       [style*="grid-template-columns: repeat(4"], [style*="grid-template-columns: repeat(3"] { grid-template-columns: 1fr 1fr !important; }
       body, html { overflow-x: hidden; max-width: 100vw; }
       * { max-width: 100%; }
+      .nav-catalog-dropdown, .nav-connect-dropdown { max-width: 90vw !important; }
     }
     @media (max-width: 480px) {
       [style*="grid-template-columns: repeat(4"], [style*="grid-template-columns: repeat(3"],
       [style*="grid-template-columns: repeat(2"] { grid-template-columns: 1fr !important; }
     }
   </style>
+<script src="ambient-audio.js"></script>
+<script src="page-transition.js"></script>
 </helmet>
 
 <div style="position: fixed; inset: 0; z-index: 0; overflow: hidden; background: #0a0b0d;">
@@ -119,7 +124,7 @@
     </div>
   </div><nav class="site-nav" style="position: sticky; top: 0; z-index: 20;">
     <div class="site-nav-inner" style="background: linear-gradient(180deg, rgba(21,22,25,0.98), rgba(9,10,12,0.96)); border-bottom: 1px solid rgba(255,106,26,0.35); box-shadow: 0 8px 26px rgba(0,0,0,0.5);">
-      <div style="max-width: 1280px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px); height: 84px; display: flex; align-items: center; justify-content: center; gap: 40px; position: relative; left: 15px;">
+      <div style="max-width: 1280px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px); height: 84px; display: flex; align-items: center; justify-content: center; gap: 40px; position: relative;">
         <div class="nav-links-desktop" style="display: flex; align-items: center; gap: 10px;">
           <div class="{{ homeWrapClass }}" onMouseEnter="{{ openHomeDrop }}" onMouseLeave="{{ closeDrop }}">
             <a href="./index.html" class="nav-tab" style="animation: signFlicker 3s linear infinite; animation-delay: 0s; text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 14px rgba(255,138,82,0.9), 0 0 26px rgba(255,106,26,0.7);">Home</a>
@@ -138,7 +143,8 @@
             </div>
           </div>
           <div style="display: flex; align-items: center;">
-            <div class="{{ navConnectWrapClass }}" onMouseEnter="{{ openNavConnect }}" onMouseLeave="{{ closeNavConnect }}">
+            <a href="./index.html#live-chat" class="nav-tab" style="animation: signFlicker 3.6s linear infinite; animation-delay: 0.9s; text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 14px rgba(255,138,82,0.9), 0 0 26px rgba(255,106,26,0.7);">Live Chat</a>
+          <div class="{{ navConnectWrapClass }}" onMouseEnter="{{ openNavConnect }}" onMouseLeave="{{ closeNavConnect }}">
             <button type="button" onClick="{{ connectNow }}" class="btn-connect" style="font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; font-size: 12.5px; color: #0a0b0d; background: linear-gradient(135deg, #ff8a4c, #ff6a1a); border: 1px solid rgba(255,180,130,0.5); height: 38px; padding: 0 18px; display: inline-flex; align-items: center; cursor: pointer; clip-path: polygon(7px 0, 100% 0, 100% calc(100% - 7px), calc(100% - 7px) 100%, 0 100%, 0 7px); box-shadow: 0 2px 8px rgba(255,106,26,0.3);">Connect Now</button>
             <div class="nav-connect-dropdown hud-panel" style="width: 340px; background: linear-gradient(180deg, rgba(255,106,26,0.08), rgba(10,11,13,0.97)); border: 1px solid rgba(255,122,61,0.35); padding: 18px 20px; box-shadow: 0 16px 40px rgba(0,0,0,0.5);">
               <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 14px;">
@@ -171,7 +177,6 @@
           <img src="assets/logo-new.png" alt="Untitled RustX" style="width: 100%; height: 100%; object-fit: contain; display: block; background: transparent;" />
         </div>
         <div class="nav-links-desktop" style="display: flex; align-items: center; gap: 10px;">
-          <a href="./index.html#live-chat" class="nav-tab" style="animation: signFlicker 3.6s linear infinite; animation-delay: 0.9s; text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 14px rgba(255,138,82,0.9), 0 0 26px rgba(255,106,26,0.7);">Live Chat</a>
           <a href="./Leaderboards.dc.html" class="nav-tab" style="animation: signFlicker 3.6s linear infinite; animation-delay: 0.9s; text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 14px rgba(255,138,82,0.9), 0 0 26px rgba(255,106,26,0.7);">Leaderboards</a>
           <a href="./FAQ.dc.html" class="nav-tab" style="animation: signFlicker 3.1s linear infinite; animation-delay: 1.6s; text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 14px rgba(255,138,82,0.9), 0 0 26px rgba(255,106,26,0.7);">FAQs</a>
           <a href="https://discord.gg/M4rqjGpjyW" target="_blank" rel="noopener" class="nav-tab" style="animation: signFlicker 2.6s linear infinite; animation-delay: 0.3s; text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 14px rgba(255,138,82,0.9), 0 0 26px rgba(255,106,26,0.7);">Discord</a>
