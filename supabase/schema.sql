@@ -89,3 +89,25 @@ create index if not exists sponsors_active_expiry_idx
   on public.sponsors (active, expires_at);
 
 alter table public.sponsors enable row level security;
+
+
+create table if not exists public.chat_messages (
+  id bigint generated always as identity primary key,
+  sender text not null,
+  origin text not null default 'website',
+  message text not null,
+  created_at timestamptz not null default now()
+);
+
+create index if not exists chat_messages_created_idx
+  on public.chat_messages (created_at desc);
+
+alter table public.chat_messages enable row level security;
+
+create table if not exists public.chat_ratelimit (
+  client_id text primary key,
+  last_message_at timestamptz not null default now()
+);
+
+alter table public.chat_ratelimit enable row level security;
+

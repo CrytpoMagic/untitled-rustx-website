@@ -40,7 +40,7 @@
       {
         "@type": "Question",
         "name": "I got muted \u2014 can I buy my way out?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Yes, for standard chat mutes, via the Unmute item in the store. It doesn't apply to bans or mutes tied to a permanent conduct ban." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Standard chat mutes run their normal duration and can't be purchased out early." }
       }
     ]
   }
@@ -110,6 +110,11 @@
     .nav-connect-wrap { position: relative; }
     .nav-connect-dropdown { position: absolute; top: calc(100% + 12px); left: 50%; transform: translateX(-50%) translateY(-6px); opacity: 0; visibility: hidden; transform: translateY(-6px); transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease; pointer-events: none; z-index: 30; }
     .nav-connect-wrap.is-open .nav-connect-dropdown { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); pointer-events: auto; }
+  /* mobile-global-fix */
+    @media (max-width: 760px) {
+      [style*="grid-template-columns: 1.5fr 1fr"], [style*="grid-template-columns: 1fr 1.5fr"],
+      [style*="grid-template-columns: 2fr 1fr"], [style*="grid-template-columns: 1fr 2fr"] { grid-template-columns: 1fr !important; }
+    }
   </style>
 </helmet>
 
@@ -159,7 +164,7 @@
               <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
                 <span style="font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 13px; color: #fff;">157.85.93.170:28015</span>
               </div>
-              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px;">
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-bottom: 14px;">
                 <div>
                   <span style="display: block; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: #6b655e; margin-bottom: 4px;">Players</span>
                   <span style="font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 17px; color: #fff;">{{ playersLabel }}</span>
@@ -182,6 +187,7 @@
           <img src="assets/logo-new.png" alt="Untitled RustX" style="width: 100%; height: 100%; object-fit: contain; display: block; background: transparent;" />
         </div>
         <div class="nav-links-desktop" style="display: flex; align-items: center; gap: 10px;">
+          <a href="./index.html#live-chat" class="nav-tab" style="animation: signFlicker 3.6s linear infinite; animation-delay: 0.9s; text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 14px rgba(255,138,82,0.9), 0 0 26px rgba(255,106,26,0.7);">Live Chat</a>
           <a href="./Leaderboards.dc.html" class="nav-tab" style="animation: signFlicker 3.6s linear infinite; animation-delay: 0.9s; text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 14px rgba(255,138,82,0.9), 0 0 26px rgba(255,106,26,0.7);">Leaderboards</a>
           <a href="./FAQ.dc.html" class="nav-tab" style="animation: signFlicker 3.1s linear infinite; animation-delay: 1.6s; text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 14px rgba(255,138,82,0.9), 0 0 26px rgba(255,106,26,0.7);">FAQs</a>
           <a href="https://discord.gg/M4rqjGpjyW" target="_blank" rel="noopener" class="nav-tab" style="animation: signFlicker 2.6s linear infinite; animation-delay: 0.3s; text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 14px rgba(255,138,82,0.9), 0 0 26px rgba(255,106,26,0.7);">Discord</a>
@@ -193,7 +199,6 @@
               <a href="./Teas.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">Teas</a>
               <a href="./WeaponKits.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">Weapon Kits</a>
               <a href="./ResourceKits.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">Resource Kits</a>
-              <a href="./Unmute.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">Unmute</a>
               <a href="./SuperSerum.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">Super Serum</a>
               <a href="./Minicopter.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">Minis</a>
               <a href="./WebsiteShoutout.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">Website Shoutout</a>
@@ -212,6 +217,7 @@
         <a href="./index.html" class="nav-tab nav-tab-mobile">Home</a>
         <a href="./Rules.dc.html" class="nav-tab nav-tab-mobile active">Rules</a>
         <a href="./Store.dc.html" class="nav-tab nav-tab-mobile">Store</a>
+        <a href="./index.html#live-chat" class="nav-tab nav-tab-mobile">Live Chat</a>
         <a href="./Leaderboards.dc.html" class="nav-tab nav-tab-mobile">Leaderboards</a>
         <a href="./FAQ.dc.html" class="nav-tab nav-tab-mobile">FAQs</a>
         <a href="https://discord.gg/M4rqjGpjyW" target="_blank" rel="noopener" class="nav-tab nav-tab-mobile">Discord</a>
@@ -231,7 +237,7 @@
     </section>
 
     <section style="padding: 12px 0 48px;">
-      <div class="reveal-stagger" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: rgba(255,255,255,0.08);">
+      <div class="reveal-stagger" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1px; background: rgba(255,255,255,0.08);">
         <div style="background: #0e0f11; padding: 26px 22px; border-top: 2px solid #ff6a1a;">
           <span style="font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; font-size: 12px; color: #ff8a52;">Zero tolerance</span>
           <h3 style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 20px; margin: 8px 0 10px; color: #fff;">Cheating &amp; exploits</h3>
@@ -277,7 +283,7 @@
 
     <section id="reporting" class="reveal-left" style="padding: 10px 0 56px;">
       <h2 style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 26px; margin: 0 0 18px; color: #fff;">Reporting a violation</h2>
-      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 20px;">
         <div style="background: #0e0f11; border: 1px solid rgba(255,255,255,0.08); padding: 22px;">
           <span style="display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 50%; background: rgba(255,106,26,0.15); color: #ff8a52; font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 15px; margin-bottom: 12px;">1</span>
           <h3 style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 16px; margin: 0 0 8px; color: #fff;">Grab evidence</h3>
@@ -334,12 +340,12 @@
         </div>
         <div style="background: #0e0f11; padding: 20px 22px;">
           <h3 style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 15px; margin: 0 0 6px; color: #fff;">I got muted \u2014 can I buy my way out?</h3>
-          <p style="font-size: 14px; line-height: 22px; margin: 0; color: #b0a99f;">Yes, for standard chat mutes \u2014 there's an Unmute item in the <a href="./Store.dc.html">store</a>. It doesn't apply to bans or mutes tied to a permanent conduct ban.</p>
+          <p style="font-size: 14px; line-height: 22px; margin: 0; color: #b0a99f;">Standard chat mutes run their normal duration and can't be purchased out early. It doesn't apply to bans or mutes tied to a permanent conduct ban.</p>
         </div>
       </div>
     </section>
 
-    <footer style="padding: 24px 0; font-size: 13px; border-top: 1px solid rgba(255,255,255,0.08); color: #6b655e;">Untitled RustX · 157.85.93.170:28015 · Wipes every Thursday, 1PM CDT · Site by joeboetheasian</footer>
+    <footer style="padding: 24px 0; font-size: 13px; border-top: 1px solid rgba(255,255,255,0.08); color: #6b655e;">Untitled RustX · 157.85.93.170:28015 · Weekly map wipes, biweekly BP wipes · Site by joeboetheasian</footer>
   </div>
 </div>
 

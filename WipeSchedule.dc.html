@@ -9,12 +9,12 @@
 <x-dc>
 <helmet>
   <title>Wipe Schedule — Untitled RustX | Weekly Wipes Every Thursday 1PM CDT</title>
-  <meta name="description" content="Untitled RustX wipes every Thursday at 1PM CDT. Map and blueprints reset weekly so every player starts fresh — see exactly what resets and what to expect.">
+  <meta name="description" content="Untitled RustX wipes every Thursday at 1PM CDT. The map resets weekly; blueprints reset biweekly — see exactly what resets and what to expect.">
   <meta name="keywords" content="rust wipe schedule, weekly wipe rust server, rust server wipe time, untitled rustx wipe, rust blueprint wipe">
   <link rel="canonical" href="https://untitledrx.com/WipeSchedule.dc.html">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Wipe Schedule — Untitled RustX">
-  <meta property="og:description" content="Weekly wipes every Thursday at 1PM CDT — map and blueprints reset, everyone starts fresh.">
+  <meta property="og:description" content="Weekly map wipes every Thursday at 1PM CDT, with a biweekly blueprint wipe.">
   <meta property="og:url" content="https://untitledrx.com/WipeSchedule.dc.html">
   <meta name="robots" content="index, follow">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -74,6 +74,11 @@
     .nav-connect-wrap { position: relative; }
     .nav-connect-dropdown { position: absolute; top: calc(100% + 12px); left: 50%; transform: translateX(-50%) translateY(-6px); opacity: 0; visibility: hidden; transform: translateY(-6px); transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease; pointer-events: none; z-index: 30; }
     .nav-connect-wrap.is-open .nav-connect-dropdown { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); pointer-events: auto; }
+  /* mobile-global-fix */
+    @media (max-width: 760px) {
+      [style*="grid-template-columns: 1.5fr 1fr"], [style*="grid-template-columns: 1fr 1.5fr"],
+      [style*="grid-template-columns: 2fr 1fr"], [style*="grid-template-columns: 1fr 2fr"] { grid-template-columns: 1fr !important; }
+    }
   </style>
 </helmet>
 
@@ -122,7 +127,7 @@
               <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
                 <span style="font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 13px; color: #fff;">157.85.93.170:28015</span>
               </div>
-              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px;">
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-bottom: 14px;">
                 <div>
                   <span style="display: block; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: #6b655e; margin-bottom: 4px;">Players</span>
                   <span style="font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 17px; color: #fff;">{{ playersLabel }}</span>
@@ -143,6 +148,7 @@
           <img src="assets/logo-new.png" alt="Untitled RustX" style="width: 100%; height: 100%; object-fit: contain; display: block;" />
         </div>
         <div class="nav-links-desktop" style="display: flex; align-items: center; gap: 10px;">
+          <a href="./index.html#live-chat" class="nav-tab">Live Chat</a>
           <a href="./Rules.dc.html#faq" class="nav-tab">FAQs</a>
           <a href="https://discord.gg/M4rqjGpjyW" target="_blank" rel="noopener" class="nav-tab" style="animation: signFlicker 2.6s linear infinite; animation-delay: 0.3s; text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 14px rgba(255,138,82,0.9), 0 0 26px rgba(255,106,26,0.7);">Discord</a>
           <div class="{{ storeWrapClass }}" onMouseEnter="{{ openStoreDrop }}" onMouseLeave="{{ closeDrop }}">
@@ -153,7 +159,6 @@
               <a href="./Teas.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">Teas</a>
               <a href="./WeaponKits.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">Weapon Kits</a>
               <a href="./ResourceKits.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">Resource Kits</a>
-              <a href="./Unmute.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">Unmute</a>
               <a href="./SuperSerum.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">Super Serum</a>
               <a href="./Minicopter.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">Minis</a>
               <a href="./WebsiteShoutout.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">Website Shoutout</a>
@@ -171,6 +176,7 @@
         <a href="./index.html" class="nav-tab nav-tab-mobile">Home</a>
         <a href="./Rules.dc.html" class="nav-tab nav-tab-mobile">Rules</a>
         <a href="./Store.dc.html" class="nav-tab nav-tab-mobile">Store</a>
+        <a href="./index.html#live-chat" class="nav-tab nav-tab-mobile">Live Chat</a>
         <a href="./Rules.dc.html#faq" class="nav-tab nav-tab-mobile">FAQs</a>
         <a href="https://discord.gg/M4rqjGpjyW" target="_blank" rel="noopener" class="nav-tab nav-tab-mobile">Discord</a>
         <button type="button" onClick="{{ connectNow }}" class="btn-connect" style="margin-top: 6px; font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; font-size: 13px; color: #0a0b0d; background: linear-gradient(135deg, #ff8a4c, #ff6a1a); border: 1px solid rgba(255,180,130,0.5); padding: 13px; cursor: pointer; clip-path: polygon(7px 0, 100% 0, 100% calc(100% - 7px), calc(100% - 7px) 100%, 0 100%, 0 7px);">Connect Now</button>
@@ -183,11 +189,11 @@
     <section class="reveal" style="padding: 118px 0 30px;">
       <span style="display: block; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; font-size: 13px; color: #ff8a52; margin: 0 0 14px;">Wipe schedule</span>
       <h1 style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase; font-size: clamp(38px, 5vw, 58px); margin: 0; color: #fff;">Every Thursday, 1PM CDT</h1>
-      <p style="font-size: 17px; line-height: 28px; max-width: 62ch; margin: 18px 0 0; color: #b9b3ab;">The map and blueprints reset weekly, every Thursday at 1:00 PM CDT — long enough to build something real, never long enough to get stale.</p>
+      <p style="font-size: 17px; line-height: 28px; max-width: 62ch; margin: 18px 0 0; color: #b9b3ab;">The map resets weekly, every Thursday at 1:00 PM CDT, with blueprints wiping biweekly — long enough to build something real, never long enough to get stale.</p>
     </section>
 
     <section class="reveal" style="padding: 10px 0 56px;">
-      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(255,122,61,0.2); border: 1px solid rgba(255,122,61,0.2); max-width: 760px;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1px; background: rgba(255,122,61,0.2); border: 1px solid rgba(255,122,61,0.2); max-width: 760px;">
         <div style="background: rgba(10,11,13,0.85); padding: 24px 20px; text-align: center;">
           <p style="font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 32px; margin: 0; color: #fff;">Thursday</p>
           <p style="font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #8f887f; margin: 8px 0 0;">Wipe day</p>
@@ -205,10 +211,10 @@
 
     <section class="reveal" style="padding: 10px 0 56px;">
       <h2 style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 22px; margin: 0 0 18px; color: #fff;">What resets, what doesn't</h2>
-      <div class="reveal-stagger" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: rgba(255,255,255,0.08); max-width: 760px;">
+      <div class="reveal-stagger" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1px; background: rgba(255,255,255,0.08); max-width: 760px;">
         <div style="background: #0e0f11; padding: 22px 20px; border-top: 2px solid #ff6a1a;">
           <h3 style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 16px; margin: 0 0 10px; color: #fff;">Resets every wipe</h3>
-          <p style="font-size: 13.5px; line-height: 22px; margin: 0; color: #b0a99f;">Map, all bases and inventories, and every blueprint you've learned. Everyone starts from a bare spawn.</p>
+          <p style="font-size: 13.5px; line-height: 22px; margin: 0; color: #b0a99f;">Map, all bases and inventories every week. Blueprints wipe biweekly (every other Thursday) — everyone starts from a bare spawn on both.</p>
         </div>
         <div style="background: #0e0f11; padding: 22px 20px; border-top: 2px solid rgba(255,255,255,0.2);">
           <h3 style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 16px; margin: 0 0 10px; color: #fff;">Carries over</h3>
@@ -236,7 +242,7 @@
         <a href="./Rules.dc.html#faq">FAQ</a>
         <a href="https://discord.gg/M4rqjGpjyW" target="_blank" rel="noopener">Discord</a>
       </div>
-      Untitled RustX · 157.85.93.170:28015 · Wipes every Thursday, 1PM CDT · Site by joeboetheasian
+      Untitled RustX · 157.85.93.170:28015 · Weekly map wipes, biweekly BP wipes · Site by joeboetheasian
     </footer>
   </div>
 </div>

@@ -58,6 +58,11 @@
     .nav-connect-wrap { position: relative; }
     .nav-connect-dropdown { position: absolute; top: calc(100% + 12px); left: 50%; transform: translateX(-50%) translateY(-6px); opacity: 0; visibility: hidden; transform: translateY(-6px); transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease; pointer-events: none; z-index: 30; }
     .nav-connect-wrap.is-open .nav-connect-dropdown { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); pointer-events: auto; }
+  /* mobile-global-fix */
+    @media (max-width: 760px) {
+      [style*="grid-template-columns: 1.5fr 1fr"], [style*="grid-template-columns: 1fr 1.5fr"],
+      [style*="grid-template-columns: 2fr 1fr"], [style*="grid-template-columns: 1fr 2fr"] { grid-template-columns: 1fr !important; }
+    }
   </style>
 </helmet>
 
@@ -106,7 +111,7 @@
               <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
                 <span style="font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 13px; color: #fff;">157.85.93.170:28015</span>
               </div>
-              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px;">
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-bottom: 14px;">
                 <div>
                   <span style="display: block; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: #6b655e; margin-bottom: 4px;">Players</span>
                   <span style="font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 17px; color: #fff;">{{ playersLabel }}</span>
@@ -129,6 +134,7 @@
           <img src="assets/logo-new.png" alt="Untitled RustX" style="width: 100%; height: 100%; object-fit: contain; display: block; background: transparent;" />
         </div>
         <div class="nav-links-desktop" style="display: flex; align-items: center; gap: 10px;">
+          <a href="./index.html#live-chat" class="nav-tab" style="animation: signFlicker 3.6s linear infinite; animation-delay: 0.9s; text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 14px rgba(255,138,82,0.9), 0 0 26px rgba(255,106,26,0.7);">Live Chat</a>
           <a href="./Leaderboards.dc.html" class="nav-tab" style="animation: signFlicker 3.6s linear infinite; animation-delay: 0.9s; text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 14px rgba(255,138,82,0.9), 0 0 26px rgba(255,106,26,0.7);">Leaderboards</a>
           <a href="./FAQ.dc.html" class="nav-tab" style="animation: signFlicker 3.1s linear infinite; animation-delay: 1.6s; text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 14px rgba(255,138,82,0.9), 0 0 26px rgba(255,106,26,0.7);">FAQs</a>
           <a href="https://discord.gg/M4rqjGpjyW" target="_blank" rel="noopener" class="nav-tab" style="animation: signFlicker 2.6s linear infinite; animation-delay: 0.3s; text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 14px rgba(255,138,82,0.9), 0 0 26px rgba(255,106,26,0.7);">Discord</a>
@@ -140,7 +146,6 @@
               <a href="./Teas.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">Teas</a>
               <a href="./WeaponKits.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">Weapon Kits</a>
               <a href="./ResourceKits.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">Resource Kits</a>
-              <a href="./Unmute.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">Unmute</a>
               <a href="./SuperSerum.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">Super Serum</a>
               <a href="./Minicopter.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">Minis</a>
               <a href="./WebsiteShoutout.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">Website Shoutout</a>
@@ -159,6 +164,7 @@
         <a href="./index.html" class="nav-tab nav-tab-mobile">Home</a>
         <a href="./Rules.dc.html" class="nav-tab nav-tab-mobile">Rules</a>
         <a href="./Store.dc.html" class="nav-tab nav-tab-mobile">Store</a>
+        <a href="./index.html#live-chat" class="nav-tab nav-tab-mobile">Live Chat</a>
         <a href="./Leaderboards.dc.html" class="nav-tab nav-tab-mobile">Leaderboards</a>
         <a href="./FAQ.dc.html" class="nav-tab nav-tab-mobile">FAQs</a>
         <a href="https://discord.gg/M4rqjGpjyW" target="_blank" rel="noopener" class="nav-tab nav-tab-mobile">Discord</a>
@@ -182,7 +188,7 @@
     </section>
 
     <section class="reveal" style="padding: 0 0 64px;">
-      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 22px;">
         <div class="event-card" style="background: linear-gradient(160deg, #17181d, #0e0f11); border: 1px solid rgba(255,106,26,0.35); border-top: 4px solid #ff6a1a; padding: 30px 26px; position: relative; overflow: hidden; box-shadow: 0 0 30px rgba(255,106,26,0.1);">
           <div style="position: absolute; top: -40px; right: -40px; width: 130px; height: 130px; background: radial-gradient(circle, rgba(255,106,26,0.22), transparent 70%);"></div>
           <div style="width: 52px; height: 52px; display: flex; align-items: center; justify-content: center; background: rgba(255,106,26,0.12); border: 1px solid rgba(255,106,26,0.4); margin-bottom: 16px;">
@@ -216,7 +222,7 @@
 
     <section class="reveal" style="padding: 0 0 64px;">
       <span style="display: block; font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; font-size: 14px; color: #ff8a52; margin: 0 0 20px; text-shadow: 0 0 12px rgba(255,106,26,0.3);">What the server has done so far</span>
-      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: rgba(255,106,26,0.2); border: 1px solid rgba(255,106,26,0.3); box-shadow: 0 0 30px rgba(255,106,26,0.1);">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(165px, 1fr)); gap: 1px; background: rgba(255,106,26,0.2); border: 1px solid rgba(255,106,26,0.3); box-shadow: 0 0 30px rgba(255,106,26,0.1);">
         <div class="stat-card" style="background: rgba(10,11,13,0.85); padding: 30px 20px; text-align: center;">
           <p style="font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 42px; margin: 0; color: #ff6a1a; text-shadow: 0 0 22px rgba(255,106,26,0.5);">52</p>
           <p style="font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #8f887f; margin: 10px 0 0;">Wipes completed a year</p>
@@ -240,7 +246,7 @@
       <a href="./index.html" class="nav-tab" style="text-decoration: none;">← Back to Home</a>
     </section>
 
-    <footer style="padding: 24px 0; font-size: 13px; border-top: 1px solid rgba(255,255,255,0.08); color: #6b655e;">Untitled RustX · 157.85.93.170:28015 · Wipes every Thursday, 1PM CDT · Site by joeboetheasian</footer>
+    <footer style="padding: 24px 0; font-size: 13px; border-top: 1px solid rgba(255,255,255,0.08); color: #6b655e;">Untitled RustX · 157.85.93.170:28015 · Weekly map wipes, biweekly BP wipes · Site by joeboetheasian</footer>
   </div>
 </div>
 

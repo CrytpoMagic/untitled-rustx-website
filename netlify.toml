@@ -3,6 +3,12 @@
   functions = "netlify/functions"
 
 [[redirects]]
+  from = "https://www.untitledrx.com/*"
+  to = "https://untitledrx.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/api/leaderboards/ingest"
   to = "/.netlify/functions/leaderboards-ingest"
   status = 200
@@ -30,5 +36,23 @@
 [[redirects]]
   from = "/api/sponsors"
   to = "/.netlify/functions/sponsors-read"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/chat/send"
+  to = "/.netlify/functions/chat-send"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/chat/read"
+  to = "/.netlify/functions/chat-read"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/chat/game-ingest"
+  to = "/.netlify/functions/chat-game-ingest"
   status = 200
   force = true

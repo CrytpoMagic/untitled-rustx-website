@@ -61,6 +61,11 @@
     .nav-connect-wrap { position: relative; }
     .nav-connect-dropdown { position: absolute; top: calc(100% + 12px); left: 50%; transform: translateX(-50%) translateY(-6px); opacity: 0; visibility: hidden; transform: translateY(-6px); transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease; pointer-events: none; z-index: 30; }
     .nav-connect-wrap.is-open .nav-connect-dropdown { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); pointer-events: auto; }
+  /* mobile-global-fix */
+    @media (max-width: 760px) {
+      [style*="grid-template-columns: 1.5fr 1fr"], [style*="grid-template-columns: 1fr 1.5fr"],
+      [style*="grid-template-columns: 2fr 1fr"], [style*="grid-template-columns: 1fr 2fr"] { grid-template-columns: 1fr !important; }
+    }
   </style>
 </helmet>
 
@@ -110,7 +115,7 @@
               <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
                 <span style="font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 13px; color: #fff;">157.85.93.170:28015</span>
               </div>
-              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px;">
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-bottom: 14px;">
                 <div>
                   <span style="display: block; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: #6b655e; margin-bottom: 4px;">Players</span>
                   <span style="font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 17px; color: #fff;">{{ playersLabel }}</span>
@@ -133,6 +138,7 @@
           <img src="assets/logo-new.png" alt="Untitled RustX" style="width: 100%; height: 100%; object-fit: contain; display: block; background: transparent;" />
         </div>
         <div class="nav-links-desktop" style="display: flex; align-items: center; gap: 10px;">
+          <a href="./index.html#live-chat" class="nav-tab" style="animation: signFlicker 3.6s linear infinite; animation-delay: 0.9s; text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 14px rgba(255,138,82,0.9), 0 0 26px rgba(255,106,26,0.7);">Live Chat</a>
           <a href="./Leaderboards.dc.html" class="nav-tab" style="animation: signFlicker 3.6s linear infinite; animation-delay: 0.9s; text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 14px rgba(255,138,82,0.9), 0 0 26px rgba(255,106,26,0.7);">Leaderboards</a>
           <a href="./FAQ.dc.html" class="nav-tab" style="animation: signFlicker 3.1s linear infinite; animation-delay: 1.6s; text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 14px rgba(255,138,82,0.9), 0 0 26px rgba(255,106,26,0.7);">FAQs</a>
           <a href="https://discord.gg/M4rqjGpjyW" target="_blank" rel="noopener" class="nav-tab" style="animation: signFlicker 2.6s linear infinite; animation-delay: 0.3s; text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 14px rgba(255,138,82,0.9), 0 0 26px rgba(255,106,26,0.7);">Discord</a>
@@ -144,7 +150,6 @@
               <a href="./Teas.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">Teas</a>
               <a href="./WeaponKits.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">Weapon Kits</a>
               <a href="./ResourceKits.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">Resource Kits</a>
-              <a href="./Unmute.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">Unmute</a>
               <a href="./SuperSerum.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">Super Serum</a>
               <a href="./Minicopter.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">Minis</a>
               <a href="./WebsiteShoutout.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">Website Shoutout</a>
@@ -163,6 +168,7 @@
         <a href="./index.html" class="nav-tab nav-tab-mobile">Home</a>
         <a href="./Rules.dc.html" class="nav-tab nav-tab-mobile">Rules</a>
         <a href="./Store.dc.html" class="nav-tab nav-tab-mobile">Store</a>
+        <a href="./index.html#live-chat" class="nav-tab nav-tab-mobile">Live Chat</a>
         <a href="./Leaderboards.dc.html" class="nav-tab nav-tab-mobile">Leaderboards</a>
         <a href="./FAQ.dc.html" class="nav-tab nav-tab-mobile">FAQs</a>
         <a href="https://discord.gg/M4rqjGpjyW" target="_blank" rel="noopener" class="nav-tab nav-tab-mobile">Discord</a>
@@ -186,7 +192,7 @@
 
     <section class="reveal-left" style="padding: 0 0 56px;">
       <span style="display: block; font-family: ui-monospace, 'SF Mono', Menlo, monospace; letter-spacing: 0.1em; text-transform: uppercase; font-size: 11.5px; color: #6b655e; margin: 0 0 16px;">// Intake process</span>
-      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 20px;">
         <div class="case-card" style="background: linear-gradient(160deg, #14151a, #0e0f11); border: 1px solid rgba(255,255,255,0.1); border-top: 2px solid #ff6a1a; padding: 24px; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%);">
           <span style="display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; background: rgba(255,106,26,0.12); border: 1px solid rgba(255,106,26,0.4); color: #ff8a52; font-family: ui-monospace, monospace; font-weight: 700; font-size: 15px; margin-bottom: 14px;">01</span>
           <h3 style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 16px; margin: 0 0 8px; color: #fff;">Grab evidence</h3>
@@ -208,7 +214,7 @@
 
     <section class="reveal-right" style="padding: 0 0 56px;">
       <span style="display: block; font-family: ui-monospace, 'SF Mono', Menlo, monospace; letter-spacing: 0.1em; text-transform: uppercase; font-size: 11.5px; color: #6b655e; margin: 0 0 16px;">// What's reportable</span>
-      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(165px, 1fr)); gap: 14px;">
         <div style="background: #0e0f11; border: 1px solid rgba(255,255,255,0.08); border-left: 3px solid #ff3b30; padding: 18px;">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff6a1a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
           <h3 style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 14px; margin: 12px 0 6px; color: #fff;">Cheating</h3>
@@ -235,7 +241,7 @@
     <section class="reveal-scale" style="padding: 0 0 64px;">
       <span style="display: block; font-family: ui-monospace, 'SF Mono', Menlo, monospace; letter-spacing: 0.1em; text-transform: uppercase; font-size: 11.5px; color: #6b655e; margin: 0 0 16px;">// Evidence checklist</span>
       <div style="background: #0e0f11; border: 1px solid rgba(255,122,61,0.25); border-top: 2px solid #ff6a1a; padding: 26px 28px;">
-        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px 28px;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px 28px;">
           <div style="display: flex; gap: 10px; align-items: flex-start;"><span style="color: #ff6a1a; font-family: ui-monospace, monospace; font-size: 14px; flex-shrink: 0;">[x]</span><span style="font-size: 13.5px; color: #cfc9c2;">Timestamp of the incident</span></div>
           <div style="display: flex; gap: 10px; align-items: flex-start;"><span style="color: #ff6a1a; font-family: ui-monospace, monospace; font-size: 14px; flex-shrink: 0;">[x]</span><span style="font-size: 13.5px; color: #cfc9c2;">Player name or Steam ID</span></div>
           <div style="display: flex; gap: 10px; align-items: flex-start;"><span style="color: #ff6a1a; font-family: ui-monospace, monospace; font-size: 14px; flex-shrink: 0;">[x]</span><span style="font-size: 13.5px; color: #cfc9c2;">Clip, screenshot, or F7 report ID</span></div>
@@ -248,7 +254,7 @@
       <a href="./Rules.dc.html" class="nav-tab" style="text-decoration: none;">← Back to Rules</a>
     </section>
 
-    <footer style="padding: 24px 0; font-size: 13px; border-top: 1px solid rgba(255,255,255,0.08); color: #6b655e;">Untitled RustX · 157.85.93.170:28015 · Wipes every Thursday, 1PM CDT · Site by joeboetheasian</footer>
+    <footer style="padding: 24px 0; font-size: 13px; border-top: 1px solid rgba(255,255,255,0.08); color: #6b655e;">Untitled RustX · 157.85.93.170:28015 · Weekly map wipes, biweekly BP wipes · Site by joeboetheasian</footer>
   </div>
 </div>
 

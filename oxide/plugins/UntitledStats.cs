@@ -127,7 +127,7 @@ namespace Oxide.Plugins
             foreach (var player in BasePlayer.activePlayerList)
             {
                 Touch(player);
-                _connectedSince[player.userID] = Time.realtimeSinceStartup;
+                _connectedSince[player.userID] = UnityEngine.Time.realtimeSinceStartup;
             }
 
             _pushTimer = timer.Every(Mathf.Max(60f, _config.PushIntervalSeconds), Push);
@@ -156,7 +156,7 @@ namespace Oxide.Plugins
         private void OnPlayerConnected(BasePlayer player)
         {
             Touch(player);
-            _connectedSince[player.userID] = Time.realtimeSinceStartup;
+            _connectedSince[player.userID] = UnityEngine.Time.realtimeSinceStartup;
         }
 
         private void OnPlayerDisconnected(BasePlayer player, string reason)
@@ -249,7 +249,7 @@ namespace Oxide.Plugins
             else if (combined.Contains("patrolhelicopter") || combined.Contains("patrol_helicopter")) { s.HeliKills++; RecordHeat("pve","heli",entity.transform.position,1); }
             else if (combined.Contains("scientist")) { s.ScientistsKilled++; RecordHeat("pve","scientists",entity.transform.position,1); }
             else if (combined.Contains("bear") || combined.Contains("wolf") || combined.Contains("boar") ||
-                     combined.Contains("stag") || combined.Contains("chicken") || combined.Contains("horse")) s.AnimalsKilled++; RecordHeat("pve","animals",entity.transform.position,1);
+                     combined.Contains("stag") || combined.Contains("chicken") || combined.Contains("horse")) { s.AnimalsKilled++; RecordHeat("pve","animals",entity.transform.position,1); }
             else if (combined.Contains("npc") || combined.Contains("murderer") || combined.Contains("dweller")) s.OtherNpcKills++;
         }
 
@@ -323,10 +323,10 @@ namespace Oxide.Plugins
         {
             double since;
             if (!_connectedSince.TryGetValue(id,out since)) return;
-            int elapsed = Mathf.Max(0, Mathf.RoundToInt((float)(Time.realtimeSinceStartup - since)));
+            int elapsed = Mathf.Max(0, Mathf.RoundToInt((float)(UnityEngine.Time.realtimeSinceStartup - since)));
             PlayerStats s;
             if (_data.Players.TryGetValue(id,out s)) s.PlaytimeSeconds += elapsed;
-            _connectedSince[id] = Time.realtimeSinceStartup;
+            _connectedSince[id] = UnityEngine.Time.realtimeSinceStartup;
         }
 
         private void Push()
@@ -437,7 +437,7 @@ namespace Oxide.Plugins
         private string BuildWipeId()
         {
             int seed = 0;
-            try { seed = World.Seed; } catch { }
+            try { seed = (int)World.Seed; } catch { }
             return $"map_{seed}_{_data.WipeStartedAtUtc}";
         }
 

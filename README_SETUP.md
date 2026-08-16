@@ -100,6 +100,29 @@ How it works:
 - Rows are upserted on `transaction_id`, so a retried webhook can never create a duplicate sponsor.
 - Sponsors default to a 7-day expiry (one weekly wipe) from purchase.
 
+## Live website chat bridge (ChatBridge.cs)
+
+Drop `oxide/plugins/ChatBridge.cs` into your server's `oxide/plugins/` folder.
+
+Edit `oxide/config/ChatBridge.json` after first load and set:
+
+```json
+{
+  "IngestUrl": "https://untitledrx.com/api/chat/game-ingest",
+  "ReadUrl": "https://untitledrx.com/api/chat/read",
+  "BearerSecret": "<same value as the CHAT_INGEST_SECRET Netlify env var>",
+  "PollIntervalSeconds": 5.0
+}
+```
+
+Add a Netlify environment variable `CHAT_INGEST_SECRET` (any random string) — it must match the plugin's `BearerSecret` exactly.
+
+The plugin does two things:
+1. Forwards every global in-game chat message to the website's live chat feed.
+2. Polls the website every few seconds for new "Website Viewer" messages and broadcasts them in-game as `Website Viewer: <message>`.
+
+The website side (chat widget, rate limiting, profanity/link/@ filtering, Supabase tables) is already built and deployed — no other website changes are needed once this plugin is installed and configured.
+
 Read endpoint for the frontend ticker:
 - GET `https://untitledrx.com/api/sponsors` → `{ "sponsors": ["Name1", "Name2"] }`, active + non-expired only.
 

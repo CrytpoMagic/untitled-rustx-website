@@ -8,18 +8,20 @@
 <body>
 <x-dc>
 <helmet>
-  <title>Untitled RustX — Vanilla Rust Server, 2x Gather Rate | Weekly Wipes Thursday 1PM CDT</title>
-  <meta name="description" content="Untitled RustX is a vanilla Rust server with a 2x gather rate on wood, stone, and cloth — everything else stock rates. Weekly wipes every Thursday at 1PM CDT, active admins, and a growing community. Join a fair, fun PC Rust server built for new players and veterans alike.">
+  <title>2x Vanilla Rust Server for PC | UNTITLED RUSTX</title>
+  <meta name="description" content="UNTITLED RUSTX is a PC Rust server with 2x gathering for wood, stone, and cloth and vanilla-leaning gameplay otherwise. Weekly map wipes, biweekly blueprint wipes, active PvP and raiding, and a welcoming community for new and experienced players alike.">
   <meta name="keywords" content="2x rust server, rust server 2x, vanilla rust server, 2x gather rate rust, rust 2x wood stone cloth, pc rust server, rust server, rust, weekly wipes, untitled, untitled rustx, rust 2x wipe">
   <link rel="canonical" href="https://untitledrx.com/">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Untitled RustX — Vanilla Rust Server, 2x Gather Rate | Weekly Wipes Thursday 1PM CDT">
-  <meta property="og:description" content="A vanilla Rust server with a 2x gather rate on wood, stone, and cloth only — everything else stock. Weekly wipes every Thursday at 1PM CDT. Join today.">
+  <meta property="og:title" content="2x Vanilla Rust Server for PC | UNTITLED RUSTX">
+  <meta property="og:description" content="PC Rust server with 2x gathering for wood, stone, and cloth, vanilla-leaning gameplay, weekly map wipes, biweekly blueprint wipes, and active PvP.">
   <meta property="og:url" content="https://untitledrx.com/">
   <meta property="og:site_name" content="Untitled RustX">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Untitled RustX — Vanilla Rust Server, 2x Gather Rate">
-  <meta name="twitter:description" content="Vanilla loot and rates, 2x gather on wood/stone/cloth, weekly Thursday wipes. Join the Untitled RustX community.">
+  <meta property="og:image" content="https://untitledrx.com/assets/untitled-rustx-social-card.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://untitledrx.com/assets/untitled-rustx-social-card.jpg">
+  <meta name="twitter:title" content="2x Vanilla Rust Server for PC | UNTITLED RUSTX">
+  <meta name="twitter:description" content="2x gathering on wood/stone/cloth, vanilla-leaning gameplay, weekly map wipes, biweekly blueprint wipes.">
   <meta name="robots" content="index, follow">
   <script type="application/ld+json">
   {
@@ -27,7 +29,7 @@
     "@type": "WebSite",
     "name": "Untitled RustX",
     "url": "https://untitledrx.com/",
-    "description": "A vanilla Rust server with a 2x gather rate on wood, stone, and cloth, weekly wipes every Thursday at 1PM CDT, and an active community.",
+    "description": "A PC Rust server with 2x gathering for wood, stone, and cloth, vanilla-leaning gameplay, weekly map wipes and biweekly blueprint wipes, and an active community.",
     "publisher": { "@type": "Organization", "name": "Untitled RustX" }
   }
   </script>
@@ -49,6 +51,17 @@
   <style>
     @keyframes storeGlow { 0%,100% { box-shadow: 0 0 16px rgba(255,255,255,0.5), 0 2px 8px rgba(0,0,0,0.3); } 50% { box-shadow: 0 0 28px rgba(255,255,255,0.9), 0 2px 8px rgba(0,0,0,0.3); } }
     @keyframes drift1 { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(40px,-30px) scale(1.08); } }
+    @keyframes fpvDrift1 { 0%,100% { transform: translateX(0); } 50% { transform: translateX(-8px); } }
+    @keyframes fpvDrift2 { 0%,100% { transform: translateX(0); } 50% { transform: translateX(6px); } }
+    @keyframes fpvScan { 0% { transform: translateY(0); } 100% { transform: translateY(320px); } }
+    @keyframes fpvRecPulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+    @keyframes fpvSpeck { 0% { transform: translate(0,0); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translate(-40px,-60px); opacity: 0; } }
+    @keyframes fpvChroma { 0%,100% { opacity: 0.3; } 50% { opacity: 0.65; } }
+    @keyframes fpvRadarSweep { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    @keyframes fpvSignal { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+    @keyframes fpvCrosshairPulse { 0%,100% { transform: translate(-50%, -50%) rotate(45deg) scale(1); } 50% { transform: translate(-50%, -50%) rotate(45deg) scale(1.25); } }
+    @keyframes fpvGlitch { 0%,92%,100% { transform: translate(0,0); text-shadow: 0 0 24px rgba(255,106,26,0.5); } 93% { transform: translate(-2px,1px); text-shadow: -2px 0 #ff3b3b, 2px 0 #3ba0ff; } 95% { transform: translate(2px,-1px); text-shadow: 2px 0 #ff3b3b, -2px 0 #3ba0ff; } 97% { transform: translate(0,0); text-shadow: 0 0 24px rgba(255,106,26,0.5); } }
+    .fpv-glitch-title { animation: fpvGlitch 5s linear infinite; }
     @keyframes signFlicker { 0%,7%,9%,11%,89%,100% { opacity: 1; } 8% { opacity: 0.4; } 10% { opacity: 0.85; } 45% { opacity: 1; } 46% { opacity: 0.3; } 47% { opacity: 1; } 90% { opacity: 0.5; } 91% { opacity: 1; } }
     .broken-sign { animation: signFlicker 2.4s linear infinite; text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 18px rgba(255,138,82,0.9), 0 0 36px rgba(255,106,26,0.8), 0 0 64px rgba(255,106,26,0.55), 0 0 100px rgba(255,80,10,0.35); }
     @keyframes scanline { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
@@ -110,6 +123,14 @@
     .nav-connect-wrap { position: relative; }
     .nav-connect-dropdown { position: absolute; top: calc(100% + 12px); left: 50%; transform: translateX(-50%) translateY(-6px); opacity: 0; visibility: hidden; transform: translateY(-6px); transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s; pointer-events: none; z-index: 30; }
     .nav-connect-wrap.is-open .nav-connect-dropdown { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); pointer-events: auto; }
+  /* mobile-global-fix */
+    @media (max-width: 760px) {
+      [style*="grid-template-columns: 1.5fr 1fr"], [style*="grid-template-columns: 1fr 1.5fr"],
+      [style*="grid-template-columns: 2fr 1fr"], [style*="grid-template-columns: 1fr 2fr"] { grid-template-columns: 1fr !important; }
+    }
+    @media (max-width: 640px) {
+      .specs-grid { grid-template-columns: repeat(2, 1fr) !important; }
+    }
   </style>
 </helmet>
 
@@ -167,7 +188,7 @@
               <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
                 <span style="font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 13px; color: #fff;">157.85.93.170:28015</span>
               </div>
-              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px;">
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-bottom: 14px;">
                 <div>
                   <span style="display: block; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: #6b655e; margin-bottom: 4px;">Players</span>
                   <span style="font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 17px; color: #fff;">{{ playersLabel }}</span>
@@ -188,6 +209,7 @@
           <img src="assets/logo-new.png" alt="Untitled RustX" style="width: 100%; height: 100%; object-fit: contain; display: block; background: transparent;" />
         </div>
         <div class="nav-links-desktop" style="display: flex; align-items: center; gap: 10px;">
+          <a href="./index.html#live-chat" class="nav-tab" style="animation: signFlicker 3.6s linear infinite; animation-delay: 0.9s; text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 14px rgba(255,138,82,0.9), 0 0 26px rgba(255,106,26,0.7);">Live Chat</a>
           <a href="./Leaderboards.dc.html" class="nav-tab" style="animation: signFlicker 3.6s linear infinite; animation-delay: 0.9s; text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 14px rgba(255,138,82,0.9), 0 0 26px rgba(255,106,26,0.7);">Leaderboards</a>
           <a href="./FAQ.dc.html" class="nav-tab" style="animation: signFlicker 3.1s linear infinite; animation-delay: 1.6s; text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 14px rgba(255,138,82,0.9), 0 0 26px rgba(255,106,26,0.7);">FAQs</a>
           <a href="https://discord.gg/M4rqjGpjyW" target="_blank" rel="noopener" class="nav-tab" style="animation: signFlicker 2.6s linear infinite; animation-delay: 0.3s; text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 14px rgba(255,138,82,0.9), 0 0 26px rgba(255,106,26,0.7);">Discord</a>
@@ -199,7 +221,6 @@
               <a href="./Teas.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">Teas</a>
               <a href="./WeaponKits.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">Weapon Kits</a>
               <a href="./ResourceKits.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">Resource Kits</a>
-              <a href="./Unmute.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">Unmute</a>
               <a href="./SuperSerum.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">Super Serum</a>
               <a href="./Minicopter.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">Minis</a>
               <a href="./WebsiteShoutout.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">Website Shoutout</a>
@@ -218,6 +239,7 @@
         <a href="./index.html" class="nav-tab nav-tab-mobile active" style="animation: signFlicker 3s linear infinite; animation-delay: 0s; text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 14px rgba(255,138,82,0.9), 0 0 26px rgba(255,106,26,0.7);">Home</a>
         <a href="./Rules.dc.html" class="nav-tab nav-tab-mobile" style="animation: signFlicker 3.4s linear infinite; animation-delay: 0.6s; text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 14px rgba(255,138,82,0.9), 0 0 26px rgba(255,106,26,0.7);">Rules</a>
         <a href="./Store.dc.html" class="nav-tab nav-tab-mobile" style="animation: signFlicker 2.8s linear infinite; animation-delay: 1.1s; text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 14px rgba(255,138,82,0.9), 0 0 26px rgba(255,106,26,0.7);">Store</a>
+        <a href="./index.html#live-chat" class="nav-tab nav-tab-mobile">Live Chat</a>
         <a href="./Leaderboards.dc.html" class="nav-tab nav-tab-mobile">Leaderboards</a>
         <a href="./FAQ.dc.html" class="nav-tab nav-tab-mobile" style="animation: signFlicker 3.1s linear infinite; animation-delay: 1.6s; text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 14px rgba(255,138,82,0.9), 0 0 26px rgba(255,106,26,0.7);">FAQs</a>
         <a href="https://discord.gg/M4rqjGpjyW" target="_blank" rel="noopener" class="nav-tab nav-tab-mobile" style="animation: signFlicker 2.6s linear infinite; animation-delay: 0.3s; text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 14px rgba(255,138,82,0.9), 0 0 26px rgba(255,106,26,0.7);">Discord</a>
@@ -230,44 +252,35 @@
 
   <div style="max-width: 1200px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 64px);">
 
-    <section style="padding: 110px 0 44px; position: relative; overflow: hidden;">
-      <span style="position: absolute; top: -40px; right: -20px; font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: clamp(180px, 26vw, 420px); line-height: 1; color: rgba(255,106,26,0.05); letter-spacing: -0.02em; pointer-events: none; z-index: 0; user-select: none;">RX</span>
-      <div style="position: absolute; top: 20%; right: 6%; width: 480px; height: 480px; background: radial-gradient(circle, rgba(255,106,26,0.18), transparent 68%); pointer-events: none; z-index: 0;"></div>
-      <div style="position: absolute; top: 0; left: -10%; width: 130%; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,106,26,0.5) 20%, rgba(255,106,26,0.5) 80%, transparent); animation: scanline 5s linear infinite;"></div>
-      <div style="position: absolute; top: 42%; left: -10%; width: 55%; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,106,26,0.7), transparent); animation: scanline 7s linear infinite 2s;"></div>
-      <div style="position: relative; z-index: 1; display: inline-flex; align-items: center; gap: 10px; padding: 6px 14px; border: 1px solid rgba(255,106,26,0.5); background: rgba(255,106,26,0.08); margin-bottom: 22px; box-shadow: 0 0 24px rgba(255,106,26,0.15);">
-        <span style="width: 7px; height: 7px; border-radius: 50%; background: #ff6a1a; box-shadow: 0 0 10px #ff6a1a; animation: iconPulse 1.6s ease-in-out infinite;"></span>
-        <span style="font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; font-size: 13px; color: #ff8a52;">Untitled RustX</span>
-      </div>
-      <h1 style="position: relative; z-index: 1; font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: clamp(52px, 8vw, 108px); line-height: 0.95; letter-spacing: -0.01em; margin: 0; text-transform: uppercase; color: #fff; text-shadow: 0 2px 0 rgba(0,0,0,0.4);">Where every wipe<br><span class="broken-sign shimmer-text" style="text-shadow: 0 0 40px rgba(255,106,26,0.6);">begins a new story.</span></h1>
+    <section style="padding: 110px 0 30px; position: relative; overflow: hidden; text-align: center;">
+      <div style="position: absolute; inset: 0; background-image: linear-gradient(rgba(255,106,26,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,106,26,0.05) 1px, transparent 1px); background-size: 44px 44px; -webkit-mask-image: radial-gradient(ellipse at 50% 30%, #000 40%, transparent 80%); mask-image: radial-gradient(ellipse at 50% 30%, #000 40%, transparent 80%); pointer-events: none; z-index: 0;"></div>
+      <div style="position: absolute; top: 20%; left: 50%; transform: translateX(-50%); width: 600px; height: 480px; background: radial-gradient(circle, rgba(255,106,26,0.16), transparent 68%); pointer-events: none; z-index: 0;"></div>
+      <div style="position: absolute; top: 40%; left: 20%; width: 60%; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,106,26,0.6), transparent); animation: scanline 6s linear infinite;"></div>
 
-      <div style="position: relative; z-index: 1; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin: 28px 0 0;">
-        <span style="font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; font-size: 16px; color: #fff;">Vanilla.</span>
-        <span style="color: #4a453f;">/</span>
-        <span style="font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; font-size: 16px; color: #fff;">Less grind.</span>
-        <span style="color: #4a453f;">/</span>
-        <span style="font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; font-size: 16px; color: #ff6a1a; text-shadow: 0 0 16px rgba(255,106,26,0.5);">More Rust.</span>
-      </div>
-      <div style="position: relative; z-index: 1; display: flex; gap: 10px; flex-wrap: wrap; margin: 16px 0 0;">
+      <span style="position: relative; z-index: 1; display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border: 1px solid rgba(255,122,61,0.5); color: #ff8a52; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; font-size: 12px; margin-bottom: 22px;">
+        <span style="width: 6px; height: 6px; border-radius: 50%; background: #ff6a1a; box-shadow: 0 0 8px #ff6a1a; animation: iconPulse 1.6s ease-in-out infinite;"></span>
+        Weekly map wipes · Biweekly BP wipes · 2x gathering · Never pay-to-win
+      </span>
+
+      <h1 style="position: relative; z-index: 1; font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase; font-size: clamp(40px, 6.5vw, 72px); line-height: 1; margin: 0; color: #fff;">Untitled <span class="shimmer-text">RustX</span></h1>
+      <p style="position: relative; z-index: 1; font-size: 17px; line-height: 28px; max-width: 58ch; margin: 20px auto 0; color: #b9b3ab;">A vanilla-leaning PC Rust server with 2x gathering on wood, stone, and cloth — everything else stays vanilla. Fair progression built for new players and veterans alike.</p>
+
+      <div style="position: relative; z-index: 1; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin: 22px 0 0;">
         <span style="font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 12px; letter-spacing: 0.04em; color: #ff8a52; border: 1px solid rgba(255,106,26,0.4); background: rgba(255,106,26,0.08); padding: 6px 12px; box-shadow: 0 0 12px rgba(255,106,26,0.12);">2X WOOD</span>
         <span style="font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 12px; letter-spacing: 0.04em; color: #ff8a52; border: 1px solid rgba(255,106,26,0.4); background: rgba(255,106,26,0.08); padding: 6px 12px; box-shadow: 0 0 12px rgba(255,106,26,0.12);">2X STONE</span>
         <span style="font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 12px; letter-spacing: 0.04em; color: #ff8a52; border: 1px solid rgba(255,106,26,0.4); background: rgba(255,106,26,0.08); padding: 6px 12px; box-shadow: 0 0 12px rgba(255,106,26,0.12);">2X CLOTH</span>
         <span style="font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 12px; letter-spacing: 0.04em; color: #b0a99f; border: 1px solid rgba(255,255,255,0.15); padding: 6px 12px;">VANILLA LOOT</span>
       </div>
 
-      <div style="position: relative; z-index: 1; max-width: 58ch; margin: 26px 0 0; padding: 20px 24px; border-left: 3px solid #ff6a1a; background: linear-gradient(90deg, rgba(255,106,26,0.08), transparent 80%);">
-        <p style="font-size: 18px; line-height: 29px; margin: 0; color: #e9e7e3;">A <strong style="color: #fff;">brand new vanilla Rust community</strong> built for survivors. <strong style="color: #ff8a52;">2x gather rate</strong> on wood, stone, and cloth — everything else stock. Fair progression without the grind, designed for new players and veterans alike.</p>
-      </div>
-      <p style="position: relative; z-index: 1; font-size: 14.5px; line-height: 24px; max-width: 56ch; margin: 18px 0 0; color: #8f887f;">We're the mom-and-pop shop up against the Costcos of Rust — no marketing team, no big-budget ads, just a server built and moderated by someone who actually plays it. We're growing and looking for staff to help run it — <a href="https://discord.gg/M4rqjGpjyW" target="_blank" rel="noopener" style="color: #ff8a52;">apply in Discord</a>.</p>
-
-      <div style="position: relative; z-index: 1;" onMouseEnter="{{ openConnectPanel }}" onMouseLeave="{{ closeConnectPanel }}">
-      <div style="display: flex; gap: 14px; flex-wrap: wrap; margin-top: 32px; align-items: center;">
+      <div style="position: relative; z-index: 1; display: inline-flex; justify-content: center;" onMouseEnter="{{ openConnectPanel }}" onMouseLeave="{{ closeConnectPanel }}">
+      <div style="display: flex; flex-direction: column; align-items: center;">
+      <div style="display: flex; gap: 14px; flex-wrap: wrap; margin-top: 32px; align-items: center; justify-content: center;">
         <button type="button" class="btn-primary" style="font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; font-size: 15px; color: #0a0b0d; background: linear-gradient(135deg, #ff8a4c, #ff6a1a); border: none; padding: 16px 28px; cursor: pointer; clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px); box-shadow: 0 6px 24px rgba(255,106,26,0.4);">{{ connectPanelOpen }}</button>
         <a href="https://discord.gg/M4rqjGpjyW" target="_blank" rel="noopener" class="btn-outline" style="font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; font-size: 15px; color: #fff; border: 1px solid rgba(255,255,255,0.3); padding: 16px 28px; text-decoration: none;">Join Discord</a>
       </div>
 
       <div class="connect-panel" style="max-height: {{ connectPanelMaxHeight }}; opacity: {{ connectPanelOpacity }}; margin-top: {{ connectPanelMargin }};">
-        <div class="hud-panel" style="background: linear-gradient(180deg, rgba(255,106,26,0.06), rgba(10,11,13,0.9)); border: 1px solid rgba(255,122,61,0.35); padding: 22px 24px; max-width: 620px;">
+        <div class="hud-panel" style="background: linear-gradient(180deg, rgba(255,106,26,0.06), rgba(10,11,13,0.9)); border: 1px solid rgba(255,122,61,0.35); padding: 22px 24px; max-width: 620px; text-align: left;">
           <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
             <span style="width: 7px; height: 7px; border-radius: 50%; background: {{ statusDotColor }}; box-shadow: 0 0 8px {{ statusDotColor }}; display: inline-block; animation: hudPulse 1.6s ease-in-out infinite;"></span>
             <span style="font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; font-size: 11.5px; color: #ff8a52;">{{ serverStatusText }}</span>
@@ -297,6 +310,7 @@
         </div>
       </div>
       </div>
+      </div>
     </section>
 
     <div class="reveal" style="display: flex; align-items: center; gap: 18px; padding: 56px 0 8px;">
@@ -306,7 +320,7 @@
 
     <section id="quickstart" class="reveal" style="padding: 20px 0 56px;">
       <span style="display: block; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; font-size: 13px; color: #ff8a52; margin: 0 0 18px;">New here?</span>
-      <div class="reveal-stagger" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: rgba(255,255,255,0.08);">
+      <div class="reveal-stagger" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(165px, 1fr)); gap: 1px; background: rgba(255,255,255,0.08);">
         <div style="background: #0e0f11; padding: 24px 20px;">
           <span style="font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 30px; color: #ff6a1a;">01</span>
           <h3 style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 16px; margin: 10px 0 8px; color: #fff;">Connect</h3>
@@ -362,7 +376,7 @@
 
     <section id="tips" class="reveal" style="padding: 10px 0 56px;">
       <span style="display: block; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; font-size: 13px; color: #ff8a52; margin: 0 0 18px;">Rookie mistakes to skip</span>
-      <div class="reveal-stagger" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: rgba(255,255,255,0.08);">
+      <div class="reveal-stagger" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1px; background: rgba(255,255,255,0.08);">
         <div style="background: #0e0f11; padding: 20px 22px;">
           <p style="font-size: 14px; line-height: 22px; margin: 0; color: #b0a99f;"><strong style="color: #fff;">Building right at spawn.</strong> High traffic means high raid risk — walk a bit further out.</p>
         </div>
@@ -380,7 +394,7 @@
 
     <section id="rules" class="reveal" style="padding: 10px 0 56px;">
       <span style="display: block; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; font-size: 13px; color: #ff8a52; margin: 0 0 18px;">House rules</span>
-      <div class="reveal-stagger" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: rgba(255,255,255,0.08);">
+      <div class="reveal-stagger" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1px; background: rgba(255,255,255,0.08);">
         <div style="background: #0e0f11; padding: 26px 22px; border-top: 2px solid #ff6a1a;">
           <span style="font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; font-size: 12px; color: #ff8a52;">Zero tolerance</span>
           <h3 style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 20px; margin: 8px 0 10px; color: #fff;">Cheating &amp; exploits</h3>
@@ -412,7 +426,7 @@
 
     <section id="specs" class="reveal" style="padding: 10px 0 56px;">
       <span style="display: block; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; font-size: 13px; color: #ff8a52; margin: 0 0 18px;">Server specs</span>
-      <div class="reveal-stagger" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;">
+      <div class="reveal-stagger specs-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;">
         <div style="background: #0e0f11; border: 1px solid rgba(255,255,255,0.08); padding: 20px; position: relative; overflow: hidden;">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ff6a1a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9z"></path></svg>
           <p style="font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 22px; margin: 14px 0 2px; color: #fff; text-shadow: 0 0 18px rgba(255,106,26,0.35);">2X</p>
@@ -493,7 +507,7 @@
 
     <section id="changelog" class="reveal" style="padding: 10px 0 56px;">
       <span style="display: block; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; font-size: 13px; color: #ff8a52; margin: 0 0 18px;">What's new this wipe</span>
-      <div class="reveal-stagger" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;">
+      <div class="reveal-stagger" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 18px;">
         <div style="background: linear-gradient(160deg, #14151a, #0e0f11); border: 1px solid rgba(255,122,61,0.3); border-top: 3px solid #ff6a1a; padding: 26px 22px; position: relative; overflow: hidden;">
           <div style="position: absolute; top: -30px; right: -30px; width: 100px; height: 100px; background: radial-gradient(circle, rgba(255,106,26,0.2), transparent 70%);"></div>
           <span style="display: inline-block; font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.05em; font-size: 12px; color: #0a0b0d; background: #ff6a1a; padding: 4px 10px; box-shadow: 0 0 14px rgba(255,106,26,0.5);">NEW</span>
@@ -565,7 +579,7 @@
 
     <section id="team" class="reveal" style="padding: 10px 0 56px;">
       <span style="display: block; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; font-size: 13px; color: #ff8a52; margin: 0 0 18px;">Who's running this</span>
-      <div class="reveal-stagger" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(255,255,255,0.08);">
+      <div class="reveal-stagger" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1px; background: rgba(255,255,255,0.08);">
         <div style="background: #0e0f11; padding: 26px 22px; border-top: 2px solid #ff6a1a; display: flex; flex-direction: column; align-items: center; text-align: center;">
           <image-slot id="team-owner-photo" shape="circle" placeholder="Owner photo" style="width: 84px; height: 84px;" src="assets/image-slots/team-owner-photo.webp"></image-slot>
           <h3 style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 18px; margin: 14px 0 4px; color: #fff;">joeboetheasian</h3>
@@ -614,6 +628,62 @@
         </div>
       </div>
       <a href="https://discord.gg/M4rqjGpjyW" target="_blank" rel="noopener" class="btn-outline" style="display: inline-block; margin-top: 20px; font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; font-size: 13px; color: #fff; border: 1px solid rgba(255,255,255,0.3); padding: 12px 22px; text-decoration: none;">Apply for staff</a>
+    </section>
+
+    <section id="live-chat" class="reveal" style="padding: 10px 0 56px;">
+      <span style="display: block; font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; font-size: 13px; color: #ff8a52; margin: 0 0 8px;">Chat with the server</span>
+      <h2 class="fpv-glitch-title" style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase; font-size: clamp(24px, 3.4vw, 38px); margin: 0 0 18px; color: #fff; text-shadow: 0 0 24px rgba(255,106,26,0.5); letter-spacing: -0.01em;">Tune into the island. Live.</h2>
+      <div style="position: relative; aspect-ratio: 16/9; background: #05060a; border: 1px solid rgba(255,90,20,0.5); overflow: hidden; box-shadow: 0 0 70px rgba(255,90,20,0.22), 0 0 0 1px rgba(0,0,0,0.6), inset 0 0 100px rgba(0,0,0,0.55);">
+        <div style="position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(35,30,25,0.5) 0%, rgba(0,0,0,0.88) 100%); pointer-events: none;"></div>
+        <div style="position: absolute; inset: 0; background-image: repeating-linear-gradient(rgba(0,0,0,0.14) 0px, transparent 1px, transparent 3px); pointer-events: none; mix-blend-mode: overlay;"></div>
+        <div style="position: absolute; inset: -2px; border: 2px solid transparent; background: linear-gradient(90deg, rgba(255,50,50,0.25), transparent 40%, transparent 60%, rgba(50,150,255,0.25)) border-box; -webkit-mask: linear-gradient(#000 0 0) padding-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; opacity: 0.5; pointer-events: none; animation: fpvChroma 6s ease-in-out infinite;"></div>
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent); animation: fpvScan 4.5s linear infinite; pointer-events: none; box-shadow: 0 0 12px rgba(255,255,255,0.4);"></div>
+
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 220px; height: 220px; border: 1px solid rgba(255,138,82,0.25); border-radius: 50%; pointer-events: none;"></div>
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 140px; height: 140px; border: 1px solid rgba(255,138,82,0.2); border-radius: 50%; pointer-events: none;"></div>
+        <div style="position: absolute; top: 50%; left: 50%; width: 220px; height: 220px; margin-top: -110px; margin-left: -110px; border-radius: 50%; background: conic-gradient(from 0deg, rgba(255,138,82,0.5), transparent 30%); animation: fpvRadarSweep 3.2s linear infinite; pointer-events: none; opacity: 0.6;"></div>
+
+        <div style="position: absolute; top: 18px; left: 18px; width: 34px; height: 34px; border-top: 2px solid rgba(255,138,82,0.95); border-left: 2px solid rgba(255,138,82,0.95); box-shadow: -2px -2px 10px rgba(255,106,26,0.4); pointer-events: none;"></div>
+        <div style="position: absolute; top: 18px; right: 18px; width: 34px; height: 34px; border-top: 2px solid rgba(255,138,82,0.95); border-right: 2px solid rgba(255,138,82,0.95); box-shadow: 2px -2px 10px rgba(255,106,26,0.4); pointer-events: none;"></div>
+        <div style="position: absolute; bottom: 18px; left: 18px; width: 34px; height: 34px; border-bottom: 2px solid rgba(255,138,82,0.95); border-left: 2px solid rgba(255,138,82,0.95); box-shadow: -2px 2px 10px rgba(255,106,26,0.4); pointer-events: none;"></div>
+        <div style="position: absolute; bottom: 18px; right: 18px; width: 34px; height: 34px; border-bottom: 2px solid rgba(255,138,82,0.95); border-right: 2px solid rgba(255,138,82,0.95); box-shadow: 2px 2px 10px rgba(255,106,26,0.4); pointer-events: none;"></div>
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(45deg); width: 22px; height: 22px; pointer-events: none; animation: fpvCrosshairPulse 2s ease-in-out infinite;">
+          <div style="position: absolute; top: 50%; left: 0; width: 100%; height: 1.5px; background: rgba(255,255,255,0.8); transform: translateY(-50%); box-shadow: 0 0 6px rgba(255,255,255,0.6);"></div>
+          <div style="position: absolute; left: 50%; top: 0; width: 1.5px; height: 100%; background: rgba(255,255,255,0.8); transform: translateX(-50%); box-shadow: 0 0 6px rgba(255,255,255,0.6);"></div>
+        </div>
+
+        <div style="position: absolute; top: 14px; left: 18px; display: flex; align-items: center; gap: 7px;">
+          <span style="width: 8px; height: 8px; border-radius: 50%; background: #ff3b3b; box-shadow: 0 0 10px #ff3b3b; animation: fpvRecPulse 1.4s ease-in-out infinite;"></span>
+          <span style="font-family: 'Consolas', 'Courier New', monospace; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; font-size: 11px; color: #ff5a5a; text-shadow: 0 0 8px rgba(255,60,60,0.8);">● LIVE</span>
+          <span style="display: flex; align-items: flex-end; gap: 1.5px; margin-left: 4px;">
+            <span style="width: 2.5px; height: 5px; background: rgba(120,255,150,0.8); animation: fpvSignal 1.2s ease-in-out infinite;"></span>
+            <span style="width: 2.5px; height: 8px; background: rgba(120,255,150,0.8); animation: fpvSignal 1.2s ease-in-out infinite 0.15s;"></span>
+            <span style="width: 2.5px; height: 11px; background: rgba(120,255,150,0.8); animation: fpvSignal 1.2s ease-in-out infinite 0.3s;"></span>
+          </span>
+        </div>
+        <div style="position: absolute; top: 14px; left: 50%; transform: translateX(-50%); font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; font-size: 10px; color: rgba(255,255,255,0.55); text-shadow: 0 1px 3px rgba(0,0,0,0.8);">Read-only for game chat · post as "Website Viewer"</div>
+        <div style="position: absolute; top: 14px; right: 18px; font-family: 'Consolas', 'Courier New', monospace; font-size: 10px; letter-spacing: 0.06em; color: rgba(255,255,255,0.5); text-shadow: 0 1px 3px rgba(0,0,0,0.8);">CH.04 · FOV 90 · N 24°</div>
+
+        <div style="position: absolute; bottom: 78px; left: 18px; width: min(78%, 460px); max-height: 150px; overflow-y: auto; display: flex; flex-direction: column-reverse; gap: 3px;" id="liveChatFeed">
+          <sc-if value="{{ chatEmpty }}" hint-placeholder-val="{{ false }}">
+            <p style="margin: 0; font-family: 'Consolas', 'Courier New', monospace; font-size: 13px; line-height: 18px; color: rgba(255,255,255,0.55); text-shadow: 0 1px 3px rgba(0,0,0,0.9);">No messages yet — be the first to say hi.</p>
+          </sc-if>
+          <sc-for list="{{ chatMessagesReversed }}" as="msg" hint-placeholder-count="4">
+            <div style="display: flex; align-items: center; gap: 6px; background: rgba(0,0,0,0.45); padding: 2px 8px 2px 4px; width: fit-content; max-width: 100%;">
+              <span style="width: 14px; height: 14px; flex-shrink: 0; background: {{ msg.color }}; border-radius: 2px; box-shadow: 0 0 4px rgba(0,0,0,0.6);"></span>
+              <p style="margin: 0; font-family: 'Consolas', 'Courier New', monospace; font-size: 13px; line-height: 18px; color: #eee; text-shadow: 0 1px 3px rgba(0,0,0,0.9); white-space: normal; word-break: break-word;"><span style="font-weight: 700; color: {{ msg.color }};">{{ msg.sender }}</span><span style="color: rgba(255,255,255,0.5);"> : </span>{{ msg.text }}</p>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="position: absolute; bottom: 16px; left: 18px; right: 18px; display: flex; gap: 8px; align-items: center;">
+          <span style="font-family: 'Consolas', 'Courier New', monospace; font-size: 13px; color: rgba(255,138,82,0.9); text-shadow: 0 0 6px rgba(255,106,26,0.7);">&gt;</span>
+          <input type="text" value="{{ chatDraft }}" onChange="{{ setChatDraft }}" maxlength="140" placeholder="Press here to chat..." style="flex: 1; background: rgba(0,0,0,0.5); border: 1px solid rgba(255,138,82,0.4); color: #fff; padding: 8px 10px; font-size: 13px; font-family: 'Consolas', 'Courier New', monospace; backdrop-filter: blur(2px); box-shadow: 0 0 12px rgba(255,90,20,0.15);">
+          <button type="button" onClick="{{ sendChat }}" style="font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; font-size: 12px; color: #0a0b0d; background: linear-gradient(135deg, #ff8a4c, #ff6a1a); border: none; padding: 8px 18px; cursor: pointer; box-shadow: 0 0 14px rgba(255,106,26,0.5);">{{ chatSendLabel }}</button>
+        </div>
+        <div style="position: absolute; bottom: 2px; right: 18px; font-size: 10px; color: rgba(255,255,255,0.4); text-shadow: 0 1px 3px rgba(0,0,0,0.9);">{{ chatCharsLeft }}/140 · {{ chatCooldownLabel }}</div>
+      </div>
+      <p style="font-size: 11px; margin: 10px 0 0; color: #6b655e;">No slurs, cursing, links, images/videos, @ mentions, or spam. Text only. One message per minute.</p>
     </section>
 
     <section id="socials" class="reveal" style="padding: 10px 0 56px;">
@@ -669,7 +739,7 @@
     </section>
 
     <section id="milestones" class="reveal" style="padding: 20px 0 56px;">
-      <div class="reveal-stagger" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(255,122,61,0.2); border: 1px solid rgba(255,122,61,0.2);">
+      <div class="reveal-stagger" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1px; background: rgba(255,122,61,0.2); border: 1px solid rgba(255,122,61,0.2);">
         <div style="background: rgba(10,11,13,0.85); padding: 24px 20px; text-align: center;">
           <p style="font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 34px; margin: 0; color: #ff6a1a;">1</p>
           <p style="font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #8f887f; margin: 8px 0 0;">Server, run by one team</p>
@@ -692,7 +762,7 @@
 
     <section id="store" class="reveal" style="padding: 10px 0 56px;">
       <span style="display: block; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; font-size: 13px; color: #ff8a52; margin: 0 0 18px;">Support the server</span>
-      <div class="reveal-stagger" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(255,255,255,0.08);">
+      <div class="reveal-stagger" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1px; background: rgba(255,255,255,0.08);">
         <div style="background: #0e0f11; padding: 28px 22px; border-top: 2px solid rgba(255,255,255,0.25); display: flex; flex-direction: column;">
           <span style="font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; font-size: 12px; color: #8f887f;">Tier I</span>
           <h3 style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 22px; margin: 8px 0 10px; color: #fff;">Supporter</h3>
@@ -749,7 +819,7 @@
         <span style="font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #ff8a52;">Every wipe, guaranteed</span>
       </div>
       <span style="display: block; font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase; font-size: clamp(30px, 4vw, 42px); margin: 0 0 24px; color: #fff; text-shadow: 0 0 24px rgba(255,106,26,0.4); letter-spacing: 0.01em;">Upcoming events</span>
-      <div class="reveal-stagger" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px;">
+      <div class="reveal-stagger" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 22px;">
         <div class="extra-card" style="background: linear-gradient(160deg, #17181d, #0e0f11); border: 1px solid rgba(255,106,26,0.35); border-top: 4px solid #ff6a1a; padding: 30px 26px; position: relative; overflow: hidden; box-shadow: 0 0 30px rgba(255,106,26,0.1);">
           <div style="position: absolute; top: -40px; right: -40px; width: 130px; height: 130px; background: radial-gradient(circle, rgba(255,106,26,0.22), transparent 70%);"></div>
           <div style="width: 52px; height: 52px; display: flex; align-items: center; justify-content: center; background: rgba(255,106,26,0.12); border: 1px solid rgba(255,106,26,0.4); margin-bottom: 16px;">
@@ -787,8 +857,8 @@
       <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 36px; align-items: start;">
         <div>
           <p style="font-size: 15.5px; line-height: 27px; margin: 0 0 16px; color: #b0a99f;">Untitled RustX is a <strong style="color: #fff;">vanilla Rust server</strong> with a <strong style="color: #fff;">2x gather rate</strong> on wood, stone, and cloth — every other resource, loot table, and crafting cost stays at standard Facepunch rates. If you're searching for a <strong style="color: #fff;">PC Rust server</strong> that isn't a bloated 5x or 10x server, this is built for you: fast enough to skip the early grind, slow enough that loot and raiding still feel earned.</p>
-          <p style="font-size: 15.5px; line-height: 27px; margin: 0 0 16px; color: #b0a99f;">The server runs <strong style="color: #fff;">weekly wipes every Thursday at 1PM CDT</strong>, resetting the map and blueprints so every player — new or returning — starts on equal footing. No premade mega-bases, no wipe-day advantage for grinders who logged in early during a previous cycle.</p>
-          <p style="font-size: 15.5px; line-height: 27px; margin: 0; color: #b0a99f;">Whether you're searching "2x rust server," "rust server 2x," "vanilla rust server," or just "rust server" and want something small, fair, and actively moderated — Untitled RustX is a community-run alternative to the big-name Rust servers, built and maintained by a small team who actually plays on it.</p>
+          <p style="font-size: 15.5px; line-height: 27px; margin: 0 0 16px; color: #b0a99f;">The server runs <strong style="color: #fff;">weekly map wipes every Thursday at 1PM CDT</strong>, with <strong style="color: #fff;">blueprints resetting biweekly</strong>, so every player — new or returning — starts on equal footing. No premade mega-bases, no wipe-day advantage for grinders who logged in early during a previous cycle.</p>
+          <p style="font-size: 15.5px; line-height: 27px; margin: 0; color: #b0a99f;">Whether you're searching "2x rust server," "rust server 2x," "vanilla rust server," or just "rust server" and want something small, fair, and actively moderated — Untitled RustX is an alternative to the big-name Rust servers, built and maintained by a small team who actually plays on it.</p>
         </div>
         <div style="background: linear-gradient(160deg, #14151a, #0e0f11); border: 1px solid rgba(255,122,61,0.3); border-top: 3px solid #ff6a1a; padding: 28px 26px; position: relative; overflow: hidden;">
           <div style="position: absolute; top: -40px; right: -40px; width: 130px; height: 130px; background: radial-gradient(circle, rgba(255,106,26,0.2), transparent 70%);"></div>
@@ -831,18 +901,26 @@
     </section>
 
 
-    <footer style="padding: 24px 0; font-size: 13px; border-top: 1px solid rgba(255,255,255,0.08); color: #6b655e;">Untitled RustX · 157.85.93.170:28015 · Wipes every Thursday, 1PM CDT · Site by joeboetheasian</footer>
+    <footer style="padding: 24px 0; font-size: 13px; border-top: 1px solid rgba(255,255,255,0.08); color: #6b655e;">Untitled RustX · 157.85.93.170:28015 · Weekly map wipes, biweekly BP wipes · Site by joeboetheasian</footer>
   </div>
 </div>
 
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  state = { activeDropdown: null, spotlightMuted: true, copyLabel: 'Copy IP', countdown: '—', scrollY: 0, onlinePlayers: null, maxPlayers: null, live: false, draftStars: 0, draftText: '', reviews: [], submitLabel: 'Submit rating', navConnectOpen: false, connectPanelOpen: true, openFaq: null, mobileMenuOpen: false, connectPanelOpen: false };
+  state = { activeDropdown: null, spotlightMuted: true, copyLabel: 'Copy IP', countdown: '—', scrollY: 0, onlinePlayers: null, maxPlayers: null, live: false, draftStars: 0, draftText: '', reviews: [], submitLabel: 'Submit rating', chatMessages: [], chatDraft: '', chatSendLabel: 'Send', chatCooldownUntil: 0, navConnectOpen: false, connectPanelOpen: true, openFaq: null, mobileMenuOpen: false, connectPanelOpen: false };
 
   componentDidMount() {
     this.tick();
     this._t = setInterval(() => this.tick(), 1000);
+    if (!window.location.hash) {
+      window.scrollTo(0, 0);
+    } else {
+      setTimeout(() => {
+        const el = document.querySelector(window.location.hash);
+        if (el) el.scrollIntoView();
+      }, 50);
+    }
     this._onScroll = () => this.setState({ scrollY: window.scrollY || 0 });
     window.addEventListener('scroll', this._onScroll, { passive: true });
     this.fetchStatus();
@@ -854,6 +932,13 @@ class Component extends DCLogic {
       document.querySelectorAll('.reveal, .reveal-stagger').forEach((el) => this._observer.observe(el));
     }, 0);
     this.loadReviews();
+    this._chatClientId = localStorage.getItem('urx_chat_client_id') || ('c' + Math.random().toString(36).slice(2) + Date.now());
+    localStorage.setItem('urx_chat_client_id', this._chatClientId);
+    const savedCooldown = parseInt(localStorage.getItem('urx_chat_cooldown_until') || '0', 10);
+    if (savedCooldown > Date.now()) this.setState({ chatCooldownUntil: savedCooldown });
+    this.fetchChat();
+    this._chatT = setInterval(() => this.fetchChat(), 4000);
+    this._chatTickT = setInterval(() => this.forceUpdate(), 1000);
     this._spotlightVideo = document.getElementById('spotlightVideo');
     if (this._spotlightVideo) {
       this._spotlightVideo.addEventListener('ended', () => {
@@ -895,6 +980,48 @@ class Component extends DCLogic {
     localStorage.setItem('urx_my_reviews', JSON.stringify(mine));
     this.setState({ reviews: [...mine, ...this.seedReviews()] });
   }
+  async fetchChat() {
+    try {
+      const res = await fetch('/api/chat/read');
+      if (!res.ok) return;
+      const json = await res.json();
+      this.setState({ chatMessages: (json.messages || []).map((m) => ({
+        sender: m.sender,
+        text: m.message,
+        color: m.origin === 'website' ? '#ff8a52' : '#fff',
+      })) });
+    } catch (e) {}
+  }
+  setChatDraft(e) {
+    this.setState({ chatDraft: e.target.value.slice(0, 140) });
+  }
+  async sendChat() {
+    const text = this.state.chatDraft.trim();
+    if (!text) return;
+    if (Date.now() < this.state.chatCooldownUntil) return;
+    if (/https?:\/\/|www\.|\.(com|net|org|gg|io|co)\b/i.test(text)) { alert('No links allowed.'); return; }
+    if (/@/.test(text)) { alert('No @ mentions allowed.'); return; }
+    this.setState({ chatSendLabel: 'Sending...' });
+    try {
+      const res = await fetch('/api/chat/send', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ clientId: this._chatClientId, message: text }),
+      });
+      const json = await res.json();
+      if (!res.ok) {
+        alert(json.error || 'Message rejected');
+        this.setState({ chatSendLabel: 'Send' });
+        return;
+      }
+      const until = Date.now() + 60000;
+      localStorage.setItem('urx_chat_cooldown_until', String(until));
+      this.setState({ chatDraft: '', chatSendLabel: 'Send', chatCooldownUntil: until });
+      this.fetchChat();
+    } catch (e) {
+      this.setState({ chatSendLabel: 'Send' });
+    }
+  }
   setStar(n) {
     this.setState({ draftStars: n });
   }
@@ -930,6 +1057,8 @@ class Component extends DCLogic {
   componentWillUnmount() {
     clearInterval(this._t);
     clearInterval(this._statusT);
+    clearInterval(this._chatT);
+    clearInterval(this._chatTickT);
     window.removeEventListener('scroll', this._onScroll);
     this._observer?.disconnect();
   }
@@ -955,7 +1084,7 @@ class Component extends DCLogic {
   faqData() {
     return [
       { q: 'How big is the map, and does group size matter?', a: 'Standard procedural map sized for our population, with a fair group limit so solo and duo players aren\'t steamrolled by mega-groups. Check Discord for the current cap.' },
-      { q: 'Do blueprints wipe every week too?', a: 'Yes — blueprints wipe alongside the map every Thursday, so everyone starts from scratch. No permanent BP progression carries between wipes.' },
+      { q: 'Do blueprints wipe every week too?', a: 'No — blueprints wipe biweekly (every other Thursday), while the map itself resets every week.' },
       { q: 'Is offline raiding allowed?', a: 'Yes, offline raiding is part of vanilla Rust and allowed here. Build accordingly — a strong base matters more than being online.' },
       { q: 'What happens if I get raided as a new player?', a: 'Raiding new players is fair game, but repeatedly camping someone right after they lose everything is not — that crosses into harassment and gets moderated.' },
       { q: 'Can I play solo, or do I need a group?', a: 'Solo and duo play is fully supported. The community and Discord are active if you want to team up, but it\'s never required.' },
@@ -998,7 +1127,17 @@ class Component extends DCLogic {
   }
   renderVals() {
     if (!this._sponsorsFetched) { this._sponsorsFetched = true; this.fetchSponsors(); this._sponsorsT = setInterval(() => this.fetchSponsors(), 120000); }
+    const cooldownMs = Math.max(0, this.state.chatCooldownUntil - Date.now());
     return {
+      chatMessages: this.state.chatMessages,
+      chatMessagesReversed: [...this.state.chatMessages].reverse(),
+      chatEmpty: this.state.chatMessages.length === 0,
+      chatDraft: this.state.chatDraft,
+      setChatDraft: (e) => this.setChatDraft(e),
+      chatCharsLeft: this.state.chatDraft.length,
+      sendChat: () => this.sendChat(),
+      chatSendLabel: cooldownMs > 0 ? Math.ceil(cooldownMs / 1000) + 's' : this.state.chatSendLabel,
+      chatCooldownLabel: cooldownMs > 0 ? 'Wait ' + Math.ceil(cooldownMs / 1000) + 's' : 'Ready',
       sponsorTickerText: (this.state.sponsors && this.state.sponsors.length) ? 'Shout Out To Our Donors: ' + this.state.sponsors.join(' \u00b7 ') : 'Be the first name on the wall \u2014 sponsor the wipe in the Store.',
       copyLabel: this.state.copyLabel,
       copyIp: () => this.copyIp(),
