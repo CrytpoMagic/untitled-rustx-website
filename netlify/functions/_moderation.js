@@ -10,7 +10,7 @@ function normalize(text) {
   let s = String(text || "").toLowerCase().normalize("NFKD").replace(/[\u0300-\u036f]/g, "");
   s = s.replace(/[@]/g, "a").replace(/[4]/g, "a");
   s = s.replace(/[3]/g, "e");
-  s = s.replace(/[1!|]/g, "i");
+  s = s.replace(/[1]/g, "i");
   s = s.replace(/[0]/g, "o");
   s = s.replace(/[$5]/g, "s");
   s = s.replace(/[7]/g, "t");
