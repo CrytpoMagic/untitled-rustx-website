@@ -1,58 +1,11 @@
 const { getSupabase, json } = require("./_supabase");
-
-const BLOCKED_WORDS = [
-  "nigger","nigga","niger","nigr","negro",
-  "faggot","fag","fags","faggy",
-  "retard","retarded","tard",
-  "spic","spick","wetback",
-  "chink","gook","jap",
-  "kike","kyke",
-  "tranny","shemale",
-  "cunt",
-  "queer",
-  "monkey","coon","porch monkey",
-  "beaner","towelhead","raghead","sandnigger",
-  "cracker honky","dyke",
-  "rapist","rape",
-  "kill yourself","kys"
-];
-
-function normalize(text) {
-  let s = text.toLowerCase();
-  s = s.replace(/[@]/g, "a").replace(/[4]/g, "a");
-  s = s.replace(/[3]/g, "e");
-  s = s.replace(/[1!|]/g, "i");
-  s = s.replace(/[0]/g, "o");
-  s = s.replace(/[$5]/g, "s");
-  s = s.replace(/[7+]/g, "t");
-  s = s.replace(/[^a-z0-9\s]/g, "");
-  s = s.replace(/(.)\1{2,}/g, "$1$1");
-  s = s.replace(/\s+/g, " ");
-  const collapsed = s.replace(/\s/g, "");
-  return { spaced: s, collapsed };
-}
-const MAX_LEN = 140;
-const COOLDOWN_MS = 60000;
+const { moderate, anonId, cfg } = require("./_moderation");
 
 function sanitize(raw) {
   let s = String(raw || "").trim();
   s = s.replace(/<[^>]*>/g, "");
-  s = s.slice(0, MAX_LEN);
+  s = s.slice(0, cfg.MAX_LEN);
   return s;
-}
-
-function violatesRules(text) {
-  const lower = text.toLowerCase();
-  if (/https?:\/\//i.test(text) || /\bwww\./i.test(text)) return "links are not allowed";
-  if (/@/.test(text)) return "@ mentions are not allowed";
-  if (/discord\.gg/i.test(text)) return "invite links are not allowed";
-  const { spaced, collapsed } = normalize(text);
-  for (const w of BLOCKED_WORDS) {
-    const wNorm = w.replace(/\s/g, "");
-    if (spaced.includes(w) || collapsed.includes(wNorm)) return "message blocked by chat filter";
-  }
-  if (!text) return "message is empty";
-  return null;
 }
 
 exports.handler = async function (event) {
@@ -60,28 +13,58 @@ exports.handler = async function (event) {
   let body;
   try { body = JSON.parse(event.body || "{}"); } catch (e) { return json(400, { error: "Invalid JSON" }); }
 
-  const clientId = String(body.clientId || "").slice(0, 80);
-  if (!clientId) return json(400, { error: "Missing clientId" });
-
   const message = sanitize(body.message);
-  const violation = violatesRules(message);
-  if (violation) return json(400, { error: violation });
+
+  // Basic non-content rules kept separate from the moderation module (not abuse categories).
+  if (/https?:\/\//i.test(message) || /\bwww\./i.test(message) || /discord\.gg/i.test(message)) {
+    return json(400, { error: "Links are not allowed." });
+  }
+  if (/@/.test(message)) return json(400, { error: "@ mentions are not allowed." });
+
+  const result = moderate(message);
+  if (result.blocked) {
+    return json(400, { error: "Message blocked by chat moderation." });
+  }
+
+  // Server-derived anonymous identity — cannot be spoofed via request body.
+  const id = anonId(event);
 
   try {
     const supabase = getSupabase();
 
     const { data: rl } = await supabase
       .from("chat_ratelimit")
-      .select("last_message_at")
-      .eq("client_id", clientId)
+      .select("last_message_at, recent_at, recent_count, last_message_text")
+      .eq("client_id", id)
       .maybeSingle();
 
-    if (rl && Date.now() - new Date(rl.last_message_at).getTime() < COOLDOWN_MS) {
-      const waitMs = COOLDOWN_MS - (Date.now() - new Date(rl.last_message_at).getTime());
-      return json(429, { error: "Slow down — 1 message per minute", retryAfterMs: waitMs });
+    const now = Date.now();
+
+    if (rl && now - new Date(rl.last_message_at).getTime() < cfg.COOLDOWN_MS) {
+      const waitMs = cfg.COOLDOWN_MS - (now - new Date(rl.last_message_at).getTime());
+      return json(429, { error: "You're sending messages too quickly. Try again shortly.", retryAfterMs: waitMs });
     }
 
-    await supabase.from("chat_ratelimit").upsert({ client_id: clientId, last_message_at: new Date().toISOString() });
+    if (rl && rl.last_message_text && now - new Date(rl.last_message_at).getTime() < cfg.DUPLICATE_WINDOW_MS) {
+      if (rl.last_message_text.trim().toLowerCase() === message.trim().toLowerCase()) {
+        return json(429, { error: "You're sending messages too quickly. Try again shortly." });
+      }
+    }
+
+    let recentAt = rl && rl.recent_at ? new Date(rl.recent_at).getTime() : 0;
+    let recentCount = rl && recentAt && now - recentAt < cfg.BURST_WINDOW_MS ? rl.recent_count || 0 : 0;
+    recentCount += 1;
+    if (recentCount > cfg.BURST_LIMIT) {
+      return json(429, { error: "You're sending messages too quickly. Try again shortly." });
+    }
+
+    await supabase.from("chat_ratelimit").upsert({
+      client_id: id,
+      last_message_at: new Date(now).toISOString(),
+      last_message_text: message,
+      recent_at: recentAt && now - recentAt < cfg.BURST_WINDOW_MS ? rl.recent_at : new Date(now).toISOString(),
+      recent_count: recentCount
+    });
 
     const { error } = await supabase.from("chat_messages").insert({
       sender: "Website Viewer",
