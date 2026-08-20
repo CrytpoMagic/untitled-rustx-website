@@ -442,6 +442,25 @@
   }
   window.urxAudio.playTransitionWhoosh = playTransitionWhoosh;
 
+  function playReelTick(progress) {
+    if (!isOn()) return;
+    try {
+      var localCtx = ctx || new (window.AudioContext || window.webkitAudioContext)();
+      var now = localCtx.currentTime;
+      var dest = master || localCtx.destination;
+      var p = typeof progress === 'number' ? progress : 0;
+      var o = localCtx.createOscillator(), g = localCtx.createGain();
+      o.type = 'square';
+      o.frequency.setValueAtTime(500 + p * 260, now);
+      g.gain.setValueAtTime(0.001, now);
+      g.gain.linearRampToValueAtTime(0.16 * (1 - p * 0.4), now + 0.005);
+      g.gain.exponentialRampToValueAtTime(0.001, now + 0.045);
+      o.connect(g); g.connect(dest);
+      o.start(now); o.stop(now + 0.05);
+    } catch (e) {}
+  }
+  window.urxAudio.playReelTick = playReelTick;
+
   function init() {
     if (!document.body) { document.addEventListener('DOMContentLoaded', init); return; }
     if (window.__urxAudioCtx) {

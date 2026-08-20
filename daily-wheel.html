@@ -8,6 +8,7 @@
 <meta name="robots" content="noindex, follow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="./ambient-audio.js"></script>
 <style>
   * { box-sizing: border-box; }
   @keyframes wheelDrift1 { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(40px,-30px) scale(1.08); } }
@@ -354,7 +355,7 @@
     const frameWidth = reelFrame.clientWidth;
     const finalOffset = -(targetIndex * ITEM_W - frameWidth / 2 + ITEM_W / 2);
     const startOffset = 0;
-    const duration = 4200;
+    const duration = 6500;
     const start = performance.now();
     reelTrack.style.transform = 'translateX(' + startOffset + 'px)';
     let lastTickIndex = -1;
@@ -364,7 +365,10 @@
       const offset = startOffset + eased * (finalOffset - startOffset);
       reelTrack.style.transform = 'translateX(' + offset + 'px)';
       const passedIndex = Math.round(-offset / ITEM_W);
-      if (passedIndex !== lastTickIndex) { lastTickIndex = passedIndex; }
+      if (passedIndex !== lastTickIndex) {
+        lastTickIndex = passedIndex;
+        if (window.urxAudio && window.urxAudio.playReelTick) window.urxAudio.playReelTick(t);
+      }
       if (t < 1) {
         requestAnimationFrame(frame);
       } else {
@@ -415,7 +419,7 @@
     const targetIndex = buildDemoReel(track, pick.name, pick.rarity);
     const frameWidth = frame.clientWidth;
     const finalOffset = -(targetIndex * ITEM_W - frameWidth / 2 + ITEM_W / 2);
-    const duration = 3200;
+    const duration = 5000;
     const start = performance.now();
     track.style.transform = 'translateX(0px)';
     function frame_(now) {
@@ -426,7 +430,7 @@
       else {
         nameEl.textContent = pick.name;
         resultEl.classList.add('show');
-        setTimeout(runDemoSpin, 3200);
+        setTimeout(runDemoSpin, 5000);
       }
     }
     requestAnimationFrame(frame_);
@@ -500,13 +504,13 @@
       const res = await fetch('/api/wheel/spin', { method: 'POST' });
       const data = await res.json();
       if (!res.ok) {
-        panel.innerHTML = '<p class="msg">' + escapeHtml(data.error || 'Something went wrong.') + (data.debug ? '<br><small style="opacity:.6">' + escapeHtml(data.debug) + '</small>' : '') + '</p>';
+        panel.innerHTML = '<p class="msg">' + escapeHtml(data.error || 'Something went wrong.') + '</p>';
         spinning = false;
         setTimeout(loadStatus, 1500);
         return;
       }
       if (data.warning) {
-        panel.innerHTML = '<p class="msg">' + escapeHtml(data.warning) + (data.debug ? '<br><small style="opacity:.6">' + escapeHtml(data.debug) + '</small>' : '') + '</p>';
+        panel.innerHTML = '<p class="msg">' + escapeHtml(data.warning) + '</p>';
         spinning = false;
         setTimeout(loadStatus, 2000);
         return;
