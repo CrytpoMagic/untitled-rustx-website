@@ -506,7 +506,7 @@
         return;
       }
       if (data.warning) {
-        panel.innerHTML = '<p class="msg">' + escapeHtml(data.warning) + '</p>';
+        panel.innerHTML = '<p class="msg">' + escapeHtml(data.warning) + (data.debug ? '<br><small style="opacity:.6">' + escapeHtml(data.debug) + '</small>' : '') + '</p>';
         spinning = false;
         setTimeout(loadStatus, 2000);
         return;
