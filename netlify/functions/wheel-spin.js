@@ -16,6 +16,12 @@ exports.handler = async function (event) {
   let supabase;
   try { supabase = getSupabase(); } catch (e) { return json(500, { error: "Server misconfigured." }); }
 
+  let keyRole = "unknown";
+  try {
+    const parts = (process.env.SUPABASE_SERVICE_ROLE_KEY || "").split(".");
+    if (parts[1]) keyRole = JSON.parse(Buffer.from(parts[1], "base64").toString("utf8")).role || "no-role-claim";
+  } catch (e) { keyRole = "decode-failed"; }
+
   const { data: cfgRow } = await supabase.from("wheel_config").select("value").eq("key", "enabled").maybeSingle();
   if (cfgRow && cfgRow.value === "false") {
     return json(503, { error: "The daily wheel is temporarily offline." });
@@ -64,7 +70,7 @@ exports.handler = async function (event) {
       ok: true,
       recovered: false,
       warning: "Your reward was already secured server-side. Refresh the page to view your result.",
-      debug: insertErr.message,
+      debug: insertErr.message + " | keyRole=" + keyRole,
     });
   }
 
