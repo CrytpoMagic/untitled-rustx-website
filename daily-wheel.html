@@ -500,7 +500,7 @@
       const res = await fetch('/api/wheel/spin', { method: 'POST' });
       const data = await res.json();
       if (!res.ok) {
-        panel.innerHTML = '<p class="msg">' + escapeHtml(data.error || 'Something went wrong.') + '</p>';
+        panel.innerHTML = '<p class="msg">' + escapeHtml(data.error || 'Something went wrong.') + (data.debug ? '<br><small style="opacity:.6">' + escapeHtml(data.debug) + '</small>' : '') + '</p>';
         spinning = false;
         setTimeout(loadStatus, 1500);
         return;
