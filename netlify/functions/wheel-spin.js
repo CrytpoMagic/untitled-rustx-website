@@ -28,7 +28,10 @@ exports.handler = async function (event) {
     p_steam_id: session.steamId,
     p_persona: session.personaName || null,
   });
-  if (claimErr) return json(500, { error: "Something went wrong. Your spin was NOT consumed. Please try again." });
+  if (claimErr) {
+    console.error("[wheel-spin] wheel_try_spin RPC error:", JSON.stringify(claimErr));
+    return json(500, { error: "Something went wrong. Your spin was NOT consumed. Please try again.", debug: claimErr.message });
+  }
 
   const claim = Array.isArray(claimRows) ? claimRows[0] : claimRows;
   if (!claim || !claim.eligible) {
