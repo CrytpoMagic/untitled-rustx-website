@@ -16,12 +16,6 @@ exports.handler = async function (event) {
   let supabase;
   try { supabase = getSupabase(); } catch (e) { return json(500, { error: "Server misconfigured." }); }
 
-  let keyRole = "unknown";
-  try {
-    const parts = (process.env.SUPABASE_SERVICE_ROLE_KEY || "").split(".");
-    if (parts[1]) keyRole = JSON.parse(Buffer.from(parts[1], "base64").toString("utf8")).role || "no-role-claim";
-  } catch (e) { keyRole = "decode-failed"; }
-
   const { data: cfgRow } = await supabase.from("wheel_config").select("value").eq("key", "enabled").maybeSingle();
   if (cfgRow && cfgRow.value === "false") {
     return json(503, { error: "The daily wheel is temporarily offline." });
@@ -34,10 +28,7 @@ exports.handler = async function (event) {
     p_steam_id: session.steamId,
     p_persona: session.personaName || null,
   });
-  if (claimErr) {
-    console.error("[wheel-spin] wheel_try_spin RPC error:", JSON.stringify(claimErr));
-    return json(500, { error: "Something went wrong. Your spin was NOT consumed. Please try again.", debug: claimErr.message });
-  }
+  if (claimErr) return json(500, { error: "Something went wrong. Your spin was NOT consumed. Please try again." });
 
   const claim = Array.isArray(claimRows) ? claimRows[0] : claimRows;
   if (!claim || !claim.eligible) {
@@ -62,7 +53,6 @@ exports.handler = async function (event) {
     .single();
 
   if (insertErr) {
-    console.error("[wheel-spin] wheel_spins insert error:", JSON.stringify(insertErr));
     // Eligibility was already atomically claimed inside Postgres above — the win is
     // real and can't be replayed as a second spin. Surfacing a "secured" message
     // rather than a raw error keeps the source of truth on the backend, per spec.
@@ -70,7 +60,6 @@ exports.handler = async function (event) {
       ok: true,
       recovered: false,
       warning: "Your reward was already secured server-side. Refresh the page to view your result.",
-      debug: insertErr.message + " | keyRole=" + keyRole,
     });
   }
 
