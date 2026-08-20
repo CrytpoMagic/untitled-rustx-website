@@ -69,6 +69,30 @@
   force = true
 
 [[redirects]]
+  from = "/supabase/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/api/wheel/steam-login"
+  to = "/.netlify/functions/wheel-steam-login"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/wheel/status"
+  to = "/.netlify/functions/wheel-status"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/wheel/spin"
+  to = "/.netlify/functions/wheel-spin"
+  status = 200
+  force = true
+
+[[redirects]]
   from = "/uploads/*"
   to = "/404.html"
   status = 404

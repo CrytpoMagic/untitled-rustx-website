@@ -152,4 +152,3 @@ function anonId(event) {
 }
 
 module.exports = { moderate, anonId, normalize, cfg };
-

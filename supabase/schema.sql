@@ -106,8 +106,51 @@ alter table public.chat_messages enable row level security;
 
 create table if not exists public.chat_ratelimit (
   client_id text primary key,
-  last_message_at timestamptz not null default now()
+  last_message_at timestamptz not null default now(),
+  last_message_text text null,
+  recent_at timestamptz null,
+  recent_count integer not null default 0
 );
 
 alter table public.chat_ratelimit enable row level security;
+
+-- Migration for existing databases created before moderation upgrade:
+-- alter table public.chat_ratelimit add column if not exists last_message_text text;
+-- alter table public.chat_ratelimit add column if not exists recent_at timestamptz;
+-- alter table public.chat_ratelimit add column if not exists recent_count integer not null default 0;
+
+create table if not exists public.chat_access_codes (
+  code text primary key,
+  transaction_id text not null unique,
+  created_at timestamptz not null default now(),
+  expires_at timestamptz not null,
+  active boolean not null default true
+);
+
+create index if not exists chat_access_codes_expiry_idx
+  on public.chat_access_codes (active, expires_at);
+
+alter table public.chat_access_codes enable row level security;
+
+create table if not exists public.chat_bans (
+  client_id text primary key,
+  reason text null,
+  violation_count integer not null default 1,
+  banned_at timestamptz not null default now(),
+  banned_until timestamptz null -- null = permanent
+);
+
+alter table public.chat_bans enable row level security;
+
+create table if not exists public.chat_violations (
+  id bigint generated always as identity primary key,
+  client_id text not null,
+  category text not null,
+  created_at timestamptz not null default now()
+);
+
+create index if not exists chat_violations_client_idx
+  on public.chat_violations (client_id, created_at desc);
+
+alter table public.chat_violations enable row level security;
 

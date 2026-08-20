@@ -216,7 +216,7 @@
   <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,11,13,0) 0%, rgba(10,11,13,0.4) 60%, #0a0b0d 100%);"></div>
 </div>
 
-<div style="position: relative; z-index: 1; font-family: 'Inter', system-ui, sans-serif; color: #e9e7e3; min-height: 100vh;">
+<div style="position: relative; z-index: 1; font-family: 'Inter', system-ui, sans-serif; color: #e9e7e3; min-height: 100vh; min-height: 100dvh;">
 
     <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; background: #0e0f11; border-bottom: 1px solid rgba(255,122,61,0.25); padding: 8px 0;">
     <div style="flex: 1; overflow: hidden;">
@@ -244,7 +244,8 @@
               <a href="./FAQ.dc.html" style="display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none;">FAQ</a>
             </div>
           </div>
-          <a href="./index.html#live-chat" class="nav-tab" style="animation: signFlicker 3.6s linear infinite; animation-delay: 0.9s; text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 14px rgba(255,138,82,0.9), 0 0 26px rgba(255,106,26,0.7);">Live Chat</a>
+          <a href="./LiveChat.dc.html" class="nav-tab" style="animation: signFlicker 3.6s linear infinite; animation-delay: 0.9s; text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 14px rgba(255,138,82,0.9), 0 0 26px rgba(255,106,26,0.7);">Live Chat</a>
+          <a href="./Community.dc.html" class="nav-tab" style="animation: signFlicker 3.3s linear infinite; animation-delay: 1.2s; text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 14px rgba(255,138,82,0.9), 0 0 26px rgba(255,106,26,0.7);">Community</a>
           <div class="{{ navConnectWrapClass }}" onMouseEnter="{{ openNavConnect }}" onMouseLeave="{{ closeNavConnect }}">
             <button type="button" class="btn-connect" style="font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; font-size: 12.5px; color: #0a0b0d; background: linear-gradient(135deg, #ff8a4c, #ff6a1a); border: 1px solid rgba(255,180,130,0.5); height: 38px; padding: 0 18px; display: inline-flex; align-items: center; cursor: pointer; clip-path: polygon(7px 0, 100% 0, 100% calc(100% - 7px), calc(100% - 7px) 100%, 0 100%, 0 7px); box-shadow: 0 2px 8px rgba(255,106,26,0.3);">Connect Now</button>
             <div class="nav-connect-dropdown hud-panel" style="width: 340px; background: linear-gradient(180deg, rgba(255,106,26,0.08), rgba(10,11,13,0.97)); border: 1px solid rgba(255,122,61,0.35); padding: 18px 20px; box-shadow: 0 16px 40px rgba(0,0,0,0.5);">
@@ -279,6 +280,7 @@
           <a href="./Leaderboards.dc.html" class="nav-tab" style="animation: signFlicker 3.6s linear infinite; animation-delay: 0.9s; text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 14px rgba(255,138,82,0.9), 0 0 26px rgba(255,106,26,0.7);">Leaderboards</a>
           <a href="./FAQ.dc.html" class="nav-tab" style="animation: signFlicker 3.1s linear infinite; animation-delay: 1.6s; text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 14px rgba(255,138,82,0.9), 0 0 26px rgba(255,106,26,0.7);">FAQs</a>
           <a href="https://discord.gg/M4rqjGpjyW" target="_blank" rel="noopener" class="nav-tab" style="animation: signFlicker 2.6s linear infinite; animation-delay: 0.3s; text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 14px rgba(255,138,82,0.9), 0 0 26px rgba(255,106,26,0.7);">Discord</a>
+          <a href="./daily-wheel.html" class="nav-tab" style="animation: signFlicker 3.3s linear infinite; animation-delay: 1.2s; text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 14px rgba(255,138,82,0.9), 0 0 26px rgba(255,106,26,0.7);">Wheel</a>
           <div class="{{ storeWrapClass }}" onMouseEnter="{{ openStoreDrop }}" onMouseLeave="{{ closeDrop }}">
             <a href="./Store.dc.html" class="nav-tab" style="animation: signFlicker 2.9s linear infinite; animation-delay: 1.3s; text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 14px rgba(255,138,82,0.9), 0 0 26px rgba(255,106,26,0.7);">Store</a>
             <div class="nav-catalog-dropdown" style="background: #15161a; border: 1px solid rgba(255,106,26,0.35); box-shadow: 0 12px 30px rgba(0,0,0,0.5); min-width: 200px; padding: 8px;">
@@ -305,7 +307,9 @@
         <a href="./index.html" class="nav-tab nav-tab-mobile active" style="animation: signFlicker 3s linear infinite; animation-delay: 0s; text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 14px rgba(255,138,82,0.9), 0 0 26px rgba(255,106,26,0.7);">Home</a>
         <a href="./Rules.dc.html" class="nav-tab nav-tab-mobile" style="animation: signFlicker 3.4s linear infinite; animation-delay: 0.6s; text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 14px rgba(255,138,82,0.9), 0 0 26px rgba(255,106,26,0.7);">Rules</a>
         <a href="./Store.dc.html" class="nav-tab nav-tab-mobile" style="animation: signFlicker 2.8s linear infinite; animation-delay: 1.1s; text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 14px rgba(255,138,82,0.9), 0 0 26px rgba(255,106,26,0.7);">Store</a>
-        <a href="./index.html#live-chat" class="nav-tab nav-tab-mobile">Live Chat</a>
+        <a href="./LiveChat.dc.html" class="nav-tab nav-tab-mobile">Live Chat</a>
+        <a href="./Community.dc.html" class="nav-tab nav-tab-mobile">Community</a>
+        <a href="./daily-wheel.html" class="nav-tab nav-tab-mobile">Wheel</a>
         <a href="./Leaderboards.dc.html" class="nav-tab nav-tab-mobile">Leaderboards</a>
         <a href="./FAQ.dc.html" class="nav-tab nav-tab-mobile" style="animation: signFlicker 3.1s linear infinite; animation-delay: 1.6s; text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 14px rgba(255,138,82,0.9), 0 0 26px rgba(255,106,26,0.7);">FAQs</a>
         <a href="https://discord.gg/M4rqjGpjyW" target="_blank" rel="noopener" class="nav-tab nav-tab-mobile" style="animation: signFlicker 2.6s linear infinite; animation-delay: 0.3s; text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 14px rgba(255,138,82,0.9), 0 0 26px rgba(255,106,26,0.7);">Discord</a>
@@ -409,6 +413,35 @@
         </div>
       </div>
     </section>
+
+    <section id="daily-wheel" class="reveal" style="padding: 10px 0 56px;">
+      <span style="display: block; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; font-size: 13px; color: #ff8a52; margin: 0 0 18px;">Untitled daily drop</span>
+      <div style="display: grid; grid-template-columns: 1.1fr 1fr; gap: 0; background: linear-gradient(135deg, #1a1b1f, #0e0f11); border: 1px solid rgba(255,176,32,0.35); border-top: 3px solid #ffb020; overflow: hidden; position: relative;">
+        <div style="position: absolute; top: -60px; right: 20%; width: 220px; height: 220px; background: radial-gradient(circle, rgba(255,176,32,0.24), transparent 70%); pointer-events: none;"></div>
+        <div style="padding: 40px 36px; position: relative;">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none"><rect x="3" y="8" width="18" height="12" rx="1" stroke="#ffb020" stroke-width="2"/><path d="M3 8l9-5 9 5" stroke="#ffb020" stroke-width="2" fill="none" stroke-linejoin="round"/><path d="M12 3v17" stroke="#ffb020" stroke-width="2"/></svg>
+          <h3 style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 30px; margin: 16px 0 10px; color: #fff; text-shadow: 0 0 20px rgba(255,176,32,0.45);">One free drop, every day</h3>
+          <p style="font-size: 15px; line-height: 24px; margin: 0 0 22px; color: #b0a99f; max-width: 40ch;">Sign in through Steam — no account, no password — and open your daily drop. Scrap, components, meds, and a rare shot at the AK jackpot.</p>
+          <a href="./daily-wheel.html" class="btn-primary" style="display: inline-flex; align-items: center; gap: 8px; font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; font-size: 14px; color: #0a0b0d; background: linear-gradient(135deg, #ffcf6b, #ffb020); padding: 13px 22px; text-decoration: none; clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px); box-shadow: 0 0 20px rgba(255,176,32,0.4);">Open your drop →</a>
+        </div>
+        <div style="background: #08090a; display: flex; align-items: center; justify-content: center; padding: 24px; border-left: 1px solid rgba(255,255,255,0.06); overflow: hidden; position: relative;">
+          <div style="display: flex; gap: 8px; animation: dailyDropReel 6s linear infinite;">
+            <div style="width: 64px; height: 64px; flex-shrink: 0; border: 1px solid rgba(255,255,255,0.1); border-radius: 2px; background: #1a1b1f; display: flex; align-items: center; justify-content: center; font-size: 20px;">⛏</div>
+            <div style="width: 64px; height: 64px; flex-shrink: 0; border: 1px solid rgba(143,208,255,0.4); border-radius: 2px; background: #1a1b1f; display: flex; align-items: center; justify-content: center; font-size: 20px; box-shadow: 0 0 10px rgba(143,208,255,0.15);">🧪</div>
+            <div style="width: 64px; height: 64px; flex-shrink: 0; border: 1px solid rgba(255,138,82,0.5); border-radius: 2px; background: #1a1b1f; display: flex; align-items: center; justify-content: center; font-size: 20px; box-shadow: 0 0 14px rgba(255,106,26,0.25);">🔧</div>
+            <div style="width: 64px; height: 64px; flex-shrink: 0; border: 1px solid rgba(255,176,32,0.6); border-radius: 2px; background: #1a1b1f; display: flex; align-items: center; justify-content: center; font-size: 22px; box-shadow: 0 0 20px rgba(255,176,32,0.5);">🔥</div>
+            <div style="width: 64px; height: 64px; flex-shrink: 0; border: 1px solid rgba(255,255,255,0.1); border-radius: 2px; background: #1a1b1f; display: flex; align-items: center; justify-content: center; font-size: 20px;">⛏</div>
+            <div style="width: 64px; height: 64px; flex-shrink: 0; border: 1px solid rgba(143,208,255,0.4); border-radius: 2px; background: #1a1b1f; display: flex; align-items: center; justify-content: center; font-size: 20px; box-shadow: 0 0 10px rgba(143,208,255,0.15);">🧪</div>
+            <div style="width: 64px; height: 64px; flex-shrink: 0; border: 1px solid rgba(255,138,82,0.5); border-radius: 2px; background: #1a1b1f; display: flex; align-items: center; justify-content: center; font-size: 20px; box-shadow: 0 0 14px rgba(255,106,26,0.25);">🔧</div>
+            <div style="width: 64px; height: 64px; flex-shrink: 0; border: 1px solid rgba(255,176,32,0.6); border-radius: 2px; background: #1a1b1f; display: flex; align-items: center; justify-content: center; font-size: 22px; box-shadow: 0 0 20px rgba(255,176,32,0.5);">🔥</div>
+          </div>
+          <div style="position: absolute; left: 0; top: 0; bottom: 0; width: 40px; background: linear-gradient(90deg, #08090a, transparent); pointer-events: none;"></div>
+          <div style="position: absolute; right: 0; top: 0; bottom: 0; width: 40px; background: linear-gradient(270deg, #08090a, transparent); pointer-events: none;"></div>
+          <div style="position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; background: #ffb020; box-shadow: 0 0 10px rgba(255,176,32,0.8); transform: translateX(-1px);"></div>
+        </div>
+      </div>
+    </section>
+    <style>@keyframes dailyDropReel { from { transform: translateX(0); } to { transform: translateX(-288px); } }</style>
 
     <section class="reveal" style="padding: 20px 0 56px;">
       <span style="display: block; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; font-size: 13px; color: #ff8a52; margin: 0 0 18px;">The philosophy</span>
@@ -560,6 +593,23 @@
       </div>
     </section>
 
+    <section id="milestones" class="reveal" style="padding: 20px 0 56px;">
+      <div class="reveal-stagger" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1px; background: rgba(255,122,61,0.2); border: 1px solid rgba(255,122,61,0.2);">
+        <div style="background: rgba(10,11,13,0.85); padding: 24px 20px; text-align: center;">
+          <p style="font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 34px; margin: 0; color: #ff6a1a;">1</p>
+          <p style="font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #8f887f; margin: 8px 0 0;">Server, run by one team</p>
+        </div>
+        <div style="background: rgba(10,11,13,0.85); padding: 24px 20px; text-align: center;">
+          <p style="font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 34px; margin: 0; color: #ff6a1a;">6</p>
+          <p style="font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #8f887f; margin: 8px 0 0;">Team members keeping it running</p>
+        </div>
+        <div style="background: rgba(10,11,13,0.85); padding: 24px 20px; text-align: center;">
+          <p style="font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 34px; margin: 0; color: #ff6a1a;">52</p>
+          <p style="font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #8f887f; margin: 8px 0 0;">Weekly wipes a year, every Thursday</p>
+        </div>
+      </div>
+    </section>
+
     <section id="map-preview" class="reveal" style="padding: 10px 0 56px;">
       <span style="display: block; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; font-size: 13px; color: #ff8a52; margin: 0 0 18px;">This wipe's map</span>
       <div style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 28px; align-items: center; background: #0e0f11; border: 1px solid rgba(255,122,61,0.25); border-top: 2px solid #ff6a1a; padding: 28px;">
@@ -591,292 +641,6 @@
       </div>
       <p style="font-size: 12px; margin: 14px 0 0; color: #6b655e;">Updated as changes ship — check back each wipe.</p>
     </section>
-
-    <div class="reveal" style="display: flex; align-items: center; gap: 18px; padding: 56px 0 8px;">
-      <span style="font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; font-size: 15px; color: #ff6a1a; white-space: nowrap;">Community</span>
-      <span style="flex: 1; height: 1px; background: linear-gradient(90deg, rgba(255,106,26,0.4), transparent);"></span>
-    </div>
-
-    <section id="featured-base" class="reveal" style="padding: 10px 0 56px;">
-      <span style="display: block; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; font-size: 13px; color: #ff8a52; margin: 0 0 18px;">Show it off</span>
-      <div style="background: #0e0f11; border: 1px solid rgba(255,122,61,0.25); border-top: 2px solid #ff6a1a; padding: 32px;">
-        <div style="display: grid; grid-template-columns: 1.1fr 1fr; gap: 32px; align-items: center; margin-bottom: 28px;">
-          <image-slot id="featured-base-photo" shape="rect" placeholder="A loaded-out base, interior and exterior" style="width: 100%; min-height: 340px;" src="assets/image-slots/featured-base-photo.webp"></image-slot>
-          <div style="display: flex; flex-direction: column; justify-content: center;">
-            <h3 style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 32px; margin: 0 0 12px; color: #fff;">Get your base featured</h3>
-            <p style="font-size: 15.5px; line-height: 26px; margin: 0; color: #b0a99f;">Built something you're proud of? Send us screenshots of the inside and outside and we'll feature the best bases on the website and our socials — bragging rights included.</p>
-            <a href="https://discord.gg/M4rqjGpjyW" target="_blank" rel="noopener" class="btn-primary" style="display: inline-block; margin-top: 22px; width: fit-content; font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; font-size: 14px; color: #0a0b0d; background: #ff6a1a; border: none; padding: 13px 24px; text-decoration: none; clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);">Submit in Discord</a>
-          </div>
-        </div>
-        <div class="reveal-stagger" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 18px;">
-          <div style="display: flex; flex-direction: column;">
-            <image-slot id="featured-base-example-1" shape="rect" placeholder="Featured base example — exterior" style="width: 100%; aspect-ratio: 4 / 3;" src="assets/image-slots/featured-base-example-1.webp"></image-slot>
-            <span style="margin-top: 10px; font-family: 'Rajdhani', sans-serif; font-weight: 600; text-transform: uppercase; font-size: 12px; letter-spacing: 0.05em; color: #8f887f;">Featured — wipe 12</span>
-          </div>
-          <div style="display: flex; flex-direction: column;">
-            <image-slot id="featured-base-example-2" shape="rect" placeholder="Featured base example — interior" style="width: 100%; aspect-ratio: 4 / 3;" src="assets/image-slots/featured-base-example-2.webp"></image-slot>
-            <span style="margin-top: 10px; font-family: 'Rajdhani', sans-serif; font-weight: 600; text-transform: uppercase; font-size: 12px; letter-spacing: 0.05em; color: #8f887f;">Featured — wipe 11</span>
-          </div>
-          <div style="display: flex; flex-direction: column;">
-            <image-slot id="featured-base-example-3" shape="rect" placeholder="Featured base example — build showcase" style="width: 100%; aspect-ratio: 4 / 3;" src="assets/image-slots/featured-base-example-3.webp"></image-slot>
-            <span style="margin-top: 10px; font-family: 'Rajdhani', sans-serif; font-weight: 600; text-transform: uppercase; font-size: 12px; letter-spacing: 0.05em; color: #8f887f;">Featured — wipe 10</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="spotlight" class="reveal" style="padding: 10px 0 56px;">
-      <span style="display: block; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; font-size: 13px; color: #ff8a52; margin: 0 0 18px;">Clip of the wipe</span>
-      <div style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 28px; align-items: center; background: #0e0f11; border: 1px solid rgba(255,122,61,0.25); border-top: 2px solid #ff6a1a; padding: 28px;">
-        <div style="position: relative;">
-          <video id="spotlightVideo" autoplay loop muted playsinline preload="auto" style="width: 100%; border-radius: 2px; background: #000; display: block;">
-            <source src="https://untitledrx.com/assets/spotlight-clip.mp4" type="video/mp4">
-          </video>
-          <button type="button" onClick="{{ toggleSpotlightMute }}" style="position: absolute; bottom: 12px; right: 12px; width: 34px; height: 34px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.3); background: rgba(0,0,0,0.6); color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 15px;">{{ spotlightMuteIcon }}</button>
-        </div>
-        <div>
-          <h3 style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 22px; margin: 0 0 10px; color: #fff;">Community spotlight</h3>
-          <p style="font-size: 14.5px; line-height: 24px; margin: 0; color: #b0a99f;">The best raid, base, or funny moment from the community each wipe gets pinned here and shared on TikTok. Post your clips in Discord to be considered.</p>
-          <p style="font-size: 12px; margin: 10px 0 0; color: #6b655e;">Clip credit: @Red</p>
-          <a href="https://discord.gg/M4rqjGpjyW" target="_blank" rel="noopener" class="btn-connect" style="display: inline-flex; align-items: center; gap: 8px; margin-top: 18px; font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; font-size: 13.5px; color: #0a0b0d; background: linear-gradient(135deg, #ff8a4c, #ff6a1a); border: 1px solid rgba(255,180,130,0.5); padding: 12px 22px; cursor: pointer; text-decoration: none; clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px); box-shadow: 0 2px 10px rgba(255,106,26,0.35);">Join Discord</a>
-        </div>
-      </div>
-    </section>
-
-    <section id="team" class="reveal" style="padding: 10px 0 56px;">
-      <span style="display: block; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; font-size: 13px; color: #ff8a52; margin: 0 0 18px;">Who's running this</span>
-      <div class="reveal-stagger" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1px; background: rgba(255,255,255,0.08);">
-        <div style="background: #0e0f11; padding: 26px 22px; border-top: 2px solid #ff6a1a; display: flex; flex-direction: column; align-items: center; text-align: center;">
-          <image-slot id="team-owner-photo" shape="circle" placeholder="Owner photo" style="width: 84px; height: 84px;" src="assets/image-slots/team-owner-photo.webp"></image-slot>
-          <h3 style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 18px; margin: 14px 0 4px; color: #fff;">joeboetheasian</h3>
-          <p style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: #ff8a52; margin: 0 0 8px;">Creator</p>
-          <p style="font-size: 13.5px; line-height: 21px; margin: 0; color: #b0a99f;">Runs the server day to day, handles the store, and builds this website.</p>
-        </div>
-        <div style="background: #0e0f11; padding: 26px 22px; border-top: 2px solid #ff6a1a; display: flex; flex-direction: column; align-items: center; text-align: center;">
-          <image-slot id="team-tstew-photo" shape="circle" placeholder="t-stew photo" style="width: 84px; height: 84px;" src="assets/image-slots/team-tstew-photo.webp"></image-slot>
-          <h3 style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 18px; margin: 14px 0 4px; color: #fff;">t-stew</h3>
-          <p style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: #ff8a52; margin: 0 0 8px;">Discord Development / Server Assistant</p>
-        </div>
-        <div style="background: #0e0f11; padding: 26px 22px; border-top: 2px solid #ff6a1a; display: flex; flex-direction: column; align-items: center; text-align: center;">
-          <image-slot id="team-hxven-photo" shape="circle" placeholder="HXVEN photo" style="width: 84px; height: 84px;" src="assets/image-slots/team-hxven-photo.webp"></image-slot>
-          <h3 style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 18px; margin: 14px 0 4px; color: #fff;">HXVEN</h3>
-          <p style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: #ff8a52; margin: 0 0 8px;">Discord Development / Map Developer</p>
-        </div>
-        <div style="background: #0e0f11; padding: 26px 22px; border-top: 2px solid #ff6a1a; display: flex; flex-direction: column; align-items: center; text-align: center;">
-          <image-slot id="team-draco-photo" shape="circle" placeholder="Draco photo" style="width: 84px; height: 84px;" src="assets/image-slots/team-draco-photo.webp"></image-slot>
-          <h3 style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 18px; margin: 14px 0 4px; color: #fff;">Draco</h3>
-          <p style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: #ff8a52; margin: 0 0 8px;">Discord Support / Discord Development</p>
-        </div>
-        <div style="background: #0e0f11; padding: 26px 22px; border-top: 2px solid #ff6a1a; display: flex; flex-direction: column; align-items: center; text-align: center;">
-          <image-slot id="team-trahogi-photo" shape="circle" placeholder="Trahogi photo" style="width: 84px; height: 84px;" src="assets/image-slots/team-trahogi-photo.webp"></image-slot>
-          <h3 style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 18px; margin: 14px 0 4px; color: #fff;">Trahogi</h3>
-          <p style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: #ff8a52; margin: 0 0 8px;">Discord Admin</p>
-        </div>
-        <div style="background: #0e0f11; padding: 26px 22px; border-top: 2px solid #ff6a1a; display: flex; flex-direction: column; align-items: center; text-align: center;">
-          <image-slot id="team-sketchydesires-photo" shape="circle" placeholder="SketchyDesires photo" style="width: 84px; height: 84px;" src="assets/image-slots/team-sketchydesires-photo.webp"></image-slot>
-          <h3 style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 18px; margin: 14px 0 4px; color: #fff;">SketchyDesires</h3>
-          <p style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: #ff8a52; margin: 0 0 8px;">Advertisement</p>
-        </div>
-        <div style="background: #0e0f11; padding: 26px 22px; border-top: 2px solid #ff6a1a; display: flex; flex-direction: column; align-items: center; text-align: center;">
-          <image-slot id="team-red-photo" shape="circle" placeholder="Red photo" style="width: 84px; height: 84px;" src="assets/image-slots/team-red-photo.png"></image-slot>
-          <h3 style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 18px; margin: 14px 0 4px; color: #fff;">Red</h3>
-          <p style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: #ff8a52; margin: 0 0 8px;">Discord Support / Customer Service</p>
-        </div>
-        <div style="background: #0e0f11; padding: 26px 22px; border-top: 2px dashed rgba(255,106,26,0.4); display: flex; flex-direction: column; align-items: center; text-align: center;">
-          <div style="width: 84px; height: 84px; border-radius: 50%; border: 1px dashed rgba(255,255,255,0.25); display: flex; align-items: center; justify-content: center; color: #6b655e; font-size: 11px;">Open</div>
-          <h3 style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 16px; margin: 14px 0 4px; color: #6b655e;">Open Position</h3>
-          <p style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: #6b655e; margin: 0;">Apply Now</p>
-        </div>
-        <div style="background: #0e0f11; padding: 26px 22px; border-top: 2px dashed rgba(255,106,26,0.4); display: flex; flex-direction: column; align-items: center; text-align: center;">
-          <div style="width: 84px; height: 84px; border-radius: 50%; border: 1px dashed rgba(255,255,255,0.25); display: flex; align-items: center; justify-content: center; color: #6b655e; font-size: 11px;">Open</div>
-          <h3 style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 16px; margin: 14px 0 4px; color: #6b655e;">Open Position</h3>
-          <p style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: #6b655e; margin: 0;">Apply Now</p>
-        </div>
-      </div>
-      <a href="https://discord.gg/M4rqjGpjyW" target="_blank" rel="noopener" class="btn-outline" style="display: inline-block; margin-top: 20px; font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; font-size: 13px; color: #fff; border: 1px solid rgba(255,255,255,0.3); padding: 12px 22px; text-decoration: none;">Apply for staff</a>
-    </section>
-
-    <section id="live-chat" class="reveal" style="padding: 10px 0 56px;">
-      <span style="display: block; font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; font-size: 13px; color: #ff8a52; margin: 0 0 8px;">Chat with the server</span>
-      <h2 class="fpv-glitch-title" style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase; font-size: clamp(24px, 3.4vw, 38px); margin: 0 0 18px; color: #fff; text-shadow: 0 0 24px rgba(255,106,26,0.5); letter-spacing: -0.01em;">Tune into the island. Live.</h2>
-      <div style="position: relative; aspect-ratio: 16/9; background: #05060a; border: 1px solid rgba(255,90,20,0.5); overflow: hidden; box-shadow: 0 0 70px rgba(255,90,20,0.22), 0 0 0 1px rgba(0,0,0,0.6), inset 0 0 100px rgba(0,0,0,0.55);">
-        <div style="position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(35,30,25,0.5) 0%, rgba(0,0,0,0.88) 100%); pointer-events: none;"></div>
-        <div style="position: absolute; inset: 0; background-image: repeating-linear-gradient(rgba(0,0,0,0.14) 0px, transparent 1px, transparent 3px); pointer-events: none; mix-blend-mode: overlay;"></div>
-        <div style="position: absolute; inset: -2px; border: 2px solid transparent; background: linear-gradient(90deg, rgba(255,50,50,0.25), transparent 40%, transparent 60%, rgba(50,150,255,0.25)) border-box; -webkit-mask: linear-gradient(#000 0 0) padding-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; opacity: 0.5; pointer-events: none; animation: fpvChroma 6s ease-in-out infinite;"></div>
-        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent); animation: fpvScan 4.5s linear infinite; pointer-events: none; box-shadow: 0 0 12px rgba(255,255,255,0.4);"></div>
-
-        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 220px; height: 220px; border: 1px solid rgba(255,138,82,0.25); border-radius: 50%; pointer-events: none;"></div>
-        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 140px; height: 140px; border: 1px solid rgba(255,138,82,0.2); border-radius: 50%; pointer-events: none;"></div>
-        <div style="position: absolute; top: 50%; left: 50%; width: 220px; height: 220px; margin-top: -110px; margin-left: -110px; border-radius: 50%; background: conic-gradient(from 0deg, rgba(255,138,82,0.5), transparent 30%); animation: fpvRadarSweep 3.2s linear infinite; pointer-events: none; opacity: 0.6;"></div>
-
-        <div style="position: absolute; top: 18px; left: 18px; width: 34px; height: 34px; border-top: 2px solid rgba(255,138,82,0.95); border-left: 2px solid rgba(255,138,82,0.95); box-shadow: -2px -2px 10px rgba(255,106,26,0.4); pointer-events: none;"></div>
-        <div style="position: absolute; top: 18px; right: 18px; width: 34px; height: 34px; border-top: 2px solid rgba(255,138,82,0.95); border-right: 2px solid rgba(255,138,82,0.95); box-shadow: 2px -2px 10px rgba(255,106,26,0.4); pointer-events: none;"></div>
-        <div style="position: absolute; bottom: 18px; left: 18px; width: 34px; height: 34px; border-bottom: 2px solid rgba(255,138,82,0.95); border-left: 2px solid rgba(255,138,82,0.95); box-shadow: -2px 2px 10px rgba(255,106,26,0.4); pointer-events: none;"></div>
-        <div style="position: absolute; bottom: 18px; right: 18px; width: 34px; height: 34px; border-bottom: 2px solid rgba(255,138,82,0.95); border-right: 2px solid rgba(255,138,82,0.95); box-shadow: 2px 2px 10px rgba(255,106,26,0.4); pointer-events: none;"></div>
-        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(45deg); width: 22px; height: 22px; pointer-events: none; animation: fpvCrosshairPulse 2s ease-in-out infinite;">
-          <div style="position: absolute; top: 50%; left: 0; width: 100%; height: 1.5px; background: rgba(255,255,255,0.8); transform: translateY(-50%); box-shadow: 0 0 6px rgba(255,255,255,0.6);"></div>
-          <div style="position: absolute; left: 50%; top: 0; width: 1.5px; height: 100%; background: rgba(255,255,255,0.8); transform: translateX(-50%); box-shadow: 0 0 6px rgba(255,255,255,0.6);"></div>
-        </div>
-
-        <div style="position: absolute; top: 14px; left: 18px; display: flex; align-items: center; gap: 7px;">
-          <span style="width: 8px; height: 8px; border-radius: 50%; background: #ff3b3b; box-shadow: 0 0 10px #ff3b3b; animation: fpvRecPulse 1.4s ease-in-out infinite;"></span>
-          <span style="font-family: 'Consolas', 'Courier New', monospace; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; font-size: 11px; color: #ff5a5a; text-shadow: 0 0 8px rgba(255,60,60,0.8);">● LIVE</span>
-          <span style="display: flex; align-items: flex-end; gap: 1.5px; margin-left: 4px;">
-            <span style="width: 2.5px; height: 5px; background: rgba(120,255,150,0.8); animation: fpvSignal 1.2s ease-in-out infinite;"></span>
-            <span style="width: 2.5px; height: 8px; background: rgba(120,255,150,0.8); animation: fpvSignal 1.2s ease-in-out infinite 0.15s;"></span>
-            <span style="width: 2.5px; height: 11px; background: rgba(120,255,150,0.8); animation: fpvSignal 1.2s ease-in-out infinite 0.3s;"></span>
-          </span>
-        </div>
-        <div style="position: absolute; top: 14px; left: 50%; transform: translateX(-50%); font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; font-size: 10px; color: rgba(255,255,255,0.55); text-shadow: 0 1px 3px rgba(0,0,0,0.8);">Read-only for game chat · post as "Website Viewer"</div>
-        <div style="position: absolute; top: 14px; right: 18px; font-family: 'Consolas', 'Courier New', monospace; font-size: 10px; letter-spacing: 0.06em; color: rgba(255,255,255,0.5); text-shadow: 0 1px 3px rgba(0,0,0,0.8);">CH.04 · FOV 90 · N 24°</div>
-
-        <div style="position: absolute; bottom: 78px; left: 18px; width: min(78%, 460px); max-height: 150px; overflow-y: auto; display: flex; flex-direction: column-reverse; gap: 3px;" id="liveChatFeed">
-          <sc-if value="{{ chatEmpty }}" hint-placeholder-val="{{ false }}">
-            <p style="margin: 0; font-family: 'Consolas', 'Courier New', monospace; font-size: 13px; line-height: 18px; color: rgba(255,255,255,0.55); text-shadow: 0 1px 3px rgba(0,0,0,0.9);">No messages yet — be the first to say hi.</p>
-          </sc-if>
-          <sc-for list="{{ chatMessagesReversed }}" as="msg" hint-placeholder-count="4">
-            <div style="display: flex; align-items: center; gap: 6px; background: rgba(0,0,0,0.45); padding: 2px 8px 2px 4px; width: fit-content; max-width: 100%;">
-              <span style="width: 14px; height: 14px; flex-shrink: 0; background: {{ msg.color }}; border-radius: 2px; box-shadow: 0 0 4px rgba(0,0,0,0.6);"></span>
-              <p style="margin: 0; font-family: 'Consolas', 'Courier New', monospace; font-size: 13px; line-height: 18px; color: #eee; text-shadow: 0 1px 3px rgba(0,0,0,0.9); white-space: normal; word-break: break-word;"><span style="font-weight: 700; color: {{ msg.color }};">{{ msg.sender }}</span><span style="color: rgba(255,255,255,0.5);"> : </span>{{ msg.text }}</p>
-            </div>
-          </sc-for>
-        </div>
-
-        <div style="position: absolute; bottom: 16px; left: 18px; right: 18px; display: flex; gap: 8px; align-items: center;">
-          <span style="font-family: 'Consolas', 'Courier New', monospace; font-size: 13px; color: rgba(255,138,82,0.9); text-shadow: 0 0 6px rgba(255,106,26,0.7);">&gt;</span>
-          <input type="text" value="{{ chatDraft }}" onChange="{{ setChatDraft }}" maxlength="140" placeholder="Press here to chat..." style="flex: 1; background: rgba(0,0,0,0.5); border: 1px solid rgba(255,138,82,0.4); color: #fff; padding: 8px 10px; font-size: 13px; font-family: 'Consolas', 'Courier New', monospace; backdrop-filter: blur(2px); box-shadow: 0 0 12px rgba(255,90,20,0.15);">
-          <button type="button" onClick="{{ sendChat }}" style="font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; font-size: 12px; color: #0a0b0d; background: linear-gradient(135deg, #ff8a4c, #ff6a1a); border: none; padding: 8px 18px; cursor: pointer; box-shadow: 0 0 14px rgba(255,106,26,0.5);">{{ chatSendLabel }}</button>
-        </div>
-        <div style="position: absolute; bottom: 2px; right: 18px; font-size: 10px; color: rgba(255,255,255,0.4); text-shadow: 0 1px 3px rgba(0,0,0,0.9);">{{ chatCharsLeft }}/140 · {{ chatCooldownLabel }}</div>
-      </div>
-      <p style="font-size: 11px; margin: 10px 0 0; color: #6b655e;">No slurs, cursing, links, images/videos, @ mentions, or spam. Text only. One message per minute.</p>
-    </section>
-
-    <section id="socials" class="reveal" style="padding: 10px 0 56px;">
-      <span style="display: block; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; font-size: 13px; color: #ff8a52; margin: 0 0 18px;">Watch us play</span>
-      <div style="display: grid; grid-template-columns: 1.1fr 1fr; gap: 0; background: linear-gradient(135deg, #1a1b1f, #0e0f11); border: 1px solid rgba(255,122,61,0.3); border-top: 3px solid #ff6a1a; overflow: hidden; position: relative;">
-        <div style="position: absolute; top: -60px; right: 20%; width: 220px; height: 220px; background: radial-gradient(circle, rgba(255,106,26,0.22), transparent 70%); pointer-events: none;"></div>
-        <div style="padding: 40px 36px; position: relative;">
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="#ff6a1a"><path d="M16.6 5.82s.51.5 0 0A4.278 4.278 0 0 1 15.54 3h-3.09v12.4a2.592 2.592 0 0 1-2.59 2.5c-1.42 0-2.6-1.16-2.6-2.6c0-1.72 1.66-3.01 3.37-2.48V9.66c-3.45-.46-6.47 2.22-6.47 5.64c0 3.33 2.76 5.7 5.69 5.7c3.14 0 5.69-2.55 5.69-5.7V9.01a7.35 7.35 0 0 0 4.03 1.2V7.13s-1.4.05-2.47-.72s-1.5-1.59-1.5-1.59"/></svg>
-          <h3 style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 30px; margin: 16px 0 10px; color: #fff; text-shadow: 0 0 20px rgba(255,106,26,0.4);">Clips every wipe</h3>
-          <p style="font-size: 15px; line-height: 24px; margin: 0 0 22px; color: #b0a99f; max-width: 40ch;">Raids, funny moments, base tours, and the highlight reel from the community — posted straight to TikTok.</p>
-          <a href="https://www.tiktok.com/@joeboetheasian" target="_blank" rel="noopener" class="btn-primary" style="display: inline-flex; align-items: center; gap: 8px; font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; font-size: 14px; color: #0a0b0d; background: #ff6a1a; padding: 13px 22px; text-decoration: none; clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);">@joeboetheasian →</a>
-        </div>
-        <div style="background: #08090a; display: flex; align-items: center; justify-content: center; padding: 24px; border-left: 1px solid rgba(255,255,255,0.06);">
-          <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@joeboetheasian" data-unique-id="joeboetheasian" data-embed-type="creator" style="max-width: 280px; min-width: 220px; margin: 0;">
-            <section><a target="_blank" href="https://www.tiktok.com/@joeboetheasian?refer=creator_embed">@joeboetheasian</a></section>
-          </blockquote>
-        </div>
-      </div>
-    </section>
-
-    <section id="reviews" class="reveal" style="padding: 10px 0 56px;">
-      <span style="display: block; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; font-size: 13px; color: #ff8a52; margin: 0 0 18px;">What players are saying</span>
-      <div style="display: grid; grid-template-columns: 1fr 1.4fr; gap: 24px; align-items: start;">
-        <div style="background: #0e0f11; border: 1px solid rgba(255,122,61,0.25); border-top: 2px solid #ff6a1a; padding: 26px 22px;">
-          <p style="font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 42px; margin: 0; color: #fff;">{{ avgRating }}<span style="font-size: 16px; color: #6b655e;"> / 5</span></p>
-          <p style="font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #8f887f; margin: 6px 0 20px;">{{ reviewCountLabel }}</p>
-          <div style="display: flex; flex-direction: column; gap: 10px;">
-            <span style="font-family: 'Rajdhani', sans-serif; font-weight: 600; font-size: 13px; color: #cfc9c2; text-transform: uppercase; letter-spacing: 0.05em;">Leave a rating</span>
-            <div style="display: flex; gap: 6px;">
-              <button type="button" onClick="{{ setStar1 }}" style="background: none; border: none; cursor: pointer; padding: 2px; font-size: 26px; color: {{ star1Color }};">★</button>
-              <button type="button" onClick="{{ setStar2 }}" style="background: none; border: none; cursor: pointer; padding: 2px; font-size: 26px; color: {{ star2Color }};">★</button>
-              <button type="button" onClick="{{ setStar3 }}" style="background: none; border: none; cursor: pointer; padding: 2px; font-size: 26px; color: {{ star3Color }};">★</button>
-              <button type="button" onClick="{{ setStar4 }}" style="background: none; border: none; cursor: pointer; padding: 2px; font-size: 26px; color: {{ star4Color }};">★</button>
-              <button type="button" onClick="{{ setStar5 }}" style="background: none; border: none; cursor: pointer; padding: 2px; font-size: 26px; color: {{ star5Color }};">★</button>
-            </div>
-            <textarea value="{{ draftText }}" onChange="{{ onDraftChange }}" placeholder="Say something about the server (optional)" rows="2" style="resize: vertical; background: #16171a; border: 1px solid rgba(255,255,255,0.15); color: #e9e7e3; font-family: 'Inter', sans-serif; font-size: 13.5px; padding: 10px 12px;"></textarea>
-            <button type="button" onClick="{{ submitReview }}" class="btn-primary" style="font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; font-size: 13px; color: #0a0b0d; background: #ff6a1a; border: none; padding: 11px; cursor: pointer;">{{ submitLabel }}</button>
-          </div>
-        </div>
-        <div class="reveal-stagger" style="display: flex; flex-direction: column; gap: 1px; background: rgba(255,255,255,0.08); max-height: 340px; overflow-y: auto;">
-          <sc-for list="{{ reviews }}" as="review" hint-placeholder-count="3">
-            <div style="background: #0e0f11; padding: 18px 20px;">
-              <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px;">
-                <span style="color: #ff6a1a; font-size: 15px; letter-spacing: 1px;">{{ review.starsDisplay }}</span>
-                <span style="font-size: 11px; color: #6b655e; text-transform: uppercase; letter-spacing: 0.05em;">{{ review.dateLabel }}</span>
-              </div>
-              <p style="font-size: 13.5px; line-height: 21px; margin: 8px 0 0; color: #b0a99f;">{{ review.text }}</p>
-            </div>
-          </sc-for>
-        </div>
-      </div>
-      <p style="font-size: 12px; margin: 14px 0 0; color: #6b655e;">Ratings are saved on this device for now — full public review syncing is coming soon.</p>
-    </section>
-
-    <section id="milestones" class="reveal" style="padding: 20px 0 56px;">
-      <div class="reveal-stagger" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1px; background: rgba(255,122,61,0.2); border: 1px solid rgba(255,122,61,0.2);">
-        <div style="background: rgba(10,11,13,0.85); padding: 24px 20px; text-align: center;">
-          <p style="font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 34px; margin: 0; color: #ff6a1a;">1</p>
-          <p style="font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #8f887f; margin: 8px 0 0;">Server, run by one team</p>
-        </div>
-        <div style="background: rgba(10,11,13,0.85); padding: 24px 20px; text-align: center;">
-          <p style="font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 34px; margin: 0; color: #ff6a1a;">6</p>
-          <p style="font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #8f887f; margin: 8px 0 0;">Team members keeping it running</p>
-        </div>
-        <div style="background: rgba(10,11,13,0.85); padding: 24px 20px; text-align: center;">
-          <p style="font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 34px; margin: 0; color: #ff6a1a;">52</p>
-          <p style="font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #8f887f; margin: 8px 0 0;">Weekly wipes a year, every Thursday</p>
-        </div>
-      </div>
-    </section>
-
-    <div class="reveal" style="display: flex; align-items: center; gap: 18px; padding: 56px 0 8px;">
-      <span style="font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; font-size: 15px; color: #ff6a1a; white-space: nowrap;">Support the server</span>
-      <span style="flex: 1; height: 1px; background: linear-gradient(90deg, rgba(255,106,26,0.4), transparent);"></span>
-    </div>
-
-    <section id="store" class="reveal" style="padding: 10px 0 56px;">
-      <span style="display: block; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; font-size: 13px; color: #ff8a52; margin: 0 0 18px;">Support the server</span>
-      <div class="reveal-stagger" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1px; background: rgba(255,255,255,0.08);">
-        <div style="background: #0e0f11; padding: 28px 22px; border-top: 2px solid rgba(255,255,255,0.25); display: flex; flex-direction: column;">
-          <span style="font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; font-size: 12px; color: #8f887f;">Tier I</span>
-          <h3 style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 22px; margin: 8px 0 10px; color: #fff;">Supporter</h3>
-          <p style="font-size: 14.5px; line-height: 24px; margin: 0; color: #b0a99f; flex: 1;">A Discord supporter role and a shout-out in our next wipe announcement.</p>
-          <p style="font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 28px; margin: 16px 0 0; color: #fff;">$10<span style="font-size: 12px; font-family: 'Inter', sans-serif; font-weight: 400; color: #8f887f;"> / month</span></p>
-        </div>
-        <div style="background: #0e0f11; padding: 28px 22px; border-top: 2px solid #ff6a1a; display: flex; flex-direction: column; box-shadow: 0 0 30px rgba(255,106,26,0.08) inset;">
-          <span style="font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; font-size: 12px; color: #ff8a52;">Tier II · Most popular</span>
-          <h3 style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 22px; margin: 8px 0 10px; color: #fff;">Patron</h3>
-          <p style="font-size: 14.5px; line-height: 24px; margin: 0; color: #b0a99f; flex: 1;">Everything in Supporter, plus a colored name in chat — pick your own color.</p>
-          <p style="font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 28px; margin: 16px 0 0; color: #fff;">$20<span style="font-size: 12px; font-family: 'Inter', sans-serif; font-weight: 400; color: #8f887f;"> / month</span></p>
-        </div>
-        <div style="background: #0e0f11; padding: 28px 22px; border-top: 2px solid rgba(255,255,255,0.25); display: flex; flex-direction: column;">
-          <span style="font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; font-size: 12px; color: #8f887f;">Tier III</span>
-          <h3 style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 22px; margin: 8px 0 10px; color: #fff;">Founder</h3>
-          <p style="font-size: 14.5px; line-height: 24px; margin: 0; color: #b0a99f; flex: 1;">Everything in Patron, plus third-person camera access — cosmetic only.</p>
-          <p style="font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 28px; margin: 16px 0 0; color: #fff;">$30<span style="font-size: 12px; font-family: 'Inter', sans-serif; font-weight: 400; color: #8f887f;"> / month</span></p>
-        </div>
-      </div>
-      <a href="./Store.dc.html" class="btn-primary" style="display: inline-block; margin-top: 20px; font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; font-size: 13px; color: #0a0b0d; background: #ff6a1a; border: none; padding: 12px 22px; text-decoration: none; clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);">Visit the store</a>
-    </section>
-
-    <section id="loyalty" class="reveal" style="padding: 10px 0 56px;">
-      <div style="background: #0e0f11; border: 1px solid rgba(255,122,61,0.25); border-top: 2px solid #ff6a1a; padding: 30px; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap;">
-        <div>
-          <span style="display: block; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; font-size: 13px; color: #ff8a52; margin: 0 0 10px;">Loyalty streak</span>
-          <h3 style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 24px; margin: 0 0 8px; color: #fff;">Play 4 wipes in a row, get a free month of Supporter</h3>
-          <p style="font-size: 14.5px; line-height: 24px; margin: 0; max-width: 60ch; color: #b0a99f;">Show up consistently and get rewarded for it. Admins track streaks manually for now — ping one in Discord after your 4th consecutive wipe to claim it.</p>
-        </div>
-        <a href="https://discord.gg/M4rqjGpjyW" target="_blank" rel="noopener" class="btn-outline" style="flex-shrink: 0; font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; font-size: 13px; color: #fff; border: 1px solid rgba(255,255,255,0.3); padding: 13px 22px; text-decoration: none;">Ask in Discord</a>
-      </div>
-    </section>
-
-    <section id="referral" class="reveal" style="padding: 10px 0 56px;">
-      <div style="background: #0e0f11; border: 1px solid rgba(255,122,61,0.25); border-top: 2px solid #ff6a1a; padding: 30px; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap;">
-        <div>
-          <span style="display: block; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; font-size: 13px; color: #ff8a52; margin: 0 0 10px;">Bring your friends</span>
-          <h3 style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 24px; margin: 0 0 8px; color: #fff;">Refer a friend, earn store credit</h3>
-          <p style="font-size: 14.5px; line-height: 24px; margin: 0; max-width: 60ch; color: #b0a99f;">Get your friend to mention you when they join Discord — once they're active for a wipe, you both get store credit toward the Supporter tier.</p>
-        </div>
-        <a href="https://discord.gg/M4rqjGpjyW" target="_blank" rel="noopener" class="btn-primary" style="flex-shrink: 0; font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; font-size: 13px; color: #0a0b0d; background: #ff6a1a; border: none; padding: 13px 22px; text-decoration: none; clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);">Learn more in Discord</a>
-      </div>
-    </section>
-
-    <div class="reveal" style="display: flex; align-items: center; gap: 18px; padding: 56px 0 8px;">
-      <span style="font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; font-size: 15px; color: #ff6a1a; white-space: nowrap;">More to know</span>
-      <span style="flex: 1; height: 1px; background: linear-gradient(90deg, rgba(255,106,26,0.4), transparent);"></span>
-    </div>
 
     <section id="events" class="reveal" style="padding: 20px 0 64px; position: relative; overflow: hidden;">
       <div style="position: absolute; top: -80px; left: -60px; width: 320px; height: 320px; background: radial-gradient(circle, rgba(255,106,26,0.14), transparent 70%); pointer-events: none;"></div>
@@ -918,6 +682,36 @@
       <p style="font-size: 13px; margin: 16px 0 0; color: #6b655e;">Exact dates and times get posted in Discord as each event is scheduled.</p>
     </section>
 
+    <div class="reveal" style="display: flex; align-items: center; gap: 18px; padding: 56px 0 8px;">
+      <span style="font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; font-size: 15px; color: #ff6a1a; white-space: nowrap;">Support the server</span>
+      <span style="flex: 1; height: 1px; background: linear-gradient(90deg, rgba(255,106,26,0.4), transparent);"></span>
+    </div>
+
+    <section id="store" class="reveal" style="padding: 10px 0 56px;">
+      <span style="display: block; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; font-size: 13px; color: #ff8a52; margin: 0 0 18px;">Support the server</span>
+      <div class="reveal-stagger" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1px; background: rgba(255,255,255,0.08);">
+        <div style="background: #0e0f11; padding: 28px 22px; border-top: 2px solid rgba(255,255,255,0.25); display: flex; flex-direction: column;">
+          <span style="font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; font-size: 12px; color: #8f887f;">Tier I</span>
+          <h3 style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 22px; margin: 8px 0 10px; color: #fff;">Supporter</h3>
+          <p style="font-size: 14.5px; line-height: 24px; margin: 0; color: #b0a99f; flex: 1;">A Discord supporter role and a shout-out in our next wipe announcement.</p>
+          <p style="font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 28px; margin: 16px 0 0; color: #fff;">$10<span style="font-size: 12px; font-family: 'Inter', sans-serif; font-weight: 400; color: #8f887f;"> / month</span></p>
+        </div>
+        <div style="background: #0e0f11; padding: 28px 22px; border-top: 2px solid #ff6a1a; display: flex; flex-direction: column; box-shadow: 0 0 30px rgba(255,106,26,0.08) inset;">
+          <span style="font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; font-size: 12px; color: #ff8a52;">Tier II · Most popular</span>
+          <h3 style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 22px; margin: 8px 0 10px; color: #fff;">Patron</h3>
+          <p style="font-size: 14.5px; line-height: 24px; margin: 0; color: #b0a99f; flex: 1;">Everything in Supporter, plus a colored name in chat — pick your own color.</p>
+          <p style="font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 28px; margin: 16px 0 0; color: #fff;">$20<span style="font-size: 12px; font-family: 'Inter', sans-serif; font-weight: 400; color: #8f887f;"> / month</span></p>
+        </div>
+        <div style="background: #0e0f11; padding: 28px 22px; border-top: 2px solid rgba(255,255,255,0.25); display: flex; flex-direction: column;">
+          <span style="font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; font-size: 12px; color: #8f887f;">Tier III</span>
+          <h3 style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 22px; margin: 8px 0 10px; color: #fff;">Founder</h3>
+          <p style="font-size: 14.5px; line-height: 24px; margin: 0; color: #b0a99f; flex: 1;">Everything in Patron, plus third-person camera access — cosmetic only.</p>
+          <p style="font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 28px; margin: 16px 0 0; color: #fff;">$30<span style="font-size: 12px; font-family: 'Inter', sans-serif; font-weight: 400; color: #8f887f;"> / month</span></p>
+        </div>
+      </div>
+      <a href="./Store.dc.html" class="btn-primary" style="display: inline-block; margin-top: 20px; font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; font-size: 13px; color: #0a0b0d; background: #ff6a1a; border: none; padding: 12px 22px; text-decoration: none; clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);">Visit the store</a>
+    </section>
+
     <section id="about-server" class="reveal" style="padding: 20px 0 56px;">
       <span style="display: block; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; font-size: 13px; color: #ff8a52; margin: 0 0 18px;">About this Rust server</span>
       <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 36px; align-items: start;">
@@ -957,6 +751,17 @@
       </div>
     </section>
 
+    <section id="referral" class="reveal" style="padding: 10px 0 56px;">
+      <div style="background: #0e0f11; border: 1px solid rgba(255,122,61,0.25); border-top: 2px solid #ff6a1a; padding: 30px; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap;">
+        <div>
+          <span style="display: block; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; font-size: 13px; color: #ff8a52; margin: 0 0 10px;">Bring your friends</span>
+          <h3 style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 24px; margin: 0 0 8px; color: #fff;">Refer a friend, earn store credit</h3>
+          <p style="font-size: 14.5px; line-height: 24px; margin: 0; max-width: 60ch; color: #b0a99f;">Get your friend to mention you when they join Discord — once they're active for a wipe, you both get store credit toward the Supporter tier.</p>
+        </div>
+        <a href="https://discord.gg/M4rqjGpjyW" target="_blank" rel="noopener" class="btn-primary" style="flex-shrink: 0; font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; font-size: 13px; color: #0a0b0d; background: #ff6a1a; border: none; padding: 13px 22px; text-decoration: none; clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);">Learn more in Discord</a>
+      </div>
+    </section>
+
     <section class="reveal" style="padding: 10px 0 64px; text-align: center;">
       <h2 style="font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase; font-size: clamp(26px, 3vw, 36px); margin: 0 0 16px; color: #fff;">Come build something that lasts.</h2>
       <p style="font-size: 15.5px; line-height: 26px; max-width: 54ch; margin: 0 auto; color: #b0a99f;">Join the Discord for wipe alerts and event announcements, or check the store to support the server. We're also looking for staff as the community grows — reach out in Discord if you're interested.</p>
@@ -974,9 +779,16 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  state = { activeDropdown: null, spotlightMuted: true, copyLabel: 'Copy IP', countdown: '—', scrollY: 0, onlinePlayers: null, maxPlayers: null, live: false, draftStars: 0, draftText: '', reviews: [], submitLabel: 'Submit rating', chatMessages: [], chatDraft: '', chatSendLabel: 'Send', chatCooldownUntil: 0, navConnectOpen: false, connectPanelOpen: true, openFaq: null, mobileMenuOpen: false, connectPanelOpen: false, introDone: true, introPhase: 'idle', introSoundOn: true };
+  state = { activeDropdown: null, spotlightMuted: true, copyLabel: 'Copy IP', countdown: '—', scrollY: 0, onlinePlayers: null, maxPlayers: null, live: false, draftStars: 0, draftText: '', chatCodeDraft: '', chatAccessCode: null, chatAccessExpires: null, chatVerifyLabel: 'Unlock', chatAccessError: '', reviews: [], submitLabel: 'Submit rating', chatMessages: [], chatDraft: '', chatSendLabel: 'Send', chatCooldownUntil: 0, navConnectOpen: false, connectPanelOpen: true, openFaq: null, mobileMenuOpen: false, connectPanelOpen: false, introDone: true, introPhase: 'idle', introSoundOn: true };
 
   componentDidMount() {
+    try {
+      const savedCode = localStorage.getItem('urx_chat_access_code');
+      const savedExpires = localStorage.getItem('urx_chat_access_expires');
+      if (savedCode && savedExpires && new Date(savedExpires).getTime() > Date.now()) {
+        this.setState({ chatAccessCode: savedCode, chatAccessExpires: savedExpires });
+      }
+    } catch (e) {}
     try {
       const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       this._introReduced = !!reduced;
@@ -1087,6 +899,33 @@ class Component extends DCLogic {
   setChatDraft(e) {
     this.setState({ chatDraft: e.target.value.slice(0, 140) });
   }
+  setChatCodeDraft(e) {
+    this.setState({ chatCodeDraft: e.target.value.slice(0, 20), chatAccessError: '' });
+  }
+  async verifyChatCode() {
+    const code = (this.state.chatCodeDraft || '').trim().toUpperCase();
+    if (!code) return;
+    this.setState({ chatVerifyLabel: 'Checking...' });
+    try {
+      const res = await fetch('/api/chat/verify-code', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ code }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        this.setState({ chatVerifyLabel: 'Unlock', chatAccessError: data.error || 'Invalid code.' });
+        return;
+      }
+      try {
+        localStorage.setItem('urx_chat_access_code', code);
+        localStorage.setItem('urx_chat_access_expires', data.expiresAt);
+      } catch (e) {}
+      this.setState({ chatVerifyLabel: 'Unlock', chatAccessCode: code, chatAccessExpires: data.expiresAt, chatCodeDraft: '', chatAccessError: '' });
+    } catch (e) {
+      this.setState({ chatVerifyLabel: 'Unlock', chatAccessError: 'Verification failed.' });
+    }
+  }
   async sendChat() {
     const text = this.state.chatDraft.trim();
     if (!text) return;
@@ -1098,7 +937,7 @@ class Component extends DCLogic {
       const res = await fetch('/api/chat/send', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ clientId: this._chatClientId, message: text }),
+        body: JSON.stringify({ clientId: this._chatClientId, message: text, accessCode: this.state.chatAccessCode }),
       });
       const json = await res.json();
       if (!res.ok) {
@@ -1112,8 +951,7 @@ class Component extends DCLogic {
       this.fetchChat();
     } catch (e) {
       this.setState({ chatSendLabel: 'Send' });
-    }
-  }
+    }  }
   setStar(n) {
     this.setState({ draftStars: n });
   }
@@ -1302,6 +1140,13 @@ class Component extends DCLogic {
       sendChat: () => this.sendChat(),
       chatSendLabel: cooldownMs > 0 ? Math.ceil(cooldownMs / 1000) + 's' : this.state.chatSendLabel,
       chatCooldownLabel: cooldownMs > 0 ? 'Wait ' + Math.ceil(cooldownMs / 1000) + 's' : 'Ready',
+      chatUnlocked: !!this.state.chatAccessCode,
+      chatLocked: !this.state.chatAccessCode,
+      chatCodeDraft: this.state.chatCodeDraft,
+      setChatCodeDraft: (e) => this.setChatCodeDraft(e),
+      verifyChatCode: () => this.verifyChatCode(),
+      chatVerifyLabel: this.state.chatVerifyLabel,
+      chatAccessError: this.state.chatAccessError,
       sponsorTickerText: (this.state.sponsors && this.state.sponsors.length) ? 'Shout Out To Our Donors: ' + this.state.sponsors.join(' \u00b7 ') : 'Be the first name on the wall \u2014 sponsor the wipe in the Store.',
       copyLabel: this.state.copyLabel,
       copyIp: () => this.copyIp(),

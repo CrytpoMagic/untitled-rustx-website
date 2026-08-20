@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Untitled Daily Drop — Untitled RustX</title>
+<meta name="description" content="Free daily reward drop on Untitled RustX. Sign in through Steam and claim one free reward every 24 hours.">
+<meta name="robots" content="noindex, follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  @keyframes wheelDrift1 { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(40px,-30px) scale(1.08); } }
+  @keyframes wheelDrift2 { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(-50px,40px) scale(1.12); } }
+  @keyframes wheelGlow { 0%,100% { opacity: 0.5; } 50% { opacity: 1; } }
+  @keyframes wheelFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+  @keyframes badgePulse { 0%,100% { opacity: 1; } 50% { opacity: 0.55; } }
+  body { margin: 0; background: #0a0b0d; color: #e9e7e3; font-family: 'Inter', system-ui, sans-serif; min-height: 100vh; min-height: 100dvh; position: relative; overflow-x: hidden; }
+  a { color: #ff8a52; text-underline-offset: 3px; }
+  a:hover { color: #ffb27a; }
+  .bg-orb-1 { position: fixed; width: 560px; height: 560px; left: -160px; top: 10%; border-radius: 50%; background: radial-gradient(circle, rgba(255,176,32,0.16), transparent 70%); filter: blur(10px); animation: wheelDrift1 14s ease-in-out infinite; z-index: 0; pointer-events: none; }
+  .bg-orb-2 { position: fixed; width: 620px; height: 620px; right: -200px; top: 55%; border-radius: 50%; background: radial-gradient(circle, rgba(255,90,20,0.14), transparent 70%); filter: blur(10px); animation: wheelDrift2 18s ease-in-out infinite; z-index: 0; pointer-events: none; }
+  .bg-grid { position: fixed; inset: 0; z-index: 0; pointer-events: none; background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px); background-size: 42px 42px; mask-image: linear-gradient(180deg, transparent, rgba(0,0,0,0.6) 20%, rgba(0,0,0,0.6) 70%, transparent); }
+
+  @keyframes signFlicker { 0%,7%,9%,11%,89%,100% { opacity: 1; } 8% { opacity: 0.4; } 10% { opacity: 0.85; } 45% { opacity: 1; } 46% { opacity: 0.3; } 47% { opacity: 1; } 90% { opacity: 0.5; } 91% { opacity: 1; } }
+  @keyframes hudPulse { 0%,100% { opacity: 1; } 50% { opacity: 0.55; } }
+  .site-nav { position: sticky; top: 0; z-index: 20; background: linear-gradient(180deg, rgba(21,22,25,0.98), rgba(9,10,12,0.96)); border-bottom: 1px solid rgba(255,106,26,0.35); box-shadow: 0 8px 26px rgba(0,0,0,0.5); overflow: visible; }
+  .site-nav-inner { max-width: 1280px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px); height: 84px; display: flex; align-items: center; justify-content: center; gap: 40px; position: relative; overflow: visible; }
+  .nav-links-desktop { display: flex; align-items: center; gap: 10px; }
+  .nav-tab { display: inline-flex; align-items: center; justify-content: center; height: 38px; padding: 0 16px; background: #15161a; border: 1px solid rgba(255,255,255,0.12); border-bottom-width: 2px; color: #c9c3ba; font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; font-size: 12.5px; text-decoration: none; clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px); box-shadow: inset 0 1px 0 rgba(255,255,255,0.05), 0 1px 3px rgba(0,0,0,0.4); transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease; }
+  .nav-tab:hover { border-color: rgba(255,106,26,0.55); background: #1c1d21; color: #ffb27a; transform: translateY(-1px); }
+  .nav-tab.active { border-color: rgba(255,176,32,0.5); border-bottom-color: #ffb020; background: linear-gradient(180deg, rgba(255,176,32,0.18), rgba(255,176,32,0.04)); color: #ffb020; box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 0 10px rgba(255,176,32,0.15); }
+  .nav-tab-mobile { display: flex; width: 100%; justify-content: flex-start; height: auto; padding: 13px 16px; }
+  .nav-hamburger { display: none; background: none; border: 1px solid rgba(255,255,255,0.25); padding: 8px 10px; cursor: pointer; flex-direction: column; gap: 4px; align-items: center; justify-content: center; position: absolute; right: clamp(16px, 4vw, 40px); }
+  .nav-catalog-wrap, .nav-connect-wrap { position: relative; }
+  .nav-catalog-dropdown { position: absolute; top: calc(100% + 10px); left: 0; opacity: 0; visibility: hidden; transform: translateY(-6px); transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s; pointer-events: none; z-index: 30; background: #15161a; border: 1px solid rgba(255,106,26,0.35); box-shadow: 0 12px 30px rgba(0,0,0,0.5); min-width: 200px; padding: 8px; }
+  .nav-catalog-wrap.is-open .nav-catalog-dropdown, .nav-connect-wrap.is-open .nav-connect-dropdown { opacity: 1; visibility: visible; transform: translateY(0); pointer-events: auto; }
+  .nav-catalog-dropdown a { display: block; padding: 9px 12px; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; font-size: 12.5px; color: #c9c3ba; text-decoration: none; }
+  .nav-catalog-dropdown a:hover { color: #ff8a52; background: rgba(255,106,26,0.1); }
+  .nav-links-desktop:last-of-type .nav-catalog-wrap:last-child .nav-catalog-dropdown { left: auto; right: 0; }
+  .nav-connect-dropdown { position: absolute; top: calc(100% + 12px); left: 50%; transform: translateX(-50%) translateY(-6px); opacity: 0; visibility: hidden; transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease; pointer-events: none; z-index: 30; width: 340px; background: linear-gradient(180deg, rgba(255,106,26,0.08), rgba(10,11,13,0.97)); border: 1px solid rgba(255,122,61,0.35); padding: 18px 20px; box-shadow: 0 16px 40px rgba(0,0,0,0.5); clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px); }
+  .nav-connect-wrap.is-open .nav-connect-dropdown { transform: translateX(-50%) translateY(0); }
+  .btn-connect { font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; font-size: 12.5px; color: #0a0b0d; background: linear-gradient(135deg, #ff8a4c, #ff6a1a); border: 1px solid rgba(255,180,130,0.5); height: 38px; padding: 0 18px; display: inline-flex; align-items: center; cursor: pointer; clip-path: polygon(7px 0, 100% 0, 100% calc(100% - 7px), calc(100% - 7px) 100%, 0 100%, 0 7px); box-shadow: 0 2px 8px rgba(255,106,26,0.3); transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease; }
+  .btn-connect:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(255,106,26,0.4); filter: brightness(1.08); }
+  .btn-outline-nav { font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; font-size: 11.5px; color: #fff; background: transparent; border: 1px solid rgba(255,255,255,0.3); padding: 9px 14px; cursor: pointer; transition: border-color 0.18s ease, background 0.18s ease; }
+  .btn-outline-nav:hover { border-color: #ff8a52; background: rgba(255,122,61,0.08); }
+  .nav-logo-box { width: 160px; height: 100px; flex-shrink: 0; position: relative; background: transparent; overflow: visible; }
+  .nav-logo-box img { width: 100%; height: 100%; object-fit: contain; display: block; background: transparent; }
+  .mobile-menu { background: #0e0f11; border-bottom: 1px solid rgba(255,106,26,0.3); padding: 14px clamp(16px, 4vw, 40px) 18px; display: none; flex-direction: column; gap: 8px; }
+  .mobile-menu.is-open { display: flex; }
+  @media (max-width: 1300px) {
+    .nav-links-desktop { display: none !important; }
+    .nav-hamburger { display: flex !important; }
+  }
+
+  .wrap { max-width: 820px; margin: 0 auto; padding: 44px 20px 90px; position: relative; z-index: 1; }
+
+  .kicker { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border: 1px solid rgba(255,176,32,0.45); background: rgba(255,176,32,0.08); font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; font-size: 11px; color: #ffb020; margin: 0 auto 18px; display: table; }
+  .kicker .dot { width: 6px; height: 6px; border-radius: 50%; background: #ffb020; box-shadow: 0 0 8px #ffb020; display: inline-block; animation: badgePulse 1.6s ease-in-out infinite; margin-right: 6px; }
+
+  h1 { font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 0.02em; font-size: clamp(32px, 6vw, 52px); margin: 0 0 10px; text-align: center; text-shadow: 0 0 30px rgba(255,176,32,0.45); }
+  .sub { text-align: center; color: #9c968d; margin: 0 auto 26px; font-size: 15.5px; max-width: 48ch; line-height: 24px; }
+
+  .stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(255,255,255,0.08); margin-bottom: 40px; border: 1px solid rgba(255,255,255,0.08); }
+  .stat-cell { background: #0e0f11; padding: 18px 14px; text-align: center; }
+  .stat-cell .num { font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 24px; color: #ffb020; text-shadow: 0 0 14px rgba(255,176,32,0.4); }
+  .stat-cell .lbl { font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: #8f887f; margin-top: 4px; }
+
+  .section-label { display: block; font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; font-size: 12px; color: #ff8a52; margin: 0 0 14px; }
+
+  .demo-panel { background: linear-gradient(160deg, #17181d, #0e0f11); border: 1px solid rgba(255,176,32,0.35); border-top: 3px solid #ffb020; padding: 22px; text-align: center; box-shadow: 0 0 30px rgba(255,176,32,0.1); margin-bottom: 40px; position: relative; overflow: hidden; }
+  .demo-panel::before { content: ''; position: absolute; top: -50px; left: -50px; width: 180px; height: 180px; background: radial-gradient(circle, rgba(255,176,32,0.16), transparent 70%); pointer-events: none; }
+  .demo-label { font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; font-size: 11px; color: #6b655e; margin-bottom: 4px; }
+  .demo-result { font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 15px; color: #ffb020; min-height: 20px; margin-top: 10px; opacity: 0; transition: opacity 0.4s ease; }
+  .demo-result.show { opacity: 1; }
+
+  .intro-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 28px; margin-bottom: 44px; align-items: start; }
+  .intro-copy { font-size: 14.5px; line-height: 24px; color: #b0a99f; }
+  .intro-copy p { margin: 0 0 14px; }
+  .intro-copy strong { color: #fff; font-weight: 600; }
+  .intro-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 9px; }
+  .intro-list li { display: flex; gap: 10px; align-items: flex-start; font-size: 13.5px; }
+  .intro-list li::before { content: '▸'; color: #ffb020; flex-shrink: 0; margin-top: 1px; }
+
+  .legend { background: #0e0f11; border: 1px solid rgba(255,255,255,0.08); padding: 4px; }
+  .legend-row { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .legend-row:last-child { border-bottom: none; }
+  .legend-swatch { width: 14px; height: 14px; border-radius: 2px; flex-shrink: 0; }
+  .legend-name { font-family: 'Rajdhani', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 12.5px; }
+  .legend-desc { font-size: 11.5px; color: #8f887f; margin-left: auto; text-align: right; }
+
+  .panel { background: #14151a; border: 1px solid rgba(255,176,32,0.35); border-top: 3px solid #ffb020; padding: 30px 24px; text-align: center; box-shadow: 0 0 40px rgba(255,176,32,0.12), 0 12px 30px rgba(0,0,0,0.5); position: relative; overflow: hidden; }
+  .panel::before { content: ''; position: absolute; top: -60px; right: -40px; width: 200px; height: 200px; background: radial-gradient(circle, rgba(255,176,32,0.18), transparent 70%); pointer-events: none; }
+  .btn { font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; font-size: 15px; color: #0a0b0d; background: linear-gradient(135deg, #ffcf6b, #ffb020); border: none; padding: 15px 30px; min-height: 48px; cursor: pointer; box-shadow: 0 0 24px rgba(255,176,32,0.5); border-radius: 2px; animation: wheelGlow 2.6s ease-in-out infinite; transition: transform 0.15s ease; }
+  .btn:hover { transform: translateY(-2px); }
+  .btn:disabled { opacity: 0.5; cursor: default; animation: none; }
+
+  .reel-frame { position: relative; height: 120px; margin: 22px 0; background: #0e0f11; border: 1px solid rgba(255,255,255,0.08); border-radius: 2px; overflow: hidden; box-shadow: inset 0 0 30px rgba(0,0,0,0.6), 0 0 24px rgba(255,176,32,0.1); }
+  .reel-frame::before, .reel-frame::after { content: ''; position: absolute; top: 0; bottom: 0; width: 60px; z-index: 3; pointer-events: none; }
+  .reel-frame::before { left: 0; background: linear-gradient(90deg, #0e0f11, transparent); }
+  .reel-frame::after { right: 0; background: linear-gradient(270deg, #0e0f11, transparent); }
+  .reel-pointer { position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; background: #ff6a1a; box-shadow: 0 0 12px rgba(255,106,26,0.9); z-index: 4; transform: translateX(-1px); }
+  .reel-pointer::before, .reel-pointer::after { content: ''; position: absolute; left: 50%; width: 0; height: 0; border-style: solid; transform: translateX(-50%); }
+  .reel-pointer::before { top: -1px; border-width: 8px 6px 0 6px; border-color: #ff6a1a transparent transparent transparent; }
+  .reel-pointer::after { bottom: -1px; border-width: 0 6px 8px 6px; border-color: transparent transparent #ff6a1a transparent; }
+  .reel-track { position: absolute; top: 0; left: 0; height: 100%; display: flex; align-items: center; will-change: transform; }
+  .reel-item { width: 96px; height: 96px; margin: 0 4px; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #1a1b1f; border: 1px solid rgba(255,255,255,0.08); border-radius: 2px; padding: 6px; text-align: center; }
+  .reel-item .name { font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 11px; text-transform: uppercase; margin-top: 6px; line-height: 1.2; }
+  .reel-item .glyph { font-size: 26px; }
+  .rarity-common { border-color: rgba(255,255,255,0.1); }
+  .rarity-common .name { color: #cfd0d3; }
+  .rarity-uncommon { border-color: rgba(143,208,255,0.4); box-shadow: 0 0 10px rgba(143,208,255,0.15); }
+  .rarity-uncommon .name { color: #8fd0ff; }
+  .rarity-rare { border-color: rgba(255,138,82,0.5); box-shadow: 0 0 14px rgba(255,106,26,0.25); }
+  .rarity-rare .name { color: #ff8a52; }
+  .rarity-jackpot { border-color: rgba(255,176,32,0.6); box-shadow: 0 0 20px rgba(255,176,32,0.4); animation: wheelFloat 2.4s ease-in-out infinite; }
+  .rarity-jackpot .name { color: #ffb020; }
+
+  .odds-wrap { margin-top: 44px; }
+  .odds-table { width: 100%; border-collapse: collapse; font-size: 13px; background: #0e0f11; border: 1px solid rgba(255,255,255,0.08); }
+  .odds-table th, .odds-table td { text-align: left; padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .odds-table th { color: #6b655e; font-weight: 500; text-transform: uppercase; font-size: 10.5px; letter-spacing: 0.06em; background: #0a0b0d; }
+  .odds-table tr:last-child td { border-bottom: none; }
+  .result-name { font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 26px; margin: 10px 0; }
+  .result-name.jackpot { color: #ffb020; text-shadow: 0 0 24px rgba(255,176,32,0.7); font-size: 32px; }
+  .jackpot-banner { font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: #ffb020; font-size: 13px; margin-bottom: 4px; }
+  .msg { color: #9c968d; font-size: 14px; margin-top: 10px; }
+  .countdown { font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.04em; color: #ff8a52; margin: 8px 0; }
+  .foot-note { text-align: center; font-size: 12px; color: #6b655e; margin-top: 40px; }
+
+  @media (max-width: 700px) {
+    .intro-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 480px) {
+    .reel-item { width: 76px; height: 76px; }
+    .reel-frame { height: 100px; }
+    .stat-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="bg-grid"></div>
+<div class="bg-orb-1"></div>
+<div class="bg-orb-2"></div>
+<nav class="site-nav">
+  <div class="site-nav-inner">
+    <div class="nav-links-desktop">
+      <div class="nav-catalog-wrap" id="homeWrap">
+        <a href="./index.html" class="nav-tab" style="animation: signFlicker 3s linear infinite; animation-delay: 0s; text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 14px rgba(255,138,82,0.9), 0 0 26px rgba(255,106,26,0.7);">Home</a>
+        <div class="nav-catalog-dropdown">
+          <a href="./Quickstart.dc.html">Quickstart</a>
+          <a href="./Server.dc.html">Server Specs</a>
+          <a href="./Events.dc.html">Events</a>
+        </div>
+      </div>
+      <div class="nav-catalog-wrap" id="rulesWrap">
+        <a href="./Rules.dc.html" class="nav-tab" style="animation: signFlicker 3.4s linear infinite; animation-delay: 0.6s; text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 14px rgba(255,138,82,0.9), 0 0 26px rgba(255,106,26,0.7);">Rules</a>
+        <div class="nav-catalog-dropdown">
+          <a href="./Reporting.dc.html">Reporting a Violation</a>
+          <a href="./Enforcement.dc.html">Enforcement</a>
+          <a href="./FAQ.dc.html">FAQ</a>
+        </div>
+      </div>
+      <a href="./LiveChat.dc.html" class="nav-tab" style="animation: signFlicker 3.6s linear infinite; animation-delay: 0.9s; text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 14px rgba(255,138,82,0.9), 0 0 26px rgba(255,106,26,0.7);">Live Chat</a>
+      <a href="./Community.dc.html" class="nav-tab" style="animation: signFlicker 3.3s linear infinite; animation-delay: 1.2s; text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 14px rgba(255,138,82,0.9), 0 0 26px rgba(255,106,26,0.7);">Community</a>
+      <div class="nav-connect-wrap" id="connectWrap">
+        <button type="button" class="btn-connect" id="connectBtn">Connect Now</button>
+        <div class="nav-connect-dropdown">
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 14px;">
+            <span id="statusDot" style="width: 7px; height: 7px; border-radius: 50%; background: #8f887f; box-shadow: 0 0 8px #8f887f; display: inline-block; animation: hudPulse 1.6s ease-in-out infinite;"></span>
+            <span id="statusText" style="font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; font-size: 11px; color: #ff8a52;">Checking…</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
+            <span style="font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 13px; color: #fff;">157.85.93.170:28015</span>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-bottom: 14px;">
+            <div>
+              <span style="display: block; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: #6b655e; margin-bottom: 4px;">Players</span>
+              <span id="playersLabel" style="font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 17px; color: #fff;">—</span>
+            </div>
+            <div>
+              <span style="display: block; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: #6b655e; margin-bottom: 4px;">Next wipe</span>
+              <span id="countdownLabel" style="font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 17px; color: #ff6a1a;">—</span>
+            </div>
+          </div>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <button type="button" class="btn-outline-nav" id="launchBtn2">Launch via Steam</button>
+            <button type="button" class="btn-outline-nav" id="copyBtn2">Copy IP</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="nav-logo-box"><img src="assets/logo-new.png" alt="Untitled RustX"></div>
+    <div class="nav-links-desktop">
+      <a href="./Leaderboards.dc.html" class="nav-tab" style="animation: signFlicker 3.6s linear infinite; animation-delay: 0.9s; text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 14px rgba(255,138,82,0.9), 0 0 26px rgba(255,106,26,0.7);">Leaderboards</a>
+      <a href="./FAQ.dc.html" class="nav-tab" style="animation: signFlicker 3.1s linear infinite; animation-delay: 1.6s; text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 14px rgba(255,138,82,0.9), 0 0 26px rgba(255,106,26,0.7);">FAQs</a>
+      <a href="https://discord.gg/M4rqjGpjyW" target="_blank" rel="noopener" class="nav-tab" style="animation: signFlicker 2.6s linear infinite; animation-delay: 0.3s; text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 14px rgba(255,138,82,0.9), 0 0 26px rgba(255,106,26,0.7);">Discord</a>
+      <a href="./daily-wheel.html" class="nav-tab active" style="animation: signFlicker 3.3s linear infinite; animation-delay: 1.2s; text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 14px rgba(255,138,82,0.9), 0 0 26px rgba(255,106,26,0.7);">Wheel</a>
+      <div class="nav-catalog-wrap" id="storeWrap" style="position: relative;">
+        <a href="./Store.dc.html" class="nav-tab" style="animation: signFlicker 2.9s linear infinite; animation-delay: 1.3s; text-shadow: 0 0 6px rgba(255,255,255,0.6), 0 0 14px rgba(255,138,82,0.9), 0 0 26px rgba(255,106,26,0.7);">Store</a>
+        <div class="nav-catalog-dropdown" style="left: auto; right: 0;">
+          <a href="./MembershipTiers.dc.html">Membership Tiers</a>
+          <a href="./Medical.dc.html">Medical</a>
+          <a href="./Teas.dc.html">Teas</a>
+          <a href="./WeaponKits.dc.html">Weapon Kits</a>
+          <a href="./ResourceKits.dc.html">Resource Kits</a>
+          <a href="./SuperSerum.dc.html">Super Serum</a>
+          <a href="./Minicopter.dc.html">Minis</a>
+          <a href="./WebsiteShoutout.dc.html">Website Shoutout</a>
+        </div>
+      </div>
+    </div>
+    <button type="button" class="nav-hamburger" id="hamburgerBtn" aria-label="Menu">
+      <span style="width: 18px; height: 2px; background: #e9e7e3;"></span>
+      <span style="width: 18px; height: 2px; background: #e9e7e3;"></span>
+      <span style="width: 18px; height: 2px; background: #e9e7e3;"></span>
+    </button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="./index.html" class="nav-tab nav-tab-mobile">Home</a>
+  <a href="./Rules.dc.html" class="nav-tab nav-tab-mobile">Rules</a>
+  <a href="./Store.dc.html" class="nav-tab nav-tab-mobile">Store</a>
+  <a href="./daily-wheel.html" class="nav-tab nav-tab-mobile active">Wheel</a>
+  <a href="./LiveChat.dc.html" class="nav-tab nav-tab-mobile">Live Chat</a>
+  <a href="./Community.dc.html" class="nav-tab nav-tab-mobile">Community</a>
+  <a href="./Leaderboards.dc.html" class="nav-tab nav-tab-mobile">Leaderboards</a>
+  <a href="./FAQ.dc.html" class="nav-tab nav-tab-mobile">FAQs</a>
+  <a href="https://discord.gg/M4rqjGpjyW" target="_blank" rel="noopener" class="nav-tab nav-tab-mobile">Discord</a>
+  <button type="button" class="btn-connect" id="connectBtnMobile" style="margin-top: 6px; width: 100%; justify-content: center;">Connect Now</button>
+</div>
+<div class="wrap">
+  <div class="kicker"><span class="dot"></span>Free · Every 24 Hours</div>
+  <h1>Untitled Daily Drop</h1>
+  <p class="sub">One free reward every 24 hours. Sign in through Steam — no account, no password, ever.</p>
+
+  <div class="stat-row">
+    <div class="stat-cell"><div class="num">24H</div><div class="lbl">Cooldown per Steam account</div></div>
+    <div class="stat-cell"><div class="num">20+</div><div class="lbl">Real store items in the pool</div></div>
+    <div class="stat-cell"><div class="num">0.10%</div><div class="lbl">Odds per weapon kit</div></div>
+  </div>
+
+  <span class="section-label">See how it works</span>
+  <div class="demo-panel">
+    <div class="demo-label">Live preview — resets automatically</div>
+    <div class="reel-frame" id="demoReelFrame" style="margin: 12px 0 0;">
+      <div class="reel-pointer"></div>
+      <div class="reel-track" id="demoReelTrack"></div>
+    </div>
+    <div class="demo-result" id="demoResult">You could have won: <span id="demoPrizeName"></span></div>
+  </div>
+
+  <div class="intro-grid">
+    <div class="intro-copy">
+      <span class="section-label">What is this?</span>
+      <p>Every day, every player on <strong>Untitled RustX</strong> gets one free crack at the drop — no purchase, no catch, no subscription. Sign in with Steam, hit the button, and watch the reel decide what you're taking back to base.</p>
+      <p>This isn't a slot machine and there's nothing to buy in here. It's a daily thank-you for showing up — the same items sold in the store, just free once a day, with the weapon kits sitting way out at the rare end of the odds so finding one still feels like something.</p>
+      <ul class="intro-list">
+        <li>One free drop per Steam account, every 24 hours — tracked server-side, not by your browser.</li>
+        <li>Rewards range from resource kits and medical supplies up through teas, Super Serum, and the Minicopter.</li>
+        <li>Weapon kits — AK, Bolt Action, Tommy Gun, Custom SMG — are the jackpot tier, each around a 0.10% chance.</li>
+        <li>Whatever you win gets delivered straight to you in-game the next time you're on the server.</li>
+        <li>The odds table below is exactly what the server rolls against — nothing hidden, nothing juiced.</li>
+      </ul>
+    </div>
+    <div class="legend">
+      <span class="section-label" style="padding: 14px 14px 0;">Rarity tiers</span>
+      <div class="legend-row"><span class="legend-swatch" style="background:#cfd0d3;"></span><span class="legend-name" style="color:#cfd0d3;">Common</span><span class="legend-desc">Resources &amp; medical</span></div>
+      <div class="legend-row"><span class="legend-swatch" style="background:#8fd0ff;"></span><span class="legend-name" style="color:#8fd0ff;">Uncommon</span><span class="legend-desc">Teas</span></div>
+      <div class="legend-row"><span class="legend-swatch" style="background:#ff8a52;"></span><span class="legend-name" style="color:#ff8a52;">Rare</span><span class="legend-desc">Serum &amp; Minicopter</span></div>
+      <div class="legend-row"><span class="legend-swatch" style="background:#ffb020;"></span><span class="legend-name" style="color:#ffb020;">Jackpot</span><span class="legend-desc">Weapon kits</span></div>
+    </div>
+  </div>
+
+  <span class="section-label">Claim your drop</span>
+  <div class="panel" id="panel">
+    <p class="msg">Loading...</p>
+  </div>
+
+  <div class="reel-frame" id="reelFrame" style="display:none;">
+    <div class="reel-pointer"></div>
+    <div class="reel-track" id="reelTrack"></div>
+  </div>
+
+  <div class="odds-wrap">
+    <span class="section-label">Full odds</span>
+    <table class="odds-table" id="oddsTable" style="display:none;">
+      <thead><tr><th>Reward</th><th>Rarity</th><th>Odds</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <p class="foot-note">Delivered automatically the next time you're on the server. Questions? Ask in Discord.</p>
+</div>
+
+<script>
+(function () {
+  const panel = document.getElementById('panel');
+  const reelFrame = document.getElementById('reelFrame');
+  const reelTrack = document.getElementById('reelTrack');
+  const oddsTable = document.getElementById('oddsTable');
+  let odds = [];
+  let spinning = false;
+
+  const GLYPHS = {
+    common: '⛏', uncommon: '🧪', rare: '🔧', jackpot: '🔥'
+  };
+
+  function itemEl(name, rarity) {
+    const div = document.createElement('div');
+    div.className = 'reel-item rarity-' + rarity;
+    div.innerHTML = '<span class="glyph">' + (GLYPHS[rarity] || '◆') + '</span><span class="name">' + escapeHtml(name) + '</span>';
+    return div;
+  }
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  function renderOdds() {
+    if (!odds.length) return;
+    const tbody = oddsTable.querySelector('tbody');
+    tbody.innerHTML = odds.map(function (o) {
+      return '<tr><td>' + escapeHtml(o.name) + '</td><td class="rarity-' + o.rarity + '" style="text-transform:uppercase;">' + o.rarity + '</td><td>' + o.oddsPercent + '%</td></tr>';
+    }).join('');
+    oddsTable.style.display = '';
+  }
+
+  const ITEM_W = 96 + 8; // width + margin
+
+  function buildReel(targetName, targetRarity) {
+    reelTrack.innerHTML = '';
+    const pool = odds.length ? odds : [{ name: targetName, rarity: targetRarity }];
+    const totalItems = 60;
+    let targetIndex = Math.floor(totalItems * 0.8);
+    for (let i = 0; i < totalItems; i++) {
+      let name, rarity;
+      if (i === targetIndex) {
+        name = targetName; rarity = targetRarity;
+      } else {
+        const pick = pool[Math.floor(Math.random() * pool.length)];
+        name = pick.name; rarity = pick.rarity;
+      }
+      reelTrack.appendChild(itemEl(name, rarity));
+    }
+    return targetIndex;
+  }
+
+  function animateReel(targetName, targetRarity, done) {
+    reelFrame.style.display = '';
+    const targetIndex = buildReel(targetName, targetRarity);
+    const frameWidth = reelFrame.clientWidth;
+    const finalOffset = -(targetIndex * ITEM_W - frameWidth / 2 + ITEM_W / 2);
+    const startOffset = 0;
+    const duration = 4200;
+    const start = performance.now();
+    reelTrack.style.transform = 'translateX(' + startOffset + 'px)';
+    let lastTickIndex = -1;
+    function frame(now) {
+      const t = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - t, 4);
+      const offset = startOffset + eased * (finalOffset - startOffset);
+      reelTrack.style.transform = 'translateX(' + offset + 'px)';
+      const passedIndex = Math.round(-offset / ITEM_W);
+      if (passedIndex !== lastTickIndex) { lastTickIndex = passedIndex; }
+      if (t < 1) {
+        requestAnimationFrame(frame);
+      } else {
+        reelTrack.style.transform = 'translateX(' + finalOffset + 'px)';
+        done();
+      }
+    }
+    requestAnimationFrame(frame);
+  }
+
+  function fmtCountdown(ms) {
+    if (ms <= 0) return 'Ready';
+    const h = Math.floor(ms / 3600000);
+    const m = Math.floor((ms % 3600000) / 60000);
+    const s = Math.floor((ms % 60000) / 1000);
+    return h + 'h ' + m + 'm ' + s + 's';
+  }
+
+  const DEMO_ITEMS = [
+    { name: '500 Metal Frags', rarity: 'common' },
+    { name: 'Medical Syringe', rarity: 'common' },
+    { name: 'Advanced Healing Tea', rarity: 'uncommon' },
+    { name: 'Super Serum', rarity: 'rare' },
+    { name: 'Minicopter', rarity: 'rare' },
+    { name: 'AK Kit + Ammo', rarity: 'jackpot' },
+    { name: '2,000 Stone', rarity: 'common' },
+    { name: 'Bandage', rarity: 'common' },
+  ];
+  function buildDemoReel(track, targetName, targetRarity) {
+    track.innerHTML = '';
+    const totalItems = 40;
+    let targetIndex = Math.floor(totalItems * 0.8);
+    for (let i = 0; i < totalItems; i++) {
+      let name, rarity;
+      if (i === targetIndex) { name = targetName; rarity = targetRarity; }
+      else { const pick = DEMO_ITEMS[Math.floor(Math.random() * DEMO_ITEMS.length)]; name = pick.name; rarity = pick.rarity; }
+      track.appendChild(itemEl(name, rarity));
+    }
+    return targetIndex;
+  }
+  function runDemoSpin() {
+    const frame = document.getElementById('demoReelFrame');
+    const track = document.getElementById('demoReelTrack');
+    const resultEl = document.getElementById('demoResult');
+    const nameEl = document.getElementById('demoPrizeName');
+    resultEl.classList.remove('show');
+    const pick = DEMO_ITEMS[Math.floor(Math.random() * DEMO_ITEMS.length)];
+    const targetIndex = buildDemoReel(track, pick.name, pick.rarity);
+    const frameWidth = frame.clientWidth;
+    const finalOffset = -(targetIndex * ITEM_W - frameWidth / 2 + ITEM_W / 2);
+    const duration = 3200;
+    const start = performance.now();
+    track.style.transform = 'translateX(0px)';
+    function frame_(now) {
+      const t = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - t, 4);
+      track.style.transform = 'translateX(' + (eased * finalOffset) + 'px)';
+      if (t < 1) requestAnimationFrame(frame_);
+      else {
+        nameEl.textContent = pick.name;
+        resultEl.classList.add('show');
+        setTimeout(runDemoSpin, 3200);
+      }
+    }
+    requestAnimationFrame(frame_);
+  }
+  setTimeout(runDemoSpin, 600);
+
+  async function loadStatus() {
+    try {
+      const res = await fetch('/api/wheel/status');
+      const data = await res.json();
+      odds = data.odds || [];
+      renderOdds();
+
+      if (!data.enabled) {
+        panel.innerHTML = '<p class="msg">UNTITLED DAILY DROP TEMPORARILY OFFLINE</p>';
+        return;
+      }
+      if (!data.authenticated) {
+        panel.innerHTML = '<p class="msg">Sign in through Steam to claim your daily reward.</p><br><button class="btn" onclick="location.href=\'/api/wheel/steam-login\'">SIGN IN THROUGH STEAM</button>';
+        return;
+      }
+      const welcomeName = data.personaName ? data.personaName : 'Survivor';
+      if (data.lastSpin && !data.eligible) {
+        const jackpot = (odds.find(function (o) { return o.name === data.lastSpin.prizeName; }) || {}).rarity === 'jackpot';
+        panel.innerHTML =
+          '<p class="msg">WELCOME, ' + escapeHtml(welcomeName) + '</p>' +
+          (jackpot ? '<div class="jackpot-banner">JACKPOT</div>' : '<p class="msg">REWARD CLAIMED</p>') +
+          '<div class="result-name' + (jackpot ? ' jackpot' : '') + '">' + escapeHtml(data.lastSpin.prizeName) + '</div>' +
+          '<p class="msg">' + (data.lastSpin.delivered ? 'Delivered in-game.' : 'Your reward is saved and will be delivered when you join the server.') + '</p>' +
+          '<div class="countdown" id="cd">NEXT DAILY DROP: ' + fmtCountdown(new Date(data.nextEligibleAt) - new Date(data.serverNow)) + '</div>';
+        startCountdown(new Date(data.nextEligibleAt).getTime() - new Date(data.serverNow).getTime());
+        return;
+      }
+      if (!data.eligible) {
+        panel.innerHTML =
+          '<p class="msg">WELCOME, ' + escapeHtml(welcomeName) + '</p>' +
+          '<p class="msg">DAILY DROP CLAIMED</p>' +
+          '<div class="countdown" id="cd">NEXT DAILY DROP: ' + fmtCountdown(new Date(data.nextEligibleAt) - new Date(data.serverNow)) + '</div>';
+        startCountdown(new Date(data.nextEligibleAt).getTime() - new Date(data.serverNow).getTime());
+        return;
+      }
+      panel.innerHTML =
+        '<p class="msg">WELCOME, ' + escapeHtml(welcomeName) + '</p>' +
+        '<p class="msg">YOUR FREE DAILY DROP IS READY</p>' +
+        '<button class="btn" id="spinBtn">OPEN DROP</button>';
+      document.getElementById('spinBtn').addEventListener('click', doSpin);
+    } catch (e) {
+      panel.innerHTML = '<p class="msg">Something went wrong. Please try again.</p>';
+    }
+  }
+
+  let cdInterval = null;
+  function startCountdown(ms) {
+    if (cdInterval) clearInterval(cdInterval);
+    let remaining = ms;
+    cdInterval = setInterval(function () {
+      remaining -= 1000;
+      const el = document.getElementById('cd');
+      if (!el) { clearInterval(cdInterval); return; }
+      if (remaining <= 0) { clearInterval(cdInterval); loadStatus(); return; }
+      el.textContent = 'NEXT DAILY DROP: ' + fmtCountdown(remaining);
+    }, 1000);
+  }
+
+  async function doSpin() {
+    if (spinning) return;
+    spinning = true;
+    const btn = document.getElementById('spinBtn');
+    if (btn) btn.disabled = true;
+    try {
+      const res = await fetch('/api/wheel/spin', { method: 'POST' });
+      const data = await res.json();
+      if (!res.ok) {
+        panel.innerHTML = '<p class="msg">' + escapeHtml(data.error || 'Something went wrong.') + '</p>';
+        spinning = false;
+        setTimeout(loadStatus, 1500);
+        return;
+      }
+      if (data.warning) {
+        panel.innerHTML = '<p class="msg">' + escapeHtml(data.warning) + '</p>';
+        spinning = false;
+        setTimeout(loadStatus, 2000);
+        return;
+      }
+      panel.innerHTML = '<p class="msg">Opening drop...</p>';
+      animateReel(data.prize.name, data.prize.rarity, function () {
+        const jackpot = data.prize.rarity === 'jackpot';
+        panel.innerHTML =
+          (jackpot ? '<div class="jackpot-banner">JACKPOT</div>' : '<p class="msg">REWARD CLAIMED</p>') +
+          '<div class="result-name' + (jackpot ? ' jackpot' : '') + '">' + escapeHtml(data.prize.name) + '</div>' +
+          '<p class="msg">Your reward will be delivered in-game.</p>';
+        spinning = false;
+      });
+    } catch (e) {
+      panel.innerHTML = '<p class="msg">Something went wrong. Your drop was NOT consumed. Please try again.</p>';
+      spinning = false;
+    }
+  }
+
+  loadStatus();
+
+  function connectNow() { window.location.href = 'steam://run/252490//+connect%20157.85.93.170:28015'; }
+  function copyIp(btn) {
+    navigator.clipboard?.writeText('157.85.93.170:28015').then(() => {
+      const old = btn.textContent;
+      btn.textContent = 'Copied!';
+      setTimeout(() => { btn.textContent = old; }, 1800);
+    });
+  }
+  document.getElementById('connectBtn').onclick = connectNow;
+  document.getElementById('connectBtnMobile').onclick = connectNow;
+  document.getElementById('launchBtn2').onclick = connectNow;
+  document.getElementById('copyBtn2').onclick = (e) => copyIp(e.currentTarget);
+
+  ['homeWrap', 'rulesWrap', 'storeWrap', 'connectWrap'].forEach((id) => {
+    const el = document.getElementById(id);
+    let t;
+    el.addEventListener('mouseenter', () => { clearTimeout(t); el.classList.add('is-open'); });
+    el.addEventListener('mouseleave', () => { t = setTimeout(() => el.classList.remove('is-open'), 300); });
+  });
+
+  const hamburger = document.getElementById('hamburgerBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.onclick = () => mobileMenu.classList.toggle('is-open');
+
+  function nextWipe(now) {
+    const target = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 18, 0, 0));
+    const diffDays = (4 - now.getUTCDay() + 7) % 7;
+    target.setUTCDate(target.getUTCDate() + diffDays);
+    if (target <= now) target.setUTCDate(target.getUTCDate() + 7);
+    return target;
+  }
+  function fmt(ms) {
+    if (ms < 0) ms = 0;
+    const s = Math.floor(ms / 1000);
+    const d = Math.floor(s / 86400);
+    const h = Math.floor((s % 86400) / 3600);
+    const m = Math.floor((s % 3600) / 60);
+    return d + 'd ' + h + 'h ' + m + 'm';
+  }
+  function tick() {
+    const now = new Date();
+    document.getElementById('countdownLabel').textContent = fmt(nextWipe(now) - now);
+  }
+  tick();
+  setInterval(tick, 1000);
+
+  async function fetchNavStatus() {
+    try {
+      const res = await fetch('https://api.battlemetrics.com/servers/40070748', {
+        headers: { Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6ImQ5Mjk3ZTAzZDAzYWU1ZmEiLCJpYXQiOjE3ODUzNTMyMjgsIm5iZiI6MTc4NTM1MzIyOCwiaXNzIjoiaHR0cHM6Ly93d3cuYmF0dGxlbWV0cmljcy5jb20iLCJzdWIiOiJ1cm46dXNlcjoxMjI2ODI1In0.r8PAaSXNGfPwJMSV_4h_ry6Ltwg9Ec8HTRFRBsuFhDs' }
+      });
+      if (!res.ok) throw new Error('http ' + res.status);
+      const json = await res.json();
+      const attrs = json?.data?.attributes;
+      const dot = document.getElementById('statusDot');
+      const text = document.getElementById('statusText');
+      const players = document.getElementById('playersLabel');
+      if (attrs) {
+        const live = attrs.status === 'online';
+        const color = live ? '#3ddc78' : '#ff4d4d';
+        dot.style.background = color;
+        dot.style.boxShadow = '0 0 8px ' + color;
+        text.textContent = live ? 'Online' : 'Offline';
+        players.textContent = live ? (attrs.players + ' / ' + attrs.maxPlayers) : '—';
+      }
+    } catch (e) {
+      document.getElementById('statusText').textContent = 'Offline';
+    }
+  }
+  fetchNavStatus();
+  setInterval(fetchNavStatus, 60000);
+})();
+</script>
+</body>
+</html>

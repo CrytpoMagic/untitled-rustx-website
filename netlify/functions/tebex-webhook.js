@@ -2,9 +2,13 @@ const crypto = require("crypto");
 const { getSupabase, json } = require("./_supabase");
 
 const SPONSOR_PACKAGE_NAME = "sponsor the wipe";
+const CHAT_ACCESS_PACKAGE_NAME = "live chat access";
 const MAX_NAME_LEN = 30;
 const WIPE_DAYS = 7;
 const ALLOWED_IPS = new Set(["18.209.80.3", "54.87.231.232"]);
+
+function generateAccessCode() {
+  return crypto.randomBytes(5).toString("hex").toUpperCase(); // 10-char code
 
 function verifySignature(rawBody, signatureHeader, secret) {
   if (!signatureHeader || !secret) return false;
@@ -46,6 +50,10 @@ function getClientIp(event) {
   return xff.split(",")[0].trim();
 }
 
+function generateAccessCode() {
+  return crypto.randomBytes(5).toString("hex").toUpperCase(); // 10-char code
+}
+
 exports.handler = async function (event) {
   if (event.httpMethod !== "POST") return json(405, { error: "Method not allowed" }, { allow: "POST" });
 
@@ -83,7 +91,31 @@ exports.handler = async function (event) {
 
   const products = Array.isArray(subject.products) ? subject.products : [];
   const sponsorProduct = products.find(p => (p.name || "").toLowerCase().trim() === SPONSOR_PACKAGE_NAME);
-  if (!sponsorProduct) return json(200, { ok: true, ignored: "no sponsor package in transaction" });
+  const chatAccessProduct = products.find(p => (p.name || "").toLowerCase().trim() === CHAT_ACCESS_PACKAGE_NAME);
+
+  let supabase;
+  try { supabase = getSupabase(); } catch (e) { return json(500, { error: e.message }); }
+
+  if (chatAccessProduct) {
+    const now = new Date();
+    const expiresAt = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000);
+    const code = generateAccessCode();
+    const { error: codeErr } = await supabase.from("chat_access_codes").upsert(
+      {
+        code,
+        transaction_id: transactionId,
+        created_at: now.toISOString(),
+        expires_at: expiresAt.toISOString(),
+        active: true,
+      },
+      { onConflict: "transaction_id", ignoreDuplicates: true }
+    );
+    if (codeErr) return json(500, { error: "Failed to store access code", detail: codeErr.message });
+    // Tebex delivers this note back to the buyer via their order confirmation.
+    return json(200, { ok: true, note: `Your live chat access code: ${code} (valid 7 days)` });
+  }
+
+  if (!sponsorProduct) return json(200, { ok: true, ignored: "no matching package in transaction" });
 
   const rawName = extractSponsorName(sponsorProduct);
   const displayName = sanitizeName(rawName);

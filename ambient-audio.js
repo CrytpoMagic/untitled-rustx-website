@@ -456,9 +456,13 @@
     window.addEventListener('pagehide', stop);
     window.addEventListener('beforeunload', stop);
     document.addEventListener('click', function (e) {
+      if (ctx && ctx.state === 'suspended') { try { ctx.resume(); } catch (er) {} }
       var el = e.target.closest && e.target.closest('button, a.nav-tab, .btn-connect');
       if (el) playClickSound();
     }, true);
+    document.addEventListener('touchend', function () {
+      if (ctx && ctx.state === 'suspended') { try { ctx.resume(); } catch (er) {} }
+    }, { passive: true });
   }
   init();
 })();
